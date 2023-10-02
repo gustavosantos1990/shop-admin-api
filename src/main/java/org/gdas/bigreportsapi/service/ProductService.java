@@ -4,10 +4,11 @@ import org.gdas.bigreportsapi.model.entity.Component;
 import org.gdas.bigreportsapi.model.entity.Product;
 import org.gdas.bigreportsapi.model.entity.ProductComponent;
 import org.gdas.bigreportsapi.repository.ProductRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
 import java.util.UUID;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
@@ -25,8 +26,8 @@ public class ProductService {
         this.componentService = componentService;
     }
 
-    public List<Product> findAll() {
-        return productRepository.findAll();
+    public Page<Product> findAll(boolean ready, Pageable pageable) {
+        return productRepository.findByReady(ready, pageable);
     }
 
     public Product findByID(UUID id) {

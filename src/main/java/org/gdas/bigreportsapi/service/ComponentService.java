@@ -2,6 +2,8 @@ package org.gdas.bigreportsapi.service;
 
 import org.gdas.bigreportsapi.model.entity.Component;
 import org.gdas.bigreportsapi.repository.ComponentsRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -20,8 +22,8 @@ public class ComponentService {
         this.componentsRepository = componentsRepository;
     }
 
-    public List<Component> findAll() {
-        return componentsRepository.findAll();
+    public Page<Component> findAll(Pageable pageable) {
+        return componentsRepository.findAll(pageable);
     }
 
     public Component findByID(UUID id) {

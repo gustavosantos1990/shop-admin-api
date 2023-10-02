@@ -6,11 +6,13 @@ import org.gdas.bigreportsapi.model.entity.ProductComponent;
 import org.gdas.bigreportsapi.model.json.ProductComponentJSON;
 import org.gdas.bigreportsapi.model.json.ProductJSON;
 import org.gdas.bigreportsapi.service.ProductService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -28,9 +30,15 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ProductJSON>> get() {
-        List<Product> entities = productService.findAll();
-        List<ProductJSON> result = entities.stream().map(ProductJSON::from).collect(Collectors.toList());
+    public ResponseEntity<Page<ProductJSON>> get(
+            @RequestParam(defaultValue = "false") boolean ready,
+            Pageable pageable
+    ) {
+        Page<Product> entities = productService.findAll(ready, pageable);
+        Page<ProductJSON> result = new PageImpl<>(
+                entities.stream().map(ProductJSON::from).collect(Collectors.toList()),
+                entities.getPageable(),
+                entities.getTotalElements());
         return result.isEmpty()
                 ? ResponseEntity.noContent().build()
                 : ResponseEntity.ok(result);

@@ -27,6 +27,10 @@ public class Product {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
+    @ManyToOne
+    @JoinColumn(name = "SRC_PDT_ID")
+    private Product sourceProduct;
+
     @Column(name = "NAME", nullable = false, unique = true, updatable = false)
     private String name;
 
@@ -81,6 +85,14 @@ public class Product {
 
     public List<ProductComponent> getComponents() {
         return components;
+    }
+
+    public Product getSourceProduct() {
+        return sourceProduct;
+    }
+
+    public void setSourceProduct(Product sourceProduct) {
+        this.sourceProduct = sourceProduct;
     }
 
     public void setComponents(List<ProductComponent> components) {

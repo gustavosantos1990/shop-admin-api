@@ -4,11 +4,13 @@ import jakarta.validation.Valid;
 import org.gdas.bigreportsapi.model.entity.Component;
 import org.gdas.bigreportsapi.model.json.ComponentJSON;
 import org.gdas.bigreportsapi.service.ComponentService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -26,9 +28,12 @@ public class ComponentsController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ComponentJSON>> get() {
-        List<Component> entities = componentService.findAll();
-        List<ComponentJSON> result = entities.stream().map(ComponentJSON::from).collect(Collectors.toList());
+    public ResponseEntity<Page<ComponentJSON>> get(Pageable pageable) {
+        Page<Component> entities = componentService.findAll(pageable);
+        Page<ComponentJSON> result = new PageImpl<>(
+                entities.stream().map(ComponentJSON::from).collect(Collectors.toList()),
+                entities.getPageable(),
+                entities.getTotalElements());
         return result.isEmpty()
                 ? ResponseEntity.noContent().build()
                 : ResponseEntity.ok(result);
