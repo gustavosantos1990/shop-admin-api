@@ -15,4 +15,12 @@ public enum Measure {
         this.label = label;
         this.symbol = symbol;
     }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public String getSymbol() {
+        return symbol;
+    }
 }

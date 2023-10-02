@@ -2,10 +2,10 @@ package org.gdas.bigreportsapi.model.json;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.gdas.bigreportsapi.model.entity.Component;
-import org.gdas.bigreportsapi.model.enummeration.Measure;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -13,6 +13,7 @@ import java.util.UUID;
 public class ComponentJSON {
 
     @JsonProperty
+    @NotNull
     private UUID id;
 
     @JsonIgnore
@@ -29,7 +30,8 @@ public class ComponentJSON {
 
     @JsonProperty
     @NotNull
-    private Measure measure;
+    @Valid
+    private MeasureJSON measure;
 
     public UUID getId() {
         return id;
@@ -63,11 +65,11 @@ public class ComponentJSON {
         this.name = name;
     }
 
-    public Measure getMeasure() {
+    public MeasureJSON getMeasure() {
         return measure;
     }
 
-    public void setMeasure(Measure measure) {
+    public void setMeasure(MeasureJSON measure) {
         this.measure = measure;
     }
 
@@ -77,7 +79,7 @@ public class ComponentJSON {
         json.setCreatedAt(entity.getCreatedAt());
         json.setUpdatedAt(entity.getUpdatedAt());
         json.setName(entity.getName());
-        json.setMeasure(entity.getMeasure());
+        json.setMeasure(MeasureJSON.from(entity.getMeasure()));
         return json;
     }
 

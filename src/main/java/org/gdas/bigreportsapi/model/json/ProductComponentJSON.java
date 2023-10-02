@@ -2,6 +2,7 @@ package org.gdas.bigreportsapi.model.json;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import org.gdas.bigreportsapi.model.entity.ProductComponent;
@@ -17,6 +18,7 @@ public class ProductComponentJSON {
 
     @JsonProperty
     @NotNull
+    @Valid
     private ComponentJSON component;
 
     @JsonIgnore

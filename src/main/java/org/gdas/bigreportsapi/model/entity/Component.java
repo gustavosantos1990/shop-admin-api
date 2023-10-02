@@ -93,7 +93,7 @@ public class Component {
         entity.setId(json.getId());
         entity.setCreatedAt(json.getCreatedAt());
         entity.setName(json.getName());
-        entity.setMeasure(json.getMeasure());
+        entity.setMeasure(Measure.valueOf(json.getMeasure().getValue()));
         return entity;
     }
 }
