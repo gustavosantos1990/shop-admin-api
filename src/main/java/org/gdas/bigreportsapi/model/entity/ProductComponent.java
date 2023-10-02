@@ -1,9 +1,11 @@
 package org.gdas.bigreportsapi.model.entity;
 
 import jakarta.persistence.*;
-import org.gdas.bigreportsapi.model.enummeration.Measure;
+import org.gdas.bigreportsapi.model.json.ProductComponentJSON;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
-import java.time.LocalDate;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -12,33 +14,33 @@ import java.util.UUID;
 public class ProductComponent {
 
     @Id
+    @Column(name = "PCO_ID")
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(nullable = false)
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "PDT_ID")
+    private Product product;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "CMP_ID")
+    private Component component;
+
+    @Column(name = "PCO_CREATED_AT", nullable = false)
+    @CreationTimestamp
     private LocalDateTime createdAt;
 
-    @Column(nullable = false)
-    private String name;
+    @Column(name = "PCO_UPDATED_AT", nullable = false)
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Measure measure;
+    @Column(name = "UNITARY_VALUE", nullable = false)
+    private BigDecimal unitaryValue;
+
+    @Column(name = "AMOUNT", nullable = false)
+    private BigDecimal amount;
 
     public ProductComponent() {
-    }
-
-    public ProductComponent(LocalDateTime createdAt, String name, Measure measure) {
-        this.createdAt = createdAt;
-        this.name = name;
-        this.measure = measure;
-    }
-
-    public ProductComponent(UUID id, LocalDateTime createdAt, String name, Measure measure) {
-        this.id = id;
-        this.createdAt = createdAt;
-        this.name = name;
-        this.measure = measure;
     }
 
     public UUID getId() {
@@ -49,6 +51,22 @@ public class ProductComponent {
         this.id = id;
     }
 
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public Component getComponent() {
+        return component;
+    }
+
+    public void setComponent(Component component) {
+        this.component = component;
+    }
+
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
@@ -57,19 +75,38 @@ public class ProductComponent {
         this.createdAt = createdAt;
     }
 
-    public String getName() {
-        return name;
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
-    public Measure getMeasure() {
-        return measure;
+    public BigDecimal getUnitaryValue() {
+        return unitaryValue;
     }
 
-    public void setMeasure(Measure measure) {
-        this.measure = measure;
+    public void setUnitaryValue(BigDecimal unitaryValue) {
+        this.unitaryValue = unitaryValue;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    public static ProductComponent from(ProductComponentJSON json) {
+        ProductComponent entity = new ProductComponent();
+        entity.setId(json.getId());
+        entity.setCreatedAt(json.getCreatedAt());
+        entity.setUpdatedAt(json.getUpdatedAt());
+        entity.setComponent(Component.from(json.getComponent()));
+        entity.setUnitaryValue(json.getUnitaryValue());
+        entity.setAmount(json.getAmount());
+        return entity;
     }
 }

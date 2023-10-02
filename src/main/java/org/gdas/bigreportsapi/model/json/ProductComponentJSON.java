@@ -1,9 +1,12 @@
 package org.gdas.bigreportsapi.model.json;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import org.gdas.bigreportsapi.model.entity.ProductComponent;
-import org.gdas.bigreportsapi.model.enummeration.Measure;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -13,13 +16,29 @@ public class ProductComponentJSON {
     private UUID id;
 
     @JsonProperty
+    @NotNull
+    private ComponentJSON component;
+
+    @JsonIgnore
+    @JsonProperty("created_at")
     private LocalDateTime createdAt;
 
-    @JsonProperty
-    private String name;
+    @JsonIgnore
+    @JsonProperty("updated_at")
+    private LocalDateTime updatedAt;
+
+    @JsonProperty("unitary_value")
+    @NotNull
+    @Positive
+    private BigDecimal unitaryValue;
 
     @JsonProperty
-    private Measure measure;
+    @NotNull
+    @Positive
+    private BigDecimal amount;
+
+    public ProductComponentJSON() {
+    }
 
     public UUID getId() {
         return id;
@@ -27,6 +46,14 @@ public class ProductComponentJSON {
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    public ComponentJSON getComponent() {
+        return component;
+    }
+
+    public void setComponent(ComponentJSON component) {
+        this.component = component;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -37,28 +64,38 @@ public class ProductComponentJSON {
         this.createdAt = createdAt;
     }
 
-    public String getName() {
-        return name;
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
-    public Measure getMeasure() {
-        return measure;
+    public BigDecimal getUnitaryValue() {
+        return unitaryValue;
     }
 
-    public void setMeasure(Measure measure) {
-        this.measure = measure;
+    public void setUnitaryValue(BigDecimal unitaryValue) {
+        this.unitaryValue = unitaryValue;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
     }
 
     public static ProductComponentJSON from(ProductComponent entity) {
         ProductComponentJSON json = new ProductComponentJSON();
         json.setId(entity.getId());
         json.setCreatedAt(entity.getCreatedAt());
-        json.setName(entity.getName());
-        json.setMeasure(entity.getMeasure());
+        json.setUpdatedAt(entity.getUpdatedAt());
+        json.setComponent(ComponentJSON.from(entity.getComponent()));
+        json.setUnitaryValue(entity.getUnitaryValue());
+        json.setAmount(entity.getAmount());
         return json;
     }
 
