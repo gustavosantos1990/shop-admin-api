@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
 import org.gdas.bigreportsapi.model.enummeration.Measure;
 
+import static org.springframework.beans.BeanUtils.copyProperties;
+
 public class MeasureJSON {
 
     @JsonProperty
@@ -40,12 +42,10 @@ public class MeasureJSON {
         this.symbol = symbol;
     }
 
-    public static MeasureJSON from(Measure measure) {
-        MeasureJSON json = new MeasureJSON();
-        json.setLabel(measure.getLabel());
-        json.setSymbol(measure.getSymbol());
-        json.setValue(measure.name());
-        return json;
+    public static MeasureJSON from(Measure source) {
+        MeasureJSON target = new MeasureJSON();
+        copyProperties(source, target);
+        return target;
     }
 
 }

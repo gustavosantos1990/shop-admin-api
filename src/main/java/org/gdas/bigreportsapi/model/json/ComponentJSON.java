@@ -10,10 +10,11 @@ import org.gdas.bigreportsapi.model.entity.Component;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import static org.springframework.beans.BeanUtils.copyProperties;
+
 public class ComponentJSON {
 
     @JsonProperty
-    @NotNull
     private UUID id;
 
     @JsonIgnore
@@ -73,14 +74,11 @@ public class ComponentJSON {
         this.measure = measure;
     }
 
-    public static ComponentJSON from(Component entity) {
-        ComponentJSON json = new ComponentJSON();
-        json.setId(entity.getId());
-        json.setCreatedAt(entity.getCreatedAt());
-        json.setUpdatedAt(entity.getUpdatedAt());
-        json.setName(entity.getName());
-        json.setMeasure(MeasureJSON.from(entity.getMeasure()));
-        return json;
+    public static ComponentJSON from(Component source) {
+        ComponentJSON target = new ComponentJSON();
+        copyProperties(source, target);
+        target.setMeasure(MeasureJSON.from(source.getMeasure()));
+        return target;
     }
 
 }

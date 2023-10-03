@@ -3,14 +3,14 @@ package org.gdas.bigreportsapi.model.json;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
-import org.gdas.bigreportsapi.model.entity.Component;
 import org.gdas.bigreportsapi.model.entity.Product;
-import org.gdas.bigreportsapi.model.entity.ProductComponent;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
+
+import static org.springframework.beans.BeanUtils.copyProperties;
 
 public class ProductJSON {
 
@@ -83,13 +83,10 @@ public class ProductJSON {
         this.components = components;
     }
 
-    public static ProductJSON from(Product entity) {
-        ProductJSON json = new ProductJSON();
-        json.setId(entity.getId());
-        json.setCreatedAt(entity.getCreatedAt());
-        json.setUpdatedAt(entity.getUpdatedAt());
-        json.setName(entity.getName());
-        return json;
+    public static ProductJSON from(Product source) {
+        ProductJSON target = new ProductJSON();
+        copyProperties(source, target);
+        return target;
     }
 
 }

@@ -9,6 +9,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import static org.springframework.beans.BeanUtils.copyProperties;
+
 @Entity
 @Table(name = "COMPONENT")
 public class Component {
@@ -88,12 +90,10 @@ public class Component {
         this.measure = measure;
     }
 
-    public static Component from(ComponentJSON json) {
-        Component entity = new Component();
-        entity.setId(json.getId());
-        entity.setCreatedAt(json.getCreatedAt());
-        entity.setName(json.getName());
-        entity.setMeasure(Measure.valueOf(json.getMeasure().getValue()));
-        return entity;
+    public static Component from(ComponentJSON source) {
+        Component target = new Component();
+        copyProperties(source, target);
+        target.setMeasure(Measure.valueOf(source.getMeasure().getValue()));
+        return target;
     }
 }

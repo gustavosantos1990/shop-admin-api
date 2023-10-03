@@ -9,6 +9,8 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import static org.springframework.beans.BeanUtils.copyProperties;
+
 @Entity
 @Table(name = "PRODUCT_COMPONENT")
 public class ProductComponent {
@@ -98,15 +100,11 @@ public class ProductComponent {
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
-
-    public static ProductComponent from(ProductComponentJSON json) {
-        ProductComponent entity = new ProductComponent();
-        entity.setId(json.getId());
-        entity.setCreatedAt(json.getCreatedAt());
-        entity.setUpdatedAt(json.getUpdatedAt());
-        entity.setComponent(Component.from(json.getComponent()));
-        entity.setUnitaryValue(json.getUnitaryValue());
-        entity.setAmount(json.getAmount());
-        return entity;
+    
+    public static ProductComponent from(ProductComponentJSON source) {
+        ProductComponent target = new ProductComponent();
+        copyProperties(source, target);
+        target.setComponent(Component.from(source.getComponent()));
+        return target;
     }
 }

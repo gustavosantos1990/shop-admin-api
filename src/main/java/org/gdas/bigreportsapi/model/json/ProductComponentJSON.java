@@ -11,10 +11,16 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import static org.springframework.beans.BeanUtils.copyProperties;
+
 public class ProductComponentJSON {
 
     @JsonProperty
     private UUID id;
+
+    @JsonProperty
+    @NotNull
+    private Long version;
 
     @JsonProperty
     @NotNull
@@ -90,15 +96,19 @@ public class ProductComponentJSON {
         this.amount = amount;
     }
 
-    public static ProductComponentJSON from(ProductComponent entity) {
-        ProductComponentJSON json = new ProductComponentJSON();
-        json.setId(entity.getId());
-        json.setCreatedAt(entity.getCreatedAt());
-        json.setUpdatedAt(entity.getUpdatedAt());
-        json.setComponent(ComponentJSON.from(entity.getComponent()));
-        json.setUnitaryValue(entity.getUnitaryValue());
-        json.setAmount(entity.getAmount());
-        return json;
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
+    }
+
+    public static ProductComponentJSON from(ProductComponent source) {
+        ProductComponentJSON target = new ProductComponentJSON();
+        copyProperties(source, target);
+        target.setComponent(ComponentJSON.from(source.getComponent()));
+        return target;
     }
 
 }

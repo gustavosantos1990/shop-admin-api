@@ -19,11 +19,11 @@ import static org.springframework.http.HttpStatus.CREATED;
 @RestController
 @RequestMapping("/v1/components")
 @Validated
-public class ComponentsController {
+public class ComponentController {
 
     private final ComponentService componentService;
 
-    public ComponentsController(ComponentService componentService) {
+    public ComponentController(ComponentService componentService) {
         this.componentService = componentService;
     }
 

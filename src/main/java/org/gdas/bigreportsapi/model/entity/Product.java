@@ -10,6 +10,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
+import static org.springframework.beans.BeanUtils.copyProperties;
+
 @Entity
 @Table(name = "PRODUCT")
 public class Product {
@@ -99,11 +101,9 @@ public class Product {
         this.components = components;
     }
 
-        public static Product from(ProductJSON json) {
-        Product entity = new Product();
-        entity.setId(json.getId());
-        entity.setName(json.getName());
-        entity.setReady(json.isReady());
-        return entity;
+        public static Product from(ProductJSON source) {
+        Product target = new Product();
+        copyProperties(source, target);
+        return target;
     }
 }
