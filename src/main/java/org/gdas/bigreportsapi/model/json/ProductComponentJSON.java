@@ -107,7 +107,7 @@ public class ProductComponentJSON {
     public static ProductComponentJSON from(ProductComponent source) {
         ProductComponentJSON target = new ProductComponentJSON();
         copyProperties(source, target);
-        target.setComponent(ComponentJSON.from(source.getComponent()));
+        target.setComponent(ComponentJSON.from(source.getProductComponentID().getComponent()));
         return target;
     }
 

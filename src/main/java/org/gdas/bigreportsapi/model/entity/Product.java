@@ -6,43 +6,48 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.Collections;
-import java.util.List;
 import java.util.UUID;
 
 import static org.springframework.beans.BeanUtils.copyProperties;
 
 @Entity
-@Table(name = "PRODUCT")
+@Table(name = "product")
 public class Product {
 
     @Id
-    @Column(name = "PDT_ID")
+    @Column(name = "pdt_id")
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(name = "PDT_CREATED_AT", nullable = false)
+    @Column(name = "pdt_created_at", nullable = false)
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-    @Column(name = "PDT_UPDATED_AT", nullable = false)
+    @Column(name = "pdt_updated_at")
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
     @ManyToOne
-    @JoinColumn(name = "SRC_PDT_ID")
+    @JoinColumn(name = "src_pdt_id")
     private Product sourceProduct;
 
-    @Column(name = "NAME", nullable = false, unique = true, updatable = false)
+    @Column(name = "pdt_name", nullable = false, unique = true, updatable = false)
     private String name;
 
-    @Column(name = "READY", nullable = false, updatable = false)
+    @Column(name = "ready", nullable = false, updatable = false)
     private boolean ready;
 
-    @OneToMany(mappedBy = "product")
-    private List<ProductComponent> components = Collections.emptyList();
+    @Column(name = "photo_address")
+    private String photoAddress;
+
+//    @OneToMany(mappedBy = "revisionID.product")
+//    private List<Revision> revisions = Collections.emptyList();
 
     public Product() {
+    }
+
+    public Product(String name) {
+        this.name = name;
     }
 
     public UUID getId() {
@@ -69,6 +74,14 @@ public class Product {
         this.updatedAt = updatedAt;
     }
 
+    public Product getSourceProduct() {
+        return sourceProduct;
+    }
+
+    public void setSourceProduct(Product sourceProduct) {
+        this.sourceProduct = sourceProduct;
+    }
+
     public String getName() {
         return name;
     }
@@ -85,23 +98,23 @@ public class Product {
         this.ready = ready;
     }
 
-    public List<ProductComponent> getComponents() {
-        return components;
+    public String getPhotoAddress() {
+        return photoAddress;
     }
 
-    public Product getSourceProduct() {
-        return sourceProduct;
+    public void setPhotoAddress(String photoAddress) {
+        this.photoAddress = photoAddress;
     }
 
-    public void setSourceProduct(Product sourceProduct) {
-        this.sourceProduct = sourceProduct;
-    }
+//    public List<Revision> getRevisions() {
+//        return revisions;
+//    }
+//
+//    public void setRevisions(List<Revision> revisions) {
+//        this.revisions = revisions;
+//    }
 
-    public void setComponents(List<ProductComponent> components) {
-        this.components = components;
-    }
-
-        public static Product from(ProductJSON source) {
+    public static Product from(ProductJSON source) {
         Product target = new Product();
         copyProperties(source, target);
         return target;

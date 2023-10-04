@@ -12,28 +12,31 @@ import java.util.UUID;
 import static org.springframework.beans.BeanUtils.copyProperties;
 
 @Entity
-@Table(name = "COMPONENT")
+@Table(name = "component")
 public class Component {
 
     @Id
-    @Column(name = "CMP_ID")
+    @Column(name = "cmp_id")
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(name = "CMP_CREATED_AT", nullable = false)
+    @Column(name = "cmp_created_at", nullable = false)
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-    @Column(name = "CMP_UPDATED_AT", nullable = false)
+    @Column(name = "cmp_updated_at")
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    @Column(name = "CMP_NAME", nullable = false, unique = true, updatable = false)
+    @Column(name = "cmp_name", nullable = false, unique = true, updatable = false)
     private String name;
 
-    @Column(name = "MEASURE", nullable = false)
+    @Column(name = "measure", nullable = false)
     @Enumerated(EnumType.STRING)
     private Measure measure;
+
+    @Column(name = "photo_address")
+    private String photoAddress;
 
     public Component() {
     }
@@ -88,6 +91,14 @@ public class Component {
 
     public void setMeasure(Measure measure) {
         this.measure = measure;
+    }
+
+    public String getPhotoAddress() {
+        return photoAddress;
+    }
+
+    public void setPhotoAddress(String photoAddress) {
+        this.photoAddress = photoAddress;
     }
 
     public static Component from(ComponentJSON source) {

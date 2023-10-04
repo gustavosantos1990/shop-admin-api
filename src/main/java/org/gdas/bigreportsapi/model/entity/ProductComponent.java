@@ -1,72 +1,48 @@
 package org.gdas.bigreportsapi.model.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import org.gdas.bigreportsapi.model.json.ProductComponentJSON;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 import static org.springframework.beans.BeanUtils.copyProperties;
 
 @Entity
-@Table(name = "PRODUCT_COMPONENT")
+@Table(name = "product_component")
 public class ProductComponent {
 
-    @Id
-    @Column(name = "PCO_ID")
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @EmbeddedId
+    private ProductComponentID productComponentID;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "PDT_ID")
-    private Product product;
-
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "CMP_ID")
-    private Component component;
-
-    @Column(name = "PCO_CREATED_AT", nullable = false)
+    @Column(name = "pco_created_at", nullable = false)
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-    @Column(name = "PCO_UPDATED_AT", nullable = false)
+    @Column(name = "pco_updated_at", nullable = false)
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    @Column(name = "UNITARY_VALUE", nullable = false)
+    @Column(name = "unitary_value", nullable = false)
     private BigDecimal unitaryValue;
 
-    @Column(name = "AMOUNT", nullable = false)
+    @Column(name = "amount", nullable = false)
     private BigDecimal amount;
 
     public ProductComponent() {
     }
 
-    public UUID getId() {
-        return id;
+    public ProductComponentID getProductComponentID() {
+        return productComponentID;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    public Component getComponent() {
-        return component;
-    }
-
-    public void setComponent(Component component) {
-        this.component = component;
+    public void setProductComponentID(ProductComponentID productComponentID) {
+        this.productComponentID = productComponentID;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -100,11 +76,10 @@ public class ProductComponent {
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
-    
+
     public static ProductComponent from(ProductComponentJSON source) {
         ProductComponent target = new ProductComponent();
         copyProperties(source, target);
-        target.setComponent(Component.from(source.getComponent()));
         return target;
     }
 }

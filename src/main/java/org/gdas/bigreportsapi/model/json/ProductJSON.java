@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import static org.springframework.beans.BeanUtils.copyProperties;
 
@@ -33,7 +34,7 @@ public class ProductJSON {
     private boolean ready;
 
     @JsonProperty
-    private List<ProductComponentJSON> components = Collections.emptyList();
+    private List<RevisionJSON> revisions = Collections.emptyList();
 
     public UUID getId() {
         return id;
@@ -75,17 +76,18 @@ public class ProductJSON {
         this.ready = ready;
     }
 
-    public List<ProductComponentJSON> getComponents() {
-        return components;
+    public List<RevisionJSON> getRevisions() {
+        return revisions;
     }
 
-    public void setComponents(List<ProductComponentJSON> components) {
-        this.components = components;
+    public void setRevisions(List<RevisionJSON> revisions) {
+        this.revisions = revisions;
     }
 
     public static ProductJSON from(Product source) {
         ProductJSON target = new ProductJSON();
         copyProperties(source, target);
+//        target.setRevisions(source.getRevisions().stream().map(RevisionJSON::from).collect(Collectors.toList()));
         return target;
     }
 

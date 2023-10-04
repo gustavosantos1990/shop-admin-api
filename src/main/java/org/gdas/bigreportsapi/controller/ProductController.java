@@ -66,12 +66,22 @@ public class ProductController {
         return ResponseEntity.ok(ProductJSON.from(updated));
     }
 
-    @PostMapping("/{id}/components")
-    public ResponseEntity<ProductComponentJSON> postComponents(
+    @PostMapping("/{id}/revisions")
+    public ResponseEntity<ProductComponentJSON> postRevision(
             @PathVariable UUID id,
             @Valid @RequestBody ProductComponentJSON payload) {
         ProductComponent newEntity = ProductComponent.from(payload);
-        ProductComponent saved = productService.saveComponent(id, newEntity);
+        ProductComponent saved = productService.saveComponentForNewRevision(id, newEntity);
+        return ResponseEntity.status(CREATED).body(ProductComponentJSON.from(saved));
+    }
+
+    @PostMapping("/{productID}/revisions/{revisionNumber}")
+    public ResponseEntity<ProductComponentJSON> postComponent(
+            @PathVariable UUID productID,
+            @PathVariable Integer revisionNumber,
+            @Valid @RequestBody ProductComponentJSON payload) {
+        ProductComponent newEntity = ProductComponent.from(payload);
+        ProductComponent saved = productService.saveComponent(productID, revisionNumber, newEntity);
         return ResponseEntity.status(CREATED).body(ProductComponentJSON.from(saved));
     }
 

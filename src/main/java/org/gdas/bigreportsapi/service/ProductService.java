@@ -1,8 +1,6 @@
 package org.gdas.bigreportsapi.service;
 
-import org.gdas.bigreportsapi.model.entity.Component;
-import org.gdas.bigreportsapi.model.entity.Product;
-import org.gdas.bigreportsapi.model.entity.ProductComponent;
+import org.gdas.bigreportsapi.model.entity.*;
 import org.gdas.bigreportsapi.repository.ProductRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,11 +17,17 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final ProductComponentService productComponentService;
     private final ComponentService componentService;
+    private final RevisionService revisionService;
 
-    public ProductService(ProductRepository productRepository, ProductComponentService productComponentService, ComponentService componentService) {
+    public ProductService(
+            ProductRepository productRepository,
+            ProductComponentService productComponentService,
+            ComponentService componentService,
+            RevisionService revisionService) {
         this.productRepository = productRepository;
         this.productComponentService = productComponentService;
         this.componentService = componentService;
+        this.revisionService = revisionService;
     }
 
     public Page<Product> findAll(boolean ready, Pageable pageable) {
@@ -38,12 +42,23 @@ public class ProductService {
         return productRepository.save(entity);
     }
 
-    public ProductComponent saveComponent(UUID id, ProductComponent entity) {
-        Product product = findByID(id);
-        Component component = componentService.findByID(entity.getComponent().getId());
-        entity.setProduct(product);
-        entity.setComponent(component);
+    public ProductComponent saveComponent(UUID productID, Integer revisionNumber, ProductComponent entity) {
+        Component component = componentService.findByID(entity.getProductComponentID().getComponent().getId());
+        Revision revision = revisionService.findByProductIDAndRevisionNumber(productID, revisionNumber);
+
+        entity.setProductComponentID(new ProductComponentID(revision, component));
+
         return productComponentService.save(entity);
+    }
+
+    public ProductComponent saveComponentForNewRevision(UUID productID, ProductComponent entity) {
+        Integer revisionNumber = revisionService.findMaxRevisionNumberByProduct(productID);
+
+        if (revisionNumber == null) {
+            revisionService.save(new Revision());
+        }
+
+        return saveComponent(productID, revisionNumber, entity);
     }
 
     public Product update(UUID id, Product product) {
@@ -65,10 +80,10 @@ public class ProductService {
     }
 
     private void validateReadiness(Product product) {
-        if (product.getComponents() == null || product.getComponents().isEmpty()) {
-            throw new IllegalStateException("Produto sem componentes cadastrados");
-        }
-        product.setReady(true);
+//        if (product.getComponents() == null || product.getComponents().isEmpty()) {
+//            throw new IllegalStateException("Produto sem componentes cadastrados");
+//        }
+//        product.setReady(true);
     }
 
 }

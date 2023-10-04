@@ -45,6 +45,7 @@ public class MeasureJSON {
     public static MeasureJSON from(Measure source) {
         MeasureJSON target = new MeasureJSON();
         copyProperties(source, target);
+        target.setValue(source.name());
         return target;
     }
 
