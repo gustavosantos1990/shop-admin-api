@@ -2,8 +2,6 @@ package org.gdas.bigreportsapi.controller;
 
 import jakarta.validation.Valid;
 import org.gdas.bigreportsapi.model.entity.Product;
-import org.gdas.bigreportsapi.model.entity.ProductComponent;
-import org.gdas.bigreportsapi.model.json.ProductComponentJSON;
 import org.gdas.bigreportsapi.model.json.ProductJSON;
 import org.gdas.bigreportsapi.service.ProductService;
 import org.springframework.data.domain.Page;
@@ -31,10 +29,9 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity<Page<ProductJSON>> get(
-            @RequestParam(defaultValue = "false") boolean ready,
             Pageable pageable
     ) {
-        Page<Product> entities = productService.findAll(ready, pageable);
+        Page<Product> entities = productService.findAll(pageable);
         Page<ProductJSON> result = new PageImpl<>(
                 entities.stream().map(ProductJSON::from).collect(Collectors.toList()),
                 entities.getPageable(),
@@ -57,32 +54,32 @@ public class ProductController {
         return ResponseEntity.status(CREATED).body(ProductJSON.from(saved));
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<ProductJSON> patch(
-            @PathVariable UUID id,
-            @Valid @RequestBody ProductJSON payload) {
-        Product entity = Product.from(payload);
-        Product updated = productService.update(id, entity);
-        return ResponseEntity.ok(ProductJSON.from(updated));
-    }
-
-    @PostMapping("/{id}/revisions")
-    public ResponseEntity<ProductComponentJSON> postRevision(
-            @PathVariable UUID id,
-            @Valid @RequestBody ProductComponentJSON payload) {
-        ProductComponent newEntity = ProductComponent.from(payload);
-        ProductComponent saved = productService.saveComponentForNewRevision(id, newEntity);
-        return ResponseEntity.status(CREATED).body(ProductComponentJSON.from(saved));
-    }
-
-    @PostMapping("/{productID}/revisions/{revisionNumber}")
-    public ResponseEntity<ProductComponentJSON> postComponent(
-            @PathVariable UUID productID,
-            @PathVariable Integer revisionNumber,
-            @Valid @RequestBody ProductComponentJSON payload) {
-        ProductComponent newEntity = ProductComponent.from(payload);
-        ProductComponent saved = productService.saveComponent(productID, revisionNumber, newEntity);
-        return ResponseEntity.status(CREATED).body(ProductComponentJSON.from(saved));
-    }
+//    @PatchMapping("/{id}")
+//    public ResponseEntity<ProductJSON> patch(
+//            @PathVariable UUID id,
+//            @Valid @RequestBody ProductJSON payload) {
+//        Product entity = Product.from(payload);
+//        Product updated = productService.update(id, entity);
+//        return ResponseEntity.ok(ProductJSON.from(updated));
+//    }
+//
+//    @PostMapping("/{id}/revisions")
+//    public ResponseEntity<ProductComponentJSON> postRevision(
+//            @PathVariable UUID id,
+//            @Valid @RequestBody ProductComponentJSON payload) {
+//        ProductComponent newEntity = ProductComponent.from(payload);
+//        ProductComponent saved = productService.saveComponentForNewRevision(id, newEntity);
+//        return ResponseEntity.status(CREATED).body(ProductComponentJSON.from(saved));
+//    }
+//
+//    @PostMapping("/{productID}/revisions/{revisionNumber}")
+//    public ResponseEntity<ProductComponentJSON> postComponent(
+//            @PathVariable UUID productID,
+//            @PathVariable Integer revisionNumber,
+//            @Valid @RequestBody ProductComponentJSON payload) {
+//        ProductComponent newEntity = ProductComponent.from(payload);
+//        ProductComponent saved = productService.saveComponent(productID, revisionNumber, newEntity);
+//        return ResponseEntity.status(CREATED).body(ProductComponentJSON.from(saved));
+//    }
 
 }

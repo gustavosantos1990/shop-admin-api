@@ -1,38 +1,32 @@
 package org.gdas.bigreportsapi.model.json;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import org.gdas.bigreportsapi.model.entity.Product;
+import org.gdas.bigreportsapi.model.entity.Customer;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 import static org.springframework.beans.BeanUtils.copyProperties;
 
-public class ProductJSON {
+public class CustomerJSON {
 
     @JsonProperty
     private UUID id;
 
     @JsonIgnore
     @JsonProperty("created_at")
-    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private LocalDateTime createdAt;
 
     @JsonIgnore
     @JsonProperty("updated_at")
-    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private LocalDateTime updatedAt;
 
     @JsonIgnore
     @JsonProperty("deleted_at")
-    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private LocalDateTime deletedAt;
 
     @JsonProperty
@@ -41,12 +35,13 @@ public class ProductJSON {
     private String name;
 
     @JsonProperty
-    private String description;
+    @NotBlank
+    @Size(min = 10, max = 11)
+    //@Pattern(regexp = "//d")
+    private String phone;
 
-    @JsonProperty
-    @NotNull
-    @Positive
-    private BigDecimal price;
+    public CustomerJSON() {
+    }
 
     public UUID getId() {
         return id;
@@ -72,14 +67,6 @@ public class ProductJSON {
         this.updatedAt = updatedAt;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public LocalDateTime getDeletedAt() {
         return deletedAt;
     }
@@ -88,24 +75,24 @@ public class ProductJSON {
         this.deletedAt = deletedAt;
     }
 
-    public String getDescription() {
-        return description;
+    public String getName() {
+        return name;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public static ProductJSON from(Product source) {
-        ProductJSON target = new ProductJSON();
+    public static CustomerJSON from(Customer source) {
+        CustomerJSON target = new CustomerJSON();
         copyProperties(source, target);
         return target;
     }

@@ -4,7 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import org.gdas.bigreportsapi.model.json.ProductComponentJSON;
+import org.gdas.bigreportsapi.model.json.RequestProductJSON;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -14,19 +14,22 @@ import java.time.LocalDateTime;
 import static org.springframework.beans.BeanUtils.copyProperties;
 
 @Entity
-@Table(name = "product_component")
-public class ProductComponent {
+@Table(name = "request_product")
+public class RequestProduct {
 
     @EmbeddedId
-    private ProductComponentID productComponentID;
+    private RequestProductID requestProductID;
 
-    @Column(name = "pco_created_at", nullable = false)
+    @Column(name = "rpd_created_at", nullable = false)
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-    @Column(name = "pco_updated_at", nullable = false)
+    @Column(name = "rpd_updated_at")
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+
+    @Column(name = "rpd_deleted_at", updatable = false)
+    private LocalDateTime deletedAt;
 
     @Column(name = "unitary_value", nullable = false)
     private BigDecimal unitaryValue;
@@ -34,15 +37,18 @@ public class ProductComponent {
     @Column(name = "amount", nullable = false)
     private BigDecimal amount;
 
-    public ProductComponent() {
+    @Column(name = "notes")
+    private String notes;
+
+    public RequestProduct() {
     }
 
-    public ProductComponentID getProductComponentID() {
-        return productComponentID;
+    public RequestProductID getRequestProductID() {
+        return requestProductID;
     }
 
-    public void setProductComponentID(ProductComponentID productComponentID) {
-        this.productComponentID = productComponentID;
+    public void setRequestProductID(RequestProductID requestProductID) {
+        this.requestProductID = requestProductID;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -61,6 +67,14 @@ public class ProductComponent {
         this.updatedAt = updatedAt;
     }
 
+    public LocalDateTime getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
+    }
+
     public BigDecimal getUnitaryValue() {
         return unitaryValue;
     }
@@ -77,9 +91,18 @@ public class ProductComponent {
         this.amount = amount;
     }
 
-    public static ProductComponent from(ProductComponentJSON source) {
-        ProductComponent target = new ProductComponent();
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    public static RequestProduct from(RequestProductJSON source) {
+        RequestProduct target = new RequestProduct();
         copyProperties(source, target);
+        target.setRequestProductID(RequestProductID.from(source));
         return target;
     }
 }

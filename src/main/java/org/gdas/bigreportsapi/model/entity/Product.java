@@ -5,6 +5,7 @@ import org.gdas.bigreportsapi.model.json.ProductJSON;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -19,6 +20,10 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @ManyToOne
+    @JoinColumn(name = "cloned_from")
+    private Product clonedFrom;
+
     @Column(name = "pdt_created_at", nullable = false)
     @CreationTimestamp
     private LocalDateTime createdAt;
@@ -27,27 +32,25 @@ public class Product {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    @ManyToOne
-    @JoinColumn(name = "src_pdt_id")
-    private Product sourceProduct;
+    @Column(name = "pdt_deleted_at")
+    private LocalDateTime deletedAt;
 
     @Column(name = "pdt_name", nullable = false, unique = true, updatable = false)
     private String name;
 
-    @Column(name = "ready", nullable = false, updatable = false)
-    private boolean ready;
+    @Column(name = "description")
+    private String description;
 
-    @Column(name = "photo_address")
-    private String photoAddress;
-
-//    @OneToMany(mappedBy = "revisionID.product")
-//    private List<Revision> revisions = Collections.emptyList();
+    @Column(name = "price", nullable = false)
+    private BigDecimal price;
 
     public Product() {
     }
 
-    public Product(String name) {
+    public Product(String name, String description, BigDecimal price) {
         this.name = name;
+        this.description = description;
+        this.price = price;
     }
 
     public UUID getId() {
@@ -56,6 +59,14 @@ public class Product {
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    public Product getClonedFrom() {
+        return clonedFrom;
+    }
+
+    public void setClonedFrom(Product clonedFrom) {
+        this.clonedFrom = clonedFrom;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -74,12 +85,12 @@ public class Product {
         this.updatedAt = updatedAt;
     }
 
-    public Product getSourceProduct() {
-        return sourceProduct;
+    public LocalDateTime getDeletedAt() {
+        return deletedAt;
     }
 
-    public void setSourceProduct(Product sourceProduct) {
-        this.sourceProduct = sourceProduct;
+    public void setDeletedAt(LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
     }
 
     public String getName() {
@@ -90,29 +101,21 @@ public class Product {
         this.name = name;
     }
 
-    public boolean isReady() {
-        return ready;
+    public String getDescription() {
+        return description;
     }
 
-    public void setReady(boolean ready) {
-        this.ready = ready;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getPhotoAddress() {
-        return photoAddress;
+    public BigDecimal getPrice() {
+        return price;
     }
 
-    public void setPhotoAddress(String photoAddress) {
-        this.photoAddress = photoAddress;
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
-
-//    public List<Revision> getRevisions() {
-//        return revisions;
-//    }
-//
-//    public void setRevisions(List<Revision> revisions) {
-//        this.revisions = revisions;
-//    }
 
     public static Product from(ProductJSON source) {
         Product target = new Product();
