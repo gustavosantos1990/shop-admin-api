@@ -15,9 +15,11 @@ import org.springframework.web.server.ResponseStatusException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
+import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
-import static org.springframework.http.HttpStatus.NOT_IMPLEMENTED;
 
 @Service
 @Transactional
@@ -71,6 +73,31 @@ public class RequestService {
     }
 
     public RequestProduct update(Long requestID, UUID productID, RequestProduct entity) {
-        throw new ResponseStatusException(NOT_IMPLEMENTED);
+        RequestProductID requestProductID = mountRequestProductID(requestID, productID);
+        RequestProduct requestProduct = findById(requestProductID);
+        copyForUpdate(requestProduct, entity);
+        return requestProductRepository.save(requestProduct);
+    }
+
+    private void copyForUpdate(RequestProduct target, RequestProduct source) {
+        target.setUnitaryValue(source.getUnitaryValue());
+        target.setAmount(source.getAmount());
+        target.setNotes(source.getNotes());
+    }
+
+    private RequestProduct findById(RequestProductID requestProductID) {
+        return requestProductRepository.findById(requestProductID)
+                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Invalid ID"));
+    }
+
+    private RequestProductID mountRequestProductID(Long requestID, UUID productID) {
+        try {
+            CompletableFuture<Request> asyncFindRequest = CompletableFuture.supplyAsync(() -> this.findByID(requestID));
+            CompletableFuture<Product> asyncFindProduct = CompletableFuture.supplyAsync(() -> productService.findByID(productID));
+            CompletableFuture.allOf(asyncFindRequest, asyncFindProduct);
+            return new RequestProductID(asyncFindRequest.get(), asyncFindProduct.get());
+        } catch (InterruptedException | ExecutionException ie) {
+            throw new ResponseStatusException(INTERNAL_SERVER_ERROR, ie.getMessage());
+        }
     }
 }

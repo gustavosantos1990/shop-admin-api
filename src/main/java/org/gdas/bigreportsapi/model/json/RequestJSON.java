@@ -9,6 +9,8 @@ import org.gdas.bigreportsapi.model.entity.Request;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.springframework.beans.BeanUtils.copyProperties;
 
@@ -48,6 +50,9 @@ public class RequestJSON {
 
     @JsonProperty
     private boolean done;
+
+    @JsonProperty
+    private List<RequestProductJSON> products;
 
     public RequestJSON() {
     }
@@ -124,10 +129,19 @@ public class RequestJSON {
         this.done = done;
     }
 
+    public List<RequestProductJSON> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<RequestProductJSON> products) {
+        this.products = products;
+    }
+
     public static RequestJSON from(Request source) {
         RequestJSON target = new RequestJSON();
         copyProperties(source, target);
         target.setCustomer(CustomerJSON.from(source.getCustomer()));
+        target.setProducts(source.getProducts().stream().map(RequestProductJSON::from).collect(Collectors.toList()));
         return target;
     }
 }

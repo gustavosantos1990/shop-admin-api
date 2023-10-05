@@ -7,6 +7,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.springframework.beans.BeanUtils.copyProperties;
 
@@ -45,6 +47,9 @@ public class Request {
 
     @Column(name = "done", nullable = false)
     private boolean done;
+
+    @OneToMany(mappedBy = "requestProductID.request")
+    private List<RequestProduct> products;
 
     public Request() {
     }
@@ -121,10 +126,19 @@ public class Request {
         this.done = done;
     }
 
+    public List<RequestProduct> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<RequestProduct> products) {
+        this.products = products;
+    }
+
     public static Request from(RequestJSON source) {
         Request target = new Request();
         copyProperties(source, target);
         target.setCustomer(Customer.from(source.getCustomer()));
+        target.setProducts(source.getProducts().stream().map(RequestProduct::from).collect(Collectors.toList()));
         return target;
     }
 

@@ -16,9 +16,10 @@ import static org.springframework.beans.BeanUtils.copyProperties;
 
 public class RequestProductJSON {
 
+    @JsonIgnore
     @JsonProperty
     @Valid
-    @NotNull(groups = {ActionsGroups.SavingRequestProduct.class})
+    @NotNull
     private RequestJSON request;
 
     @JsonProperty
@@ -26,12 +27,10 @@ public class RequestProductJSON {
     @NotNull(groups = {ActionsGroups.SavingRequestProduct.class})
     private ProductJSON product;
 
-    @JsonIgnore
     @JsonProperty("created_at")
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     private LocalDateTime createdAt;
 
-    @JsonIgnore
     @JsonProperty("updated_at")
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     private LocalDateTime updatedAt;
@@ -124,7 +123,7 @@ public class RequestProductJSON {
     public static RequestProductJSON from(RequestProduct source) {
         RequestProductJSON target = new RequestProductJSON();
         copyProperties(source, target);
-        target.setRequest(RequestJSON.from(source.getRequestProductID().getRequest()));
+//        target.setRequest(RequestJSON.from(source.getRequestProductID().getRequest()));
         target.setProduct(ProductJSON.from(source.getRequestProductID().getProduct()));
         return target;
     }
