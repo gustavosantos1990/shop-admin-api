@@ -6,7 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
-import org.gdas.bigreportsapi.model.ActionsGroups;
+import org.gdas.bigreportsapi.model.actions.SavingNewRequest;
+import org.gdas.bigreportsapi.model.actions.UpdatingRequest;
 import org.gdas.bigreportsapi.model.entity.RequestProduct;
 
 import java.math.BigDecimal;
@@ -18,13 +19,11 @@ public class RequestProductJSON {
 
     @JsonIgnore
     @JsonProperty
-    @Valid
-    @NotNull
     private RequestJSON request;
 
     @JsonProperty
     @Valid
-    @NotNull(groups = {ActionsGroups.SavingRequestProduct.class})
+    @NotNull(groups = {SavingNewRequest.class, UpdatingRequest.class})
     private ProductJSON product;
 
     @JsonProperty("created_at")
@@ -41,13 +40,13 @@ public class RequestProductJSON {
     private LocalDateTime deletedAt;
 
     @JsonProperty("unitary_value")
-    @NotNull(groups = {ActionsGroups.SavingRequestProduct.class})
-    @Positive(groups = {ActionsGroups.SavingRequestProduct.class})
+    @NotNull(groups = {SavingNewRequest.class, UpdatingRequest.class})
+    @Positive(groups = {SavingNewRequest.class, UpdatingRequest.class})
     private BigDecimal unitaryValue;
 
     @JsonProperty
-    @NotNull(groups = {ActionsGroups.SavingRequestProduct.class})
-    @Positive(groups = {ActionsGroups.SavingRequestProduct.class})
+    @NotNull(groups = {SavingNewRequest.class, UpdatingRequest.class})
+    @Positive(groups = {SavingNewRequest.class, UpdatingRequest.class})
     private BigDecimal amount;
 
     @JsonProperty

@@ -4,13 +4,11 @@ import jakarta.validation.Valid;
 import org.gdas.bigreportsapi.model.entity.Product;
 import org.gdas.bigreportsapi.model.json.ProductJSON;
 import org.gdas.bigreportsapi.service.ProductService;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -28,14 +26,11 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<ProductJSON>> get(
-            Pageable pageable
+    public ResponseEntity<List<ProductJSON>> get(
+            @RequestParam(name = "include_deleted", defaultValue = "false") boolean includeDeleted
     ) {
-        Page<Product> entities = productService.findAll(pageable);
-        Page<ProductJSON> result = new PageImpl<>(
-                entities.stream().map(ProductJSON::from).collect(Collectors.toList()),
-                entities.getPageable(),
-                entities.getTotalElements());
+        List<Product> entities = productService.findAll(includeDeleted);
+        List<ProductJSON> result = entities.stream().map(ProductJSON::from).collect(Collectors.toList());
         return result.isEmpty()
                 ? ResponseEntity.noContent().build()
                 : ResponseEntity.ok(result);
@@ -54,32 +49,19 @@ public class ProductController {
         return ResponseEntity.status(CREATED).body(ProductJSON.from(saved));
     }
 
-//    @PatchMapping("/{id}")
-//    public ResponseEntity<ProductJSON> patch(
-//            @PathVariable UUID id,
-//            @Valid @RequestBody ProductJSON payload) {
-//        Product entity = Product.from(payload);
-//        Product updated = productService.update(id, entity);
-//        return ResponseEntity.ok(ProductJSON.from(updated));
-//    }
-//
-//    @PostMapping("/{id}/revisions")
-//    public ResponseEntity<ProductComponentJSON> postRevision(
-//            @PathVariable UUID id,
-//            @Valid @RequestBody ProductComponentJSON payload) {
-//        ProductComponent newEntity = ProductComponent.from(payload);
-//        ProductComponent saved = productService.saveComponentForNewRevision(id, newEntity);
-//        return ResponseEntity.status(CREATED).body(ProductComponentJSON.from(saved));
-//    }
-//
-//    @PostMapping("/{productID}/revisions/{revisionNumber}")
-//    public ResponseEntity<ProductComponentJSON> postComponent(
-//            @PathVariable UUID productID,
-//            @PathVariable Integer revisionNumber,
-//            @Valid @RequestBody ProductComponentJSON payload) {
-//        ProductComponent newEntity = ProductComponent.from(payload);
-//        ProductComponent saved = productService.saveComponent(productID, revisionNumber, newEntity);
-//        return ResponseEntity.status(CREATED).body(ProductComponentJSON.from(saved));
-//    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ProductJSON> delete(@PathVariable UUID id) {
+        Product deleted = productService.delete(id);
+        return ResponseEntity.ok(ProductJSON.from(deleted));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ProductJSON> put(
+            @PathVariable UUID id,
+            @Valid @RequestBody ProductJSON payload) {
+        Product entity = Product.from(payload);
+        Product updated = productService.update(id, entity);
+        return ResponseEntity.ok(ProductJSON.from(updated));
+    }
 
 }

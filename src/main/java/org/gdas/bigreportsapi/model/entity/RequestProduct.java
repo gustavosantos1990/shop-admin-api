@@ -10,6 +10,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import static org.springframework.beans.BeanUtils.copyProperties;
 
@@ -41,6 +42,19 @@ public class RequestProduct {
     private String notes;
 
     public RequestProduct() {
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RequestProduct that = (RequestProduct) o;
+        return Objects.equals(requestProductID, that.requestProductID);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(requestProductID);
     }
 
     public RequestProductID getRequestProductID() {

@@ -17,7 +17,6 @@ public class CustomerJSON {
     @JsonProperty
     private UUID id;
 
-    @JsonIgnore
     @JsonProperty("created_at")
     private LocalDateTime createdAt;
 
@@ -37,7 +36,7 @@ public class CustomerJSON {
     @JsonProperty
     @NotBlank
     @Size(min = 10, max = 11)
-    //@Pattern(regexp = "//d")
+    @Pattern(regexp = "\\d+", message = "phone must contain only numbers")
     private String phone;
 
     public CustomerJSON() {

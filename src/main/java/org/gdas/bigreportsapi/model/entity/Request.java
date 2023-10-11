@@ -8,6 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static org.springframework.beans.BeanUtils.copyProperties;
@@ -49,9 +50,22 @@ public class Request {
     private boolean done;
 
     @OneToMany(mappedBy = "requestProductID.request")
-    private List<RequestProduct> products;
+    private List<RequestProduct> requestProducts;
 
     public Request() {
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Request request = (Request) o;
+        return Objects.equals(id, request.id) && Objects.equals(customer, request.customer) && Objects.equals(createdAt, request.createdAt) && Objects.equals(dueDate, request.dueDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, customer, createdAt, dueDate);
     }
 
     public Long getId() {
@@ -126,19 +140,19 @@ public class Request {
         this.done = done;
     }
 
-    public List<RequestProduct> getProducts() {
-        return products;
+    public List<RequestProduct> getRequestProducts() {
+        return requestProducts;
     }
 
-    public void setProducts(List<RequestProduct> products) {
-        this.products = products;
+    public void setRequestProducts(List<RequestProduct> requestProducts) {
+        this.requestProducts = requestProducts;
     }
 
     public static Request from(RequestJSON source) {
         Request target = new Request();
         copyProperties(source, target);
         target.setCustomer(Customer.from(source.getCustomer()));
-        target.setProducts(source.getProducts().stream().map(RequestProduct::from).collect(Collectors.toList()));
+        target.setRequestProducts(source.getRequestProducts().stream().map(RequestProduct::from).collect(Collectors.toList()));
         return target;
     }
 

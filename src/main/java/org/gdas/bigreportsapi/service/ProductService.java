@@ -2,11 +2,12 @@ package org.gdas.bigreportsapi.service;
 
 import org.gdas.bigreportsapi.model.entity.Product;
 import org.gdas.bigreportsapi.repository.ProductRepository;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.List;
 import java.util.UUID;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
@@ -27,8 +28,8 @@ public class ProductService {
         this.customerService = customerService;
     }
 
-    public Page<Product> findAll(Pageable pageable) {
-        return productRepository.findAll(pageable);
+    public List<Product> findAll(boolean includeDeleted) {
+        return includeDeleted ? productRepository.findAll() : productRepository.findByDeletedAtIsNull();
     }
 
     public Product findByID(UUID id) {
@@ -40,4 +41,16 @@ public class ProductService {
         return productRepository.save(entity);
     }
 
+    public Product delete(UUID id) {
+        Product product = findByID(id);
+        product.setDeletedAt(LocalDateTime.now(ZoneId.of("America/Sao_Paulo")));
+        return productRepository.save(product);
+    }
+
+    public Product update(UUID id, Product entity) {
+        Product product = findByID(id);
+        product.setPrice(entity.getPrice());
+        product.setDescription(entity.getDescription());
+        return productRepository.save(product);
+    }
 }

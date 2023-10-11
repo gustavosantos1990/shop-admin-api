@@ -1,12 +1,13 @@
 package org.gdas.bigreportsapi.model.json;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
+import org.gdas.bigreportsapi.model.actions.SavingNewRequest;
+import org.gdas.bigreportsapi.model.actions.SavingProduct;
 import org.gdas.bigreportsapi.model.entity.Product;
 
 import java.math.BigDecimal;
@@ -18,34 +19,32 @@ import static org.springframework.beans.BeanUtils.copyProperties;
 public class ProductJSON {
 
     @JsonProperty
+    @NotNull(groups = {SavingNewRequest.class})
     private UUID id;
 
-    @JsonIgnore
     @JsonProperty("created_at")
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     private LocalDateTime createdAt;
 
-    @JsonIgnore
     @JsonProperty("updated_at")
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     private LocalDateTime updatedAt;
 
-    @JsonIgnore
     @JsonProperty("deleted_at")
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     private LocalDateTime deletedAt;
 
     @JsonProperty
-    @NotBlank
-    @Size(min = 2)
+    @NotBlank(groups = {SavingProduct.class})
+    @Size(min = 2, groups = {SavingProduct.class})
     private String name;
 
     @JsonProperty
     private String description;
 
     @JsonProperty
-    @NotNull
-    @Positive
+    @NotNull(groups = {SavingProduct.class})
+    @Positive(groups = {SavingProduct.class})
     private BigDecimal price;
 
     public UUID getId() {

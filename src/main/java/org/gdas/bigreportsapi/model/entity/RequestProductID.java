@@ -5,6 +5,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import org.gdas.bigreportsapi.model.json.RequestProductJSON;
 
+import java.util.Objects;
+
 @Embeddable
 public class RequestProductID {
 
@@ -26,6 +28,19 @@ public class RequestProductID {
     public RequestProductID(Request request, Product product) {
         this.request = request;
         this.product = product;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RequestProductID that = (RequestProductID) o;
+        return Objects.equals(request, that.request) && Objects.equals(product, that.product);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(request, product);
     }
 
     public Request getRequest() {
