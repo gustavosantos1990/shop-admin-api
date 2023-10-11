@@ -36,6 +36,9 @@ public class Customer {
     @Column(name = "phone", nullable = false, updatable = false, unique = true)
     private String phone;
 
+    @Column(name = "facebook_chat_number")
+    private String facebookChatNumber;
+
     public Customer() {
     }
 
@@ -85,6 +88,14 @@ public class Customer {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getFacebookChatNumber() {
+        return facebookChatNumber;
+    }
+
+    public void setFacebookChatNumber(String facebookChatNumber) {
+        this.facebookChatNumber = facebookChatNumber;
     }
 
     public static Customer from(CustomerJSON source) {

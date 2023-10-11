@@ -39,6 +39,10 @@ public class CustomerJSON {
     @Pattern(regexp = "\\d+", message = "phone must contain only numbers")
     private String phone;
 
+    @JsonProperty("facebook_chat_number")
+    @Pattern(regexp = "\\d+", message = "chat number must contain only numbers")
+    private String facebookChatNumber;
+
     public CustomerJSON() {
     }
 
@@ -88,6 +92,14 @@ public class CustomerJSON {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getFacebookChatNumber() {
+        return facebookChatNumber;
+    }
+
+    public void setFacebookChatNumber(String facebookChatNumber) {
+        this.facebookChatNumber = facebookChatNumber;
     }
 
     public static CustomerJSON from(Customer source) {
