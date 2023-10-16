@@ -1,0 +1,199 @@
+<mxfile host="Electron" modified="2023-10-16T01:15:46.984Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.0.2 Chrome/114.0.5735.289 Electron/25.8.4 Safari/537.36" etag="nvUeOi4RVJp2RZ3li7XQ" version="22.0.2" type="device" pages="2">
+  <diagram name="version B" id="tw7bOugptfXPdBWQpAGX">
+    <mxGraphModel dx="1837" dy="1793" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="none" math="0" shadow="0">
+      <root>
+        <mxCell id="C0qg8u0_gGs9_s_iUCHX-0" />
+        <mxCell id="C0qg8u0_gGs9_s_iUCHX-1" parent="C0qg8u0_gGs9_s_iUCHX-0" />
+        <mxCell id="C0qg8u0_gGs9_s_iUCHX-8" value="COMPONENT (CMP)&lt;br&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;ul&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;CMP_ID PK&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;CMP_CREATED_AT DATETIME NN&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;CMP_UPDATED_AT DATETIME&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;CMP_DELETED_AT DATETIME&lt;/span&gt;&lt;/li&gt;&lt;li&gt;CMP_NAME VARCHAR NN UK&lt;/li&gt;&lt;li&gt;PHOTO_ADDRESS VARCHAR&lt;/li&gt;&lt;li&gt;MEASURE VARCHAR NN&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;spacingLeft=10;verticalAlign=top;spacingTop=10;" parent="C0qg8u0_gGs9_s_iUCHX-1" vertex="1">
+          <mxGeometry x="260" y="670" width="360" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="Ygff0WiNiJIvmF6vx_iR-11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="C0qg8u0_gGs9_s_iUCHX-1" source="Ygff0WiNiJIvmF6vx_iR-8" target="Ygff0WiNiJIvmF6vx_iR-10" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Ygff0WiNiJIvmF6vx_iR-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="C0qg8u0_gGs9_s_iUCHX-1" source="Ygff0WiNiJIvmF6vx_iR-8" target="C0qg8u0_gGs9_s_iUCHX-8" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Ygff0WiNiJIvmF6vx_iR-8" value="PRODUCT_COMPONENT (PCO)&lt;br&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;ul&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;PCO_PDT_ID&amp;nbsp;UUID PK FK&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;PCO_CMP_ID UUID PK FK&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;PCO_CREATED_AT DATETIME NN&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;PCO_UPDATED_AT DATETIME&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;PCO_DELETED_AT DATETIME&lt;/span&gt;&lt;/li&gt;&lt;li&gt;UNITARY_VALUE DECIMAL NN&lt;/li&gt;&lt;li&gt;AMOUNT DECIMAL NN&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;spacingLeft=10;verticalAlign=top;spacingTop=10;" parent="C0qg8u0_gGs9_s_iUCHX-1" vertex="1">
+          <mxGeometry x="-150" y="670" width="360" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="Ygff0WiNiJIvmF6vx_iR-10" value="PRODUCT (PDT)&lt;br&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;ul&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;PDT_ID UUID PK&lt;/span&gt;&lt;/li&gt;&lt;li&gt;CLONED_FROM UUID FK&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;PDT_CREATED_AT DATETIME NN&lt;/span&gt;&lt;br&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;PDT_UPDATED_AT DATETIME&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;PDT_DELETED_AT DATETIME&lt;/span&gt;&lt;/li&gt;&lt;li&gt;PDT_NAME VARCHAR NN UK&lt;/li&gt;&lt;li&gt;DESCRIPTION VARCHAR&lt;/li&gt;&lt;li&gt;PRICE DECIMAL NN&lt;/li&gt;&lt;li&gt;PHOTO_ADDRESS VARCHAR&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;spacingLeft=10;verticalAlign=top;spacingTop=10;" parent="C0qg8u0_gGs9_s_iUCHX-1" vertex="1">
+          <mxGeometry x="-150" y="400" width="360" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="Ygff0WiNiJIvmF6vx_iR-15" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="C0qg8u0_gGs9_s_iUCHX-1" source="Ygff0WiNiJIvmF6vx_iR-12" target="Ygff0WiNiJIvmF6vx_iR-14" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Ygff0WiNiJIvmF6vx_iR-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="C0qg8u0_gGs9_s_iUCHX-1" source="Ygff0WiNiJIvmF6vx_iR-12" target="Ygff0WiNiJIvmF6vx_iR-10" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="440" y="505" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Ygff0WiNiJIvmF6vx_iR-12" value="REQUEST_PRODUCT (RPD)&lt;br&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;ul&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;RPD_RQT_ID PK FK&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;RPD_PDT_ID PK FK&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;RPD_CREATED_AT DATETIME NN&lt;/span&gt;&lt;br&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;RPD_UPDATED_AT DATETIME&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;RPD_DELETED_AT DATETIME&lt;/span&gt;&lt;/li&gt;&lt;li&gt;UNITARY_VALUE DECIMAL NN&lt;/li&gt;&lt;li&gt;AMOUNT DECIMAL NN&lt;/li&gt;&lt;li&gt;NOTES VARCHAR&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;spacingLeft=10;verticalAlign=top;spacingTop=10;" parent="C0qg8u0_gGs9_s_iUCHX-1" vertex="1">
+          <mxGeometry x="260" y="120" width="360" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="Ygff0WiNiJIvmF6vx_iR-17" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="C0qg8u0_gGs9_s_iUCHX-1" source="Ygff0WiNiJIvmF6vx_iR-14" target="Ygff0WiNiJIvmF6vx_iR-16" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qT1Zz3O92g6PQhBymwFu-1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="C0qg8u0_gGs9_s_iUCHX-1" source="Ygff0WiNiJIvmF6vx_iR-14" target="qT1Zz3O92g6PQhBymwFu-0" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Ygff0WiNiJIvmF6vx_iR-14" value="REQUEST (RQT)&lt;br&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;ul&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;RQT_ID PK&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;RQT_CTM_ID FK NN&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;RQT_CREATED_AT DATETIME NN&lt;/span&gt;&lt;br&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;RQT_UPDATED_AT DATETIME&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;RQT_DELETED_AT DATETIME&lt;/span&gt;&lt;/li&gt;&lt;li&gt;RQT_CANCELED_AT DATETIME&lt;/li&gt;&lt;li&gt;DUE_DATE DATE NN&lt;/li&gt;&lt;li&gt;NOTES VARCHAR&lt;/li&gt;&lt;li&gt;STATUS VARCHAR NN&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;spacingLeft=10;verticalAlign=top;spacingTop=10;" parent="C0qg8u0_gGs9_s_iUCHX-1" vertex="1">
+          <mxGeometry x="-150" y="120" width="360" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="Ygff0WiNiJIvmF6vx_iR-16" value="CUSTOMER (CTM)&lt;br&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;ul&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;CTM_ID PK&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;CTM_CREATED_AT DATETIME NN&lt;/span&gt;&lt;br&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;CTM_UPDATED_AT DATETIME&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;CTM_DELETED_AT DATETIME&lt;/span&gt;&lt;/li&gt;&lt;li&gt;PHONE VARCHAR NN UK&lt;/li&gt;&lt;li&gt;CTM_NAME VARCHAR NN&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;spacingLeft=10;verticalAlign=top;spacingTop=10;" parent="C0qg8u0_gGs9_s_iUCHX-1" vertex="1">
+          <mxGeometry x="-810" y="120" width="360" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="qT1Zz3O92g6PQhBymwFu-0" value="&lt;b&gt;v2&lt;/b&gt;&lt;br&gt;&lt;br&gt;MOVIMENTATION (MVT)&lt;br&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;ul&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;MVT_ID INT PK&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;MVT_RQT_ID FK&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;MVT_MAQ_ID FK&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;MVT_CREATED_AT DATETIME NN&lt;/span&gt;&lt;br&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;MVT_UPDATED_AT DATETIME&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;MVT_DELETED_AT DATETIME&lt;/span&gt;&lt;/li&gt;&lt;li&gt;MVT_ACCOUNT_ID -- NN&lt;/li&gt;&lt;li&gt;MVT_DATE DATE NN&lt;/li&gt;&lt;li&gt;MVT_VALUE DECIMAL NN&lt;/li&gt;&lt;li&gt;DESCRIPTION VARCHAR NN&lt;/li&gt;&lt;li&gt;NOTES VARCHAR&lt;/li&gt;&lt;li&gt;REASON VARCHAR/ENUM NN&lt;/li&gt;&lt;li&gt;MVT_TYPE VARCHAR/ENUM NN&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;spacingLeft=10;verticalAlign=top;spacingTop=10;fillColor=#fa6800;fontColor=#000000;strokeColor=#C73500;" parent="C0qg8u0_gGs9_s_iUCHX-1" vertex="1">
+          <mxGeometry x="-150" y="-564" width="360" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="NTIwrDRPoCQlP06jhe8P-0" value="MOVEMENT_REASON&lt;br&gt;ENUM&lt;br&gt;&lt;ul&gt;&lt;li style=&quot;text-align: left;&quot;&gt;PRODUCTION_COST_REIMBURSEMENT (INCOME/+, null)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;COMPANY_OPERATIONS (INCOME/+, 30%)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;COMMISSION (INCOME/+, 20%)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;PROFIT (INCOME/+, 50%)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;MATERIALS_ACQUISITION (DEBT/-, null)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;EXTRA_PRODUCTION_COST (DEBT/-, null)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;WHITHDRAWAL (DEBT/-, null)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;UNKNOWN (null, null)&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;spacingLeft=-20;fillColor=#fa6800;fontColor=#000000;strokeColor=#C73500;" vertex="1" parent="C0qg8u0_gGs9_s_iUCHX-1">
+          <mxGeometry x="-440" y="-904" width="410" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="e0ha-ejXl7h5yGd43i1T-0" value="MOVIMENTATION_METHOD&lt;br&gt;ENUM&lt;br&gt;&lt;ul&gt;&lt;li style=&quot;text-align: left;&quot;&gt;MONEY&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;CREDIT&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;PIX&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;spacingLeft=-20;fillColor=#fa6800;fontColor=#000000;strokeColor=#C73500;" vertex="1" parent="C0qg8u0_gGs9_s_iUCHX-1">
+          <mxGeometry x="-20" y="-904" width="220" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="aixIUmm3CiERQ2K2kEwL-0" value="MATERIAL_ACQUISITION&amp;nbsp;(MAQ)&lt;br&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;ul&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;MAQ_ID&amp;nbsp;UUID PK FK&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;MAQ_CREATED_AT DATETIME NN&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;MAQ_UPDATED_AT DATETIME&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;MAQ_DELETED_AT DATETIME&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;MAQ_DATE DATE NN&lt;/span&gt;&lt;/li&gt;&lt;li&gt;MAQ_STR_ID UUID FK NN&lt;/li&gt;&lt;li&gt;NOTES VARCHAR&lt;/li&gt;&lt;li&gt;MAQ_DELIVERY_TAX DECIMAL NN&lt;/li&gt;&lt;li&gt;&lt;br&gt;&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;spacingLeft=10;verticalAlign=top;spacingTop=10;fillColor=#6d8764;fontColor=#ffffff;strokeColor=#3A5431;" vertex="1" parent="C0qg8u0_gGs9_s_iUCHX-1">
+          <mxGeometry x="790" y="-564" width="360" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="DuafAJx64HUzNj7nYha8-1" value="MOVIMENTATION_TYPE&lt;br&gt;ENUM&lt;br&gt;&lt;ul&gt;&lt;li style=&quot;text-align: left;&quot;&gt;INCOME&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;SAVING&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;DEBT&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;spacingLeft=-20;fillColor=#6d8764;fontColor=#ffffff;strokeColor=#3A5431;" vertex="1" parent="C0qg8u0_gGs9_s_iUCHX-1">
+          <mxGeometry x="210" y="-904" width="200" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="DuafAJx64HUzNj7nYha8-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="C0qg8u0_gGs9_s_iUCHX-1" source="DuafAJx64HUzNj7nYha8-2" target="aixIUmm3CiERQ2K2kEwL-0">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="DuafAJx64HUzNj7nYha8-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="C0qg8u0_gGs9_s_iUCHX-1" source="DuafAJx64HUzNj7nYha8-2" target="C0qg8u0_gGs9_s_iUCHX-8">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="970" y="775" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DuafAJx64HUzNj7nYha8-2" value="MATERIAL_ACQUISITION_COMPONENT (MAC)&lt;br&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;ul&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;MAC_MAQ_ID&amp;nbsp;UUID PK FK&lt;/span&gt;&lt;/li&gt;&lt;li&gt;MAC_CMP_ID&amp;nbsp;UUID PK FK&lt;/li&gt;&lt;li&gt;AMOUNT DECIMAL NN&lt;/li&gt;&lt;li&gt;WIDTH DECIMAL NN&lt;/li&gt;&lt;li&gt;HEIGHT DECIMAL NN&lt;/li&gt;&lt;li&gt;VALUE DECIMAL NN&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;spacingLeft=10;verticalAlign=top;spacingTop=10;fillColor=#6d8764;fontColor=#ffffff;strokeColor=#3A5431;" vertex="1" parent="C0qg8u0_gGs9_s_iUCHX-1">
+          <mxGeometry x="790" y="-310" width="360" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="BzaDTK5jLBmIMNmThcL--1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="C0qg8u0_gGs9_s_iUCHX-1" source="BzaDTK5jLBmIMNmThcL--0" target="Ygff0WiNiJIvmF6vx_iR-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="BzaDTK5jLBmIMNmThcL--0" value="STATUS ENUM&lt;br&gt;&lt;ul&gt;&lt;li style=&quot;text-align: left;&quot;&gt;READY(&quot;Cadastrado&quot;)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;DOING(&quot;Em produção&quot;)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;DELIVERED(&quot;Entregue&quot;)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;PROCESSED(&quot;Processado&quot;)&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#6d8764;strokeColor=#3A5431;fontColor=#ffffff;" vertex="1" parent="C0qg8u0_gGs9_s_iUCHX-1">
+          <mxGeometry x="-440" y="390" width="250" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="BzaDTK5jLBmIMNmThcL--2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.574;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="C0qg8u0_gGs9_s_iUCHX-1" source="DuafAJx64HUzNj7nYha8-1" target="qT1Zz3O92g6PQhBymwFu-0">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="BzaDTK5jLBmIMNmThcL--5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="C0qg8u0_gGs9_s_iUCHX-1" source="BzaDTK5jLBmIMNmThcL--3" target="BzaDTK5jLBmIMNmThcL--4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="BzaDTK5jLBmIMNmThcL--3" value="/movimentations?&lt;b&gt;&lt;font color=&quot;#ff0000&quot;&gt;start_date_inclusive&lt;/font&gt;&lt;/b&gt;=yyyy-MM-dd&amp;amp;&lt;b&gt;&lt;font color=&quot;#ff0000&quot;&gt;end_date_inclusive&lt;/font&gt;&lt;/b&gt;=yyyy-MM-dd" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="C0qg8u0_gGs9_s_iUCHX-1">
+          <mxGeometry x="-760" y="-604" width="530" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="BzaDTK5jLBmIMNmThcL--4" value="{&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&quot;previous_balance&quot;: 999.99,&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&quot;movimentations: [&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;{&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;.&lt;/span&gt;..&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;}&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;],&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&quot;current_balance&quot;: 999.99&lt;br&gt;}" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;spacingLeft=15;fillColor=#ffcccc;strokeColor=#36393d;fontColor=#000000;" vertex="1" parent="C0qg8u0_gGs9_s_iUCHX-1">
+          <mxGeometry x="-625" y="-494" width="260" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="BzaDTK5jLBmIMNmThcL--6" value="Does movimentations must follow actual bank account movimentations?" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;" vertex="1" parent="C0qg8u0_gGs9_s_iUCHX-1">
+          <mxGeometry x="-543" y="-1150" width="130" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="BzaDTK5jLBmIMNmThcL--7" value="What&#39;s a good way to handle credit operations?" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;" vertex="1" parent="C0qg8u0_gGs9_s_iUCHX-1">
+          <mxGeometry x="-390" y="-1150" width="130" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="BzaDTK5jLBmIMNmThcL--8" value="Should mantain simple income/debt records?&lt;br&gt;&lt;br&gt;Start directly with more comples movimentations management?" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;" vertex="1" parent="C0qg8u0_gGs9_s_iUCHX-1">
+          <mxGeometry x="-690" y="-1150" width="130" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="BzaDTK5jLBmIMNmThcL--9" value="Make use of spreadsheet while system is not ready." style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#e51400;fontColor=#ffffff;strokeColor=#B20000;" vertex="1" parent="C0qg8u0_gGs9_s_iUCHX-1">
+          <mxGeometry x="-240" y="-1150" width="130" height="160" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="version A" id="-UZcvvsH6KnIwmaqrAq-">
+    <mxGraphModel dx="3018" dy="843" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="none" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="7A054APB6TZybVWNMQpJ-15" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="7A054APB6TZybVWNMQpJ-6" target="7A054APB6TZybVWNMQpJ-14" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_gxMeObQO4zB7mxPQDEl-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.842;exitY=1.045;exitDx=0;exitDy=0;entryX=0.787;entryY=-0.024;entryDx=0;entryDy=0;exitPerimeter=0;entryPerimeter=0;" parent="1" source="7A054APB6TZybVWNMQpJ-6" target="7A054APB6TZybVWNMQpJ-7" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_gxMeObQO4zB7mxPQDEl-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="7A054APB6TZybVWNMQpJ-6" target="_gxMeObQO4zB7mxPQDEl-2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7A054APB6TZybVWNMQpJ-6" value="PRODUCT TABLE&lt;br&gt;ID | NAME | DESCRIPTION | PHOTO_ADDRESS" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="240" y="490" width="490" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="7A054APB6TZybVWNMQpJ-10" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="7A054APB6TZybVWNMQpJ-7" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="480" y="740" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7A054APB6TZybVWNMQpJ-7" value="PRODUCT_COMPONENT TABLE&lt;br&gt;ID | PRODUCT_ID | VERSION_NUMBER | COMPONENT_ID | UNITARY_VALUE | AMOUNT" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="180" y="657" width="600" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="7A054APB6TZybVWNMQpJ-9" value="COMPONENT TABLE&lt;br&gt;ID | NAME | MEASURE" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="240" y="737" width="490" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="7A054APB6TZybVWNMQpJ-14" value="PRODUCT_VALUE_HISTORY TABLE&lt;br&gt;PRODUCT_ID | CREATION_DATE | VALUE" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#6a00ff;fontColor=#ffffff;strokeColor=#3700CC;" parent="1" vertex="1">
+          <mxGeometry x="810" y="490" width="490" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="7A054APB6TZybVWNMQpJ-19" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="7A054APB6TZybVWNMQpJ-16" target="7A054APB6TZybVWNMQpJ-18" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7A054APB6TZybVWNMQpJ-21" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="7A054APB6TZybVWNMQpJ-16" target="7A054APB6TZybVWNMQpJ-20" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7A054APB6TZybVWNMQpJ-30" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="7A054APB6TZybVWNMQpJ-16" target="7A054APB6TZybVWNMQpJ-29" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7A054APB6TZybVWNMQpJ-16" value="REQUEST TABLE&lt;br&gt;ID | CUSTOMER_ID | NOTES | DUE_DATE | STATUS | CANCELED_AT" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="-330" y="390" width="490" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="7A054APB6TZybVWNMQpJ-18" value="CUSTOMER TABLE&lt;br&gt;ID | NAME | PHONE" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="-330" y="290" width="250" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="7A054APB6TZybVWNMQpJ-20" value="REQUEST_PRODUCTS TABLE&lt;br&gt;REQUEST_ID | PRODUCT_REVISION_ID | AMOUNT | UNITARY_VALUE | NOTES" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="-330" y="480" width="490" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="7A054APB6TZybVWNMQpJ-29" value="MOVEMENT TABLE&lt;br&gt;ID | DESCRIPTION | SOURCE_REQUEST_ID | DATE | VALUE | TYPE | TAX" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="-900" y="390" width="490" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="7A054APB6TZybVWNMQpJ-36" value="MEASURE ENUM&lt;br&gt;&lt;ul&gt;&lt;li style=&quot;text-align: left;&quot;&gt;UNITY&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;MT&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;CM&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;MT2&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;CM2&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="580" y="827" width="130" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="7A054APB6TZybVWNMQpJ-40" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.386;entryY=-0.001;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="7A054APB6TZybVWNMQpJ-9" target="7A054APB6TZybVWNMQpJ-36" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7A054APB6TZybVWNMQpJ-46" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="7A054APB6TZybVWNMQpJ-43" target="7A054APB6TZybVWNMQpJ-45" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7A054APB6TZybVWNMQpJ-43" value="&lt;font color=&quot;#d4d4d4&quot;&gt;KIT TABLE&lt;br&gt;ID | NAME | DEFAULT_VALUE&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#6a00ff;fontColor=#ffffff;strokeColor=#3700CC;" parent="1" vertex="1">
+          <mxGeometry x="235" y="385" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="7A054APB6TZybVWNMQpJ-45" value="KIT_PRODUCT TABLE&lt;br&gt;KIT_ID | PRODUCT_ID" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#6a00ff;strokeColor=#3700CC;fontColor=#ffffff;" parent="1" vertex="1">
+          <mxGeometry x="235" y="290" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="7A054APB6TZybVWNMQpJ-47" value="Photo" style="html=1;whiteSpace=wrap;strokeColor=none;fillColor=#0079D6;labelPosition=center;verticalLabelPosition=middle;verticalAlign=top;align=center;fontSize=12;outlineConnect=0;spacingTop=-6;fontColor=#FFFFFF;sketch=0;shape=mxgraph.sitemap.photo;" parent="1" vertex="1">
+          <mxGeometry x="640" y="450" width="70" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="7A054APB6TZybVWNMQpJ-51" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0.49;entryY=1.034;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="7A054APB6TZybVWNMQpJ-6" target="7A054APB6TZybVWNMQpJ-43" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_gxMeObQO4zB7mxPQDEl-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" parent="1" source="_gxMeObQO4zB7mxPQDEl-2" target="7A054APB6TZybVWNMQpJ-7" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_gxMeObQO4zB7mxPQDEl-2" value="PRODUCT_REVISION TABLE&lt;br&gt;NUMBER/CODE | PRODUCT_ID | NAME | NOTES | READY | PRICE | PHOTO_ADDRESS" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="70" y="570" width="520" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ljcHsXH1Y8I9ZwkOo5O3-3" value="REVISION NUMBER/CODE:&lt;br&gt;01&lt;br&gt;04102023-01&lt;br&gt;04102023-A" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=20;" parent="1" vertex="1">
+          <mxGeometry x="-300" y="630" width="260" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="ljcHsXH1Y8I9ZwkOo5O3-4" value="COMPONENT TABLE&lt;br&gt;XXX_CREATED_AT&lt;br&gt;XXX_UPDATED_AT&lt;br&gt;XXX_DELETED_AT&lt;br&gt;&lt;br&gt;COMPONENT TABLE&lt;br&gt;XXX_CREATED_BY&lt;br&gt;XXX_UPDATED_BY&lt;br&gt;XXX_DELETED_BY" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="-300" y="750" width="490" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="QgHTz88DONTaZ_egxvaE-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.447;entryY=1.021;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="_gxMeObQO4zB7mxPQDEl-2" target="7A054APB6TZybVWNMQpJ-20" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
