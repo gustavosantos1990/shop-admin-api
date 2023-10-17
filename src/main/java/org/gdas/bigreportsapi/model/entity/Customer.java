@@ -30,7 +30,7 @@ public class Customer {
     @Column(name = "ctm_deleted_at")
     private LocalDateTime deletedAt;
 
-    @Column(name = "ctm_name", nullable = false, updatable = false)
+    @Column(name = "ctm_name", nullable = false)
     private String name;
 
     @Column(name = "phone", nullable = false, updatable = false, unique = true)

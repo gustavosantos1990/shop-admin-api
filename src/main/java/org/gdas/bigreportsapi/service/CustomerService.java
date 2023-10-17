@@ -9,6 +9,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 import java.util.Optional;
 
+import static org.apache.commons.lang3.StringUtils.isEmpty;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Service
@@ -34,17 +35,24 @@ public class CustomerService {
     }
 
     @Transactional
-    public Customer selectSave(Customer customer) {
-        if (customer.getId() != null) {
-            Optional<Customer> optCustomer = customerRepository.findById(customer.getId());
-            Customer toSave = optCustomer.orElse(customer);
-            toSave.setName(customer.getName());
+    public Customer selectSave(Customer payloadCustomer) {
+        if (payloadCustomer.getId() != null) {
+            Optional<Customer> optCustomer = customerRepository.findById(payloadCustomer.getId());
+            Customer toSave = optCustomer.orElse(payloadCustomer);
+            copyProperties(toSave, payloadCustomer);
             return customerRepository.save(toSave);
         }
 
-        Optional<Customer> optCustomer = customerRepository.findByPhone(customer.getPhone());
-        Customer toSave = optCustomer.orElse(customer);
-        toSave.setName(customer.getName());
+        Optional<Customer> optCustomer = customerRepository.findByPhone(payloadCustomer.getPhone());
+        Customer toSave = optCustomer.orElse(payloadCustomer);
+        copyProperties(toSave, payloadCustomer);
         return customerRepository.save(toSave);
+    }
+
+    private void copyProperties(Customer target, Customer source) {
+        target.setName(source.getName());
+        if (!isEmpty(source.getFacebookChatNumber())) {
+            target.setFacebookChatNumber(source.getFacebookChatNumber());
+        }
     }
 }
