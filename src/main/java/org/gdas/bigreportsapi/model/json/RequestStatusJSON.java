@@ -3,10 +3,11 @@ package org.gdas.bigreportsapi.model.json;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
 import org.gdas.bigreportsapi.model.enummeration.Measure;
+import org.gdas.bigreportsapi.model.enummeration.RequestStatus;
 
 import static org.springframework.beans.BeanUtils.copyProperties;
 
-public class MeasureJSON {
+public class RequestStatusJSON {
 
     @JsonProperty
     private String label;
@@ -14,12 +15,6 @@ public class MeasureJSON {
     @JsonProperty
     @NotBlank
     private String value;
-
-    @JsonProperty
-    private String symbol;
-
-    @JsonProperty("multi_dimension")
-    private boolean multiDimension;
 
     public String getLabel() {
         return label;
@@ -37,28 +32,12 @@ public class MeasureJSON {
         this.value = value;
     }
 
-    public String getSymbol() {
-        return symbol;
-    }
-
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
-    }
-
-    public boolean isMultiDimension() {
-        return multiDimension;
-    }
-
-    public void setMultiDimension(boolean multiDimension) {
-        this.multiDimension = multiDimension;
-    }
-
     public Measure toEnum() {
         return Measure.valueOf(this.value);
     }
 
-    public static MeasureJSON from(Measure source) {
-        MeasureJSON target = new MeasureJSON();
+    public static RequestStatusJSON from(RequestStatus source) {
+        RequestStatusJSON target = new RequestStatusJSON();
         copyProperties(source, target);
         target.setValue(source.name());
         return target;

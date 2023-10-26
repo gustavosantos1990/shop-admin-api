@@ -3,10 +3,11 @@ package org.gdas.bigreportsapi.model.entity;
 import jakarta.persistence.*;
 import org.gdas.bigreportsapi.model.json.ProductJSON;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 import static org.springframework.beans.BeanUtils.copyProperties;
@@ -17,20 +18,12 @@ public class Product {
 
     @Id
     @Column(name = "pdt_id")
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
-
-    @ManyToOne
-    @JoinColumn(name = "cloned_from")
-    private Product clonedFrom;
 
     @Column(name = "pdt_created_at", nullable = false)
     @CreationTimestamp
     private LocalDateTime createdAt;
-
-    @Column(name = "pdt_updated_at")
-    @UpdateTimestamp
-    private LocalDateTime updatedAt;
 
     @Column(name = "pdt_deleted_at")
     private LocalDateTime deletedAt;
@@ -43,6 +36,12 @@ public class Product {
 
     @Column(name = "price", nullable = false)
     private BigDecimal price;
+
+    @Column(name = "photo_address")
+    private String photoAddress;
+
+    @OneToMany(mappedBy = "productComponentID.product")
+    private List<ProductComponent> components;
 
     public Product() {
     }
@@ -61,28 +60,12 @@ public class Product {
         this.id = id;
     }
 
-    public Product getClonedFrom() {
-        return clonedFrom;
-    }
-
-    public void setClonedFrom(Product clonedFrom) {
-        this.clonedFrom = clonedFrom;
-    }
-
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
     }
 
     public LocalDateTime getDeletedAt() {
@@ -117,9 +100,34 @@ public class Product {
         this.price = price;
     }
 
+    public String getPhotoAddress() {
+        return photoAddress;
+    }
+
+    public void setPhotoAddress(String photoAddress) {
+        this.photoAddress = photoAddress;
+    }
+
+    public List<ProductComponent> getComponents() {
+        return components;
+    }
+
+    public void setComponents(List<ProductComponent> components) {
+        this.components = components;
+    }
+
     public static Product from(ProductJSON source) {
         Product target = new Product();
         copyProperties(source, target);
         return target;
     }
+
+    public BigDecimal calculateProductionCost() {
+        return components
+                .stream()
+                .map(ProductComponent::getCost)
+                .reduce(BigDecimal.ZERO, BigDecimal::add)
+                .setScale(2, RoundingMode.HALF_UP);
+    }
+
 }

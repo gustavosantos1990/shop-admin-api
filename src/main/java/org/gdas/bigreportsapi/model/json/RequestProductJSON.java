@@ -6,8 +6,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
-import org.gdas.bigreportsapi.model.actions.SavingNewRequest;
-import org.gdas.bigreportsapi.model.actions.UpdatingRequest;
 import org.gdas.bigreportsapi.model.entity.RequestProduct;
 
 import java.math.BigDecimal;
@@ -23,34 +21,39 @@ public class RequestProductJSON {
 
     @JsonProperty
     @Valid
-    @NotNull(groups = {SavingNewRequest.class, UpdatingRequest.class})
+    @NotNull
     private ProductJSON product;
 
     @JsonProperty("created_at")
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     private LocalDateTime createdAt;
 
-    @JsonProperty("updated_at")
-    @JsonFormat(shape = JsonFormat.Shape.STRING)
-    private LocalDateTime updatedAt;
+    @JsonProperty("calculated_production_cost")
+    private BigDecimal calculatedProductionCost;
 
-    @JsonIgnore
-    @JsonProperty("deleted_at")
-    @JsonFormat(shape = JsonFormat.Shape.STRING)
-    private LocalDateTime deletedAt;
+    @JsonProperty("declared_production_cost")
+    @NotNull
+    @Positive
+    private BigDecimal declaredProductionCost;
 
     @JsonProperty("unitary_value")
-    @NotNull(groups = {SavingNewRequest.class, UpdatingRequest.class})
-    @Positive(groups = {SavingNewRequest.class, UpdatingRequest.class})
+    @NotNull
+    @Positive
     private BigDecimal unitaryValue;
 
     @JsonProperty
-    @NotNull(groups = {SavingNewRequest.class, UpdatingRequest.class})
-    @Positive(groups = {SavingNewRequest.class, UpdatingRequest.class})
+    @NotNull
+    @Positive
     private BigDecimal amount;
 
     @JsonProperty
     private String notes;
+
+    @JsonProperty("file_path")
+    private String filePath;
+
+    @JsonProperty("file_link")
+    private String fileLink;
 
     public RequestProductJSON() {
     }
@@ -61,6 +64,38 @@ public class RequestProductJSON {
 
     public void setRequest(RequestJSON request) {
         this.request = request;
+    }
+
+    public BigDecimal getCalculatedProductionCost() {
+        return calculatedProductionCost;
+    }
+
+    public void setCalculatedProductionCost(BigDecimal calculatedProductionCost) {
+        this.calculatedProductionCost = calculatedProductionCost;
+    }
+
+    public BigDecimal getDeclaredProductionCost() {
+        return declaredProductionCost;
+    }
+
+    public void setDeclaredProductionCost(BigDecimal declaredProductionCost) {
+        this.declaredProductionCost = declaredProductionCost;
+    }
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public String getFileLink() {
+        return fileLink;
+    }
+
+    public void setFileLink(String fileLink) {
+        this.fileLink = fileLink;
     }
 
     public ProductJSON getProduct() {
@@ -77,22 +112,6 @@ public class RequestProductJSON {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public LocalDateTime getDeletedAt() {
-        return deletedAt;
-    }
-
-    public void setDeletedAt(LocalDateTime deletedAt) {
-        this.deletedAt = deletedAt;
     }
 
     public BigDecimal getUnitaryValue() {
@@ -122,7 +141,6 @@ public class RequestProductJSON {
     public static RequestProductJSON from(RequestProduct source) {
         RequestProductJSON target = new RequestProductJSON();
         copyProperties(source, target);
-//        target.setRequest(RequestJSON.from(source.getRequestProductID().getRequest()));
         target.setProduct(ProductJSON.from(source.getRequestProductID().getProduct()));
         return target;
     }

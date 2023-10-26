@@ -3,10 +3,8 @@ package org.gdas.bigreportsapi.model.json;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import org.gdas.bigreportsapi.model.actions.SavingNewRequest;
-import org.gdas.bigreportsapi.model.actions.UpdatingRequest;
 import org.gdas.bigreportsapi.model.entity.Request;
 
 import java.time.LocalDate;
@@ -22,37 +20,28 @@ public class RequestJSON {
     private Long id;
 
     @JsonProperty
-    @NotNull(groups = {SavingNewRequest.class, UpdatingRequest.class})
+    @NotNull(groups = {SavingNewRequest.class})
     @Valid
     private CustomerJSON customer;
 
     @JsonProperty("created_at")
     private LocalDateTime createdAt;
 
-    @JsonProperty("updated_at")
-    private LocalDateTime updatedAt;
-
-    @JsonProperty("deleted_at")
-    private LocalDateTime deletedAt;
-
     @JsonProperty("canceled_at")
     private LocalDateTime canceledAt;
 
     @JsonProperty("due_date")
-    @JsonFormat(shape = JsonFormat.Shape.STRING )
-    @NotNull(groups = {SavingNewRequest.class, UpdatingRequest.class})
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
+    @NotNull(groups = {SavingNewRequest.class})
     private LocalDate dueDate;
 
     @JsonProperty
     private String notes;
 
     @JsonProperty
-    private boolean done;
+    private RequestStatusJSON status;
 
     @JsonProperty("request_products")
-    @NotNull(groups = {SavingNewRequest.class, UpdatingRequest.class})
-    @NotEmpty(groups = {SavingNewRequest.class, UpdatingRequest.class})
-    @Valid
     private List<RequestProductJSON> requestProducts;
 
     public RequestJSON() {
@@ -82,22 +71,6 @@ public class RequestJSON {
         this.createdAt = createdAt;
     }
 
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public LocalDateTime getDeletedAt() {
-        return deletedAt;
-    }
-
-    public void setDeletedAt(LocalDateTime deletedAt) {
-        this.deletedAt = deletedAt;
-    }
-
     public LocalDateTime getCanceledAt() {
         return canceledAt;
     }
@@ -122,14 +95,6 @@ public class RequestJSON {
         this.notes = notes;
     }
 
-    public boolean isDone() {
-        return done;
-    }
-
-    public void setDone(boolean done) {
-        this.done = done;
-    }
-
     public List<RequestProductJSON> getRequestProducts() {
         return requestProducts;
     }
@@ -138,11 +103,20 @@ public class RequestJSON {
         this.requestProducts = requestProducts;
     }
 
+    public RequestStatusJSON getStatus() {
+        return status;
+    }
+
+    public void setStatus(RequestStatusJSON status) {
+        this.status = status;
+    }
+
     public static RequestJSON from(Request source) {
         RequestJSON target = new RequestJSON();
         copyProperties(source, target);
         target.setCustomer(CustomerJSON.from(source.getCustomer()));
-        target.setRequestProducts(source.getRequestProducts().stream().map(RequestProductJSON::from).collect(Collectors.toList()));
+        if (source.getRequestProducts() != null) target.setRequestProducts(source.getRequestProducts().stream().map(RequestProductJSON::from).collect(Collectors.toList()));
+        target.setStatus(RequestStatusJSON.from(source.getStatus()));
         return target;
     }
 }

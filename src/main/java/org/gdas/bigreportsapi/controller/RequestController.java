@@ -65,15 +65,26 @@ public class RequestController {
         return ResponseEntity.ok(RequestJSON.from(updated));
     }
 
+    @GetMapping("/{requestID}/products")
+    @Validated
+    public ResponseEntity<List<RequestProductJSON>> getRequestProducts(
+            @PathVariable Long requestID) {
+        Request request = requestService.findByID(requestID);
+        List<RequestProductJSON> result =
+                request.getRequestProducts().stream()
+                        .map(RequestProductJSON::from)
+                        .collect(Collectors.toList());
+        return ResponseEntity.ok(result);
+    }
+
     @PostMapping("/{requestID}/products")
     @Validated
-    public ResponseEntity<List<RequestProductJSON>> postRequestProducts(
+    public ResponseEntity<RequestProductJSON> postRequestProducts(
             @PathVariable Long requestID,
-            @Validated @RequestBody List<RequestProductJSON> payload) {
-        List<RequestProduct> entities = payload.stream().map(RequestProduct::from).collect(Collectors.toList());
-        List<RequestProduct> newEntities = requestService.saveAll(requestID, entities);
-        List<RequestProductJSON> result = newEntities.stream().map(RequestProductJSON::from).collect(Collectors.toList());
-        return ResponseEntity.status(CREATED).body(result);
+            @Validated @RequestBody RequestProductJSON payload) {
+        RequestProduct entity = RequestProduct.from(payload);
+        RequestProduct saved = requestService.save(requestID, entity);
+        return ResponseEntity.status(CREATED).body(RequestProductJSON.from(saved));
     }
 
     @PatchMapping("/{requestID}/products/{productID}")
@@ -87,11 +98,13 @@ public class RequestController {
         return ResponseEntity.status(CREATED).body(RequestProductJSON.from(updated));
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<RequestJSON> delete(
-            @PathVariable Long id) {
-        Request deleted = requestService.delete(id);
-        return ResponseEntity.status(CREATED).body(RequestJSON.from(deleted));
+    @DeleteMapping("/{requestID}/products/{productID}")
+    @Validated
+    public ResponseEntity<Void> deleteRequestProduct(
+            @PathVariable Long requestID,
+            @PathVariable UUID productID) {
+        requestService.deleteProduct(requestID, productID);
+        return ResponseEntity.noContent().build();
     }
 
 }

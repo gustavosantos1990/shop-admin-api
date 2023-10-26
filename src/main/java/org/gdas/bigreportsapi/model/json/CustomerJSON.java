@@ -1,6 +1,5 @@
 package org.gdas.bigreportsapi.model.json;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -19,14 +18,6 @@ public class CustomerJSON {
 
     @JsonProperty("created_at")
     private LocalDateTime createdAt;
-
-    @JsonIgnore
-    @JsonProperty("updated_at")
-    private LocalDateTime updatedAt;
-
-    @JsonIgnore
-    @JsonProperty("deleted_at")
-    private LocalDateTime deletedAt;
 
     @JsonProperty
     @NotBlank
@@ -60,22 +51,6 @@ public class CustomerJSON {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public LocalDateTime getDeletedAt() {
-        return deletedAt;
-    }
-
-    public void setDeletedAt(LocalDateTime deletedAt) {
-        this.deletedAt = deletedAt;
     }
 
     public String getName() {

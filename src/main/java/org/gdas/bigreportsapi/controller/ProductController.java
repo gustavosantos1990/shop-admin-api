@@ -2,6 +2,8 @@ package org.gdas.bigreportsapi.controller;
 
 import jakarta.validation.Valid;
 import org.gdas.bigreportsapi.model.entity.Product;
+import org.gdas.bigreportsapi.model.entity.ProductComponent;
+import org.gdas.bigreportsapi.model.json.ProductComponentJSON;
 import org.gdas.bigreportsapi.model.json.ProductJSON;
 import org.gdas.bigreportsapi.service.ProductService;
 import org.springframework.http.ResponseEntity;
@@ -62,6 +64,31 @@ public class ProductController {
         Product entity = Product.from(payload);
         Product updated = productService.update(id, entity);
         return ResponseEntity.ok(ProductJSON.from(updated));
+    }
+
+    @GetMapping("/{productID}/components")
+    public ResponseEntity<List<ProductComponentJSON>> getComponents(@PathVariable UUID productID) {
+        List<ProductComponent> componentsByProduct = productService.findComponentsByProduct(productID);
+        List<ProductComponentJSON> result = componentsByProduct.stream().map(ProductComponentJSON::from)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(result);
+    }
+
+    @PostMapping("/{productID}/components")
+    public ResponseEntity<ProductComponentJSON> postComponent(
+            @PathVariable UUID productID,
+            @Valid @RequestBody ProductComponentJSON payload) {
+        ProductComponent newEntity = ProductComponent.from(payload);
+        ProductComponent saved = productService.saveComponent(productID, newEntity);
+        return ResponseEntity.status(CREATED).body(ProductComponentJSON.from(saved));
+    }
+
+    @DeleteMapping("/{productID}/components/{componentID}")
+    public ResponseEntity<Void> deleteComponent(
+            @PathVariable UUID productID,
+            @PathVariable String componentID) {
+        productService.deleteProductComponent(productID, componentID);
+        return ResponseEntity.noContent().build();
     }
 
 }

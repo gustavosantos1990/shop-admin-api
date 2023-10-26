@@ -5,17 +5,14 @@ import org.gdas.bigreportsapi.model.entity.Product;
 import org.gdas.bigreportsapi.model.entity.Request;
 import org.gdas.bigreportsapi.model.entity.RequestProduct;
 import org.gdas.bigreportsapi.model.entity.RequestProductID;
+import org.gdas.bigreportsapi.model.enummeration.RequestStatus;
 import org.gdas.bigreportsapi.repository.RequestProductRepository;
 import org.gdas.bigreportsapi.repository.RequestRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -39,10 +36,10 @@ public class RequestService {
         this.productService = productService;
     }
 
-    public List<Request> findAll(LocalDate startDate, LocalDate endDate, boolean includeDeleted) {
-        return includeDeleted
+    public List<Request> findAll(LocalDate startDate, LocalDate endDate, boolean includeCanceled) {
+        return includeCanceled
                 ? requestRepository.findAllBetweenOrderByCreatedAtDesc(startDate, endDate)
-                : requestRepository.findAllBetweenAndDeletedAtIsNullOrderByCreatedAtDesc(startDate, endDate);
+                : requestRepository.findAllBetweenAndCanceledAtIsNullOrderByCreatedAtDesc(startDate, endDate);
     }
 
     public Request findByID(Long id) {
@@ -53,80 +50,33 @@ public class RequestService {
     @Transactional
     public Request save(Request entity) {
         entity.setCustomer(customerService.selectSave(entity.getCustomer()));
-        Request savedRequest = requestRepository.save(entity);
-        entity.getRequestProducts().forEach(rp -> rp.setRequestProductID(new RequestProductID(savedRequest, rp.getRequestProductID().getProduct())));
-        requestProductRepository.saveAll(entity.getRequestProducts());
-        return findByID(savedRequest.getId());
+        entity.setStatus(RequestStatus.CREATED);
+        return requestRepository.save(entity);
     }
 
     @Transactional
     public Request update(Long requestID, Request payload) {
         Request request = findByID(requestID);
-        request.setDueDate(payload.getDueDate());
-        request.setNotes(payload.getNotes());
-        Request updated = requestRepository.save(request);
-        updateRequestProducts(updated, payload);
-        return findByID(requestID);
+        updateProperties(request, payload);
+        return requestRepository.save(request);
+    }
+
+    private void updateProperties(Request existing, Request payload) {
+        if (payload.getDueDate() != null) existing.setDueDate(payload.getDueDate());
+        existing.setNotes(payload.getNotes());
     }
 
     @Transactional
-    private void updateRequestProducts(Request saved, Request payload) {
-        payload.getRequestProducts().forEach(rp -> rp.setRequestProductID(new RequestProductID(saved, rp.getRequestProductID().getProduct())));
-
-        List<RequestProduct> toDelete = new ArrayList<>();
-        List<RequestProduct> toSaveUpdate = new ArrayList<>();
-
-        List<RequestProduct> requestProducts = requestProductRepository.findByRequestProductIDRequestId(saved.getId());
-        List<RequestProduct> payloadProducts = payload.getRequestProducts();
-
-        requestProducts.removeIf(savedRequestProduct -> {
-            Optional<RequestProduct> optRP = payloadProducts.stream().filter(rp -> isProductEqual(savedRequestProduct, rp)).findFirst();
-            if (optRP.isEmpty()) {
-                toDelete.add(savedRequestProduct);
-                return true;
-            }
-            return false;
-        });
-
-        for (RequestProduct requestProductFromPayload : payloadProducts) {
-            Optional<RequestProduct> optRP = requestProducts.stream().filter(rp -> isProductEqual(requestProductFromPayload, rp)).findFirst();
-            RequestProduct toSave = optRP.orElse(requestProductFromPayload);
-            updateProperties(toSave, requestProductFromPayload);
-            toSaveUpdate.add(toSave);
-        }
-
-        requestProductRepository.deleteAll(toDelete);
-        requestProductRepository.saveAll(toSaveUpdate);
-    }
-
-    private boolean isProductEqual(RequestProduct a, RequestProduct b) {
-        return a.getRequestProductID().getRequest().getId().equals(b.getRequestProductID().getRequest().getId())
-                && a.getRequestProductID().getProduct().getId().equals(b.getRequestProductID().getProduct().getId());
-    }
-
-    private void updateProperties(RequestProduct target, RequestProduct source) {
-        target.setUnitaryValue(source.getUnitaryValue());
-        target.setAmount(source.getAmount());
-    }
-
-    @Transactional
-    public Request save(Long requestID, RequestProduct entity) {
+    public RequestProduct save(Long requestID, RequestProduct entity) {
         Request request = findByID(requestID);
         prepareRequestProduct(entity, request);
-        requestProductRepository.save(entity);
-        return findByID(requestID);
-    }
-
-    @Transactional
-    public List<RequestProduct> saveAll(Long requestID, List<RequestProduct> entities) {
-        Request request = findByID(requestID);
-        entities.parallelStream().forEach(rp -> prepareRequestProduct(rp, request));
-        return requestProductRepository.saveAll(entities);
+        return requestProductRepository.save(entity);
     }
 
     private void prepareRequestProduct(RequestProduct rp, Request request) {
         Product product = productService.findByID(rp.getRequestProductID().getProduct().getId());
         rp.setRequestProductID(new RequestProductID(request, product));
+//        rp.setCalculatedProductionCost(product.calculateProductionCost());
     }
 
     public RequestProduct update(Long requestID, UUID productID, RequestProduct entity) {
@@ -158,9 +108,13 @@ public class RequestService {
         }
     }
 
-    public Request delete(Long id) {
-        Request request = findByID(id);
-        request.setDeletedAt(LocalDateTime.now(ZoneId.of("America/Sao_Paulo")));
-        return requestRepository.save(request);
+    public RequestProduct findByRequestAndProductID(Long requestID, UUID productID) {
+        return requestProductRepository.findByRequestProductIDRequestIdAndRequestProductIDProductId(requestID, productID)
+                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Invalid combination of request and product IDs"));
+    }
+
+    public void deleteProduct(Long requestID, UUID productID) {
+        RequestProduct requestProduct = findByRequestAndProductID(requestID, productID);
+        requestProductRepository.delete(requestProduct);
     }
 }

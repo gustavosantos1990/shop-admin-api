@@ -3,7 +3,6 @@ package org.gdas.bigreportsapi.model.entity;
 import jakarta.persistence.*;
 import org.gdas.bigreportsapi.model.json.CustomerJSON;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -16,19 +15,12 @@ public class Customer {
 
     @Id
     @Column(name = "ctm_id")
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
 
     @Column(name = "ctm_created_at", nullable = false)
     @CreationTimestamp
     private LocalDateTime createdAt;
-
-    @Column(name = "ctm_updated_at")
-    @UpdateTimestamp
-    private LocalDateTime updatedAt;
-
-    @Column(name = "ctm_deleted_at")
-    private LocalDateTime deletedAt;
 
     @Column(name = "ctm_name", nullable = false)
     private String name;
@@ -56,22 +48,6 @@ public class Customer {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public LocalDateTime getDeletedAt() {
-        return deletedAt;
-    }
-
-    public void setDeletedAt(LocalDateTime deletedAt) {
-        this.deletedAt = deletedAt;
     }
 
     public String getName() {

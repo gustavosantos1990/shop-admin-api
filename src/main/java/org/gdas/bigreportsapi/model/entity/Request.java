@@ -1,9 +1,10 @@
 package org.gdas.bigreportsapi.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import org.gdas.bigreportsapi.model.enummeration.RequestStatus;
 import org.gdas.bigreportsapi.model.json.RequestJSON;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -24,30 +25,27 @@ public class Request {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "rqt_ctm_id")
+    @NotNull
     private Customer customer;
 
     @Column(name = "rqt_created_at", nullable = false)
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-    @Column(name = "rqt_updated_at")
-    @UpdateTimestamp
-    private LocalDateTime updatedAt;
-
-    @Column(name = "rqt_deleted_at", updatable = false)
-    private LocalDateTime deletedAt;
-
     @Column(name = "rqt_canceled_at", updatable = false)
     private LocalDateTime canceledAt;
 
     @Column(name = "due_date", nullable = false)
+    @NotNull
     private LocalDate dueDate;
 
     @Column(name = "notes")
     private String notes;
 
-    @Column(name = "done", nullable = false)
-    private boolean done;
+    @Column(name = "status", nullable = false)
+    @Enumerated(EnumType.STRING)
+    @NotNull
+    private RequestStatus status;
 
     @OneToMany(mappedBy = "requestProductID.request")
     private List<RequestProduct> requestProducts;
@@ -92,22 +90,6 @@ public class Request {
         this.createdAt = createdAt;
     }
 
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public LocalDateTime getDeletedAt() {
-        return deletedAt;
-    }
-
-    public void setDeletedAt(LocalDateTime deletedAt) {
-        this.deletedAt = deletedAt;
-    }
-
     public LocalDateTime getCanceledAt() {
         return canceledAt;
     }
@@ -132,12 +114,12 @@ public class Request {
         this.notes = notes;
     }
 
-    public boolean isDone() {
-        return done;
+    public RequestStatus getStatus() {
+        return status;
     }
 
-    public void setDone(boolean done) {
-        this.done = done;
+    public void setStatus(RequestStatus status) {
+        this.status = status;
     }
 
     public List<RequestProduct> getRequestProducts() {
@@ -151,8 +133,8 @@ public class Request {
     public static Request from(RequestJSON source) {
         Request target = new Request();
         copyProperties(source, target);
-        target.setCustomer(Customer.from(source.getCustomer()));
-        target.setRequestProducts(source.getRequestProducts().stream().map(RequestProduct::from).collect(Collectors.toList()));
+        if (source.getCustomer() != null) target.setCustomer(Customer.from(source.getCustomer()));
+        if (source.getRequestProducts() != null) target.setRequestProducts(source.getRequestProducts().stream().map(RequestProduct::from).collect(Collectors.toList()));
         return target;
     }
 

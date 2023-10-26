@@ -1,12 +1,8 @@
 package org.gdas.bigreportsapi.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import org.gdas.bigreportsapi.model.json.RequestProductJSON;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -25,12 +21,12 @@ public class RequestProduct {
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-    @Column(name = "rpd_updated_at")
-    @UpdateTimestamp
-    private LocalDateTime updatedAt;
+    @Column(name = "calculated_production_cost", nullable = false)
+    //TODO: include hibernate validator annotations in entity (ex.: @NotNull)
+    private BigDecimal calculatedProductionCost;
 
-    @Column(name = "rpd_deleted_at", updatable = false)
-    private LocalDateTime deletedAt;
+    @Column(name = "declared_production_cost", nullable = false)
+    private BigDecimal declaredProductionCost;
 
     @Column(name = "unitary_value", nullable = false)
     private BigDecimal unitaryValue;
@@ -40,6 +36,12 @@ public class RequestProduct {
 
     @Column(name = "notes")
     private String notes;
+
+    @Column(name = "file_path")
+    private String filePath;
+
+    @Column(name = "file_link")
+    private String fileLink;
 
     public RequestProduct() {
     }
@@ -73,20 +75,20 @@ public class RequestProduct {
         this.createdAt = createdAt;
     }
 
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
+    public BigDecimal getCalculatedProductionCost() {
+        return calculatedProductionCost;
     }
 
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setCalculatedProductionCost(BigDecimal calculatedProductionCost) {
+        this.calculatedProductionCost = calculatedProductionCost;
     }
 
-    public LocalDateTime getDeletedAt() {
-        return deletedAt;
+    public BigDecimal getDeclaredProductionCost() {
+        return declaredProductionCost;
     }
 
-    public void setDeletedAt(LocalDateTime deletedAt) {
-        this.deletedAt = deletedAt;
+    public void setDeclaredProductionCost(BigDecimal declaredProductionCost) {
+        this.declaredProductionCost = declaredProductionCost;
     }
 
     public BigDecimal getUnitaryValue() {
@@ -113,10 +115,31 @@ public class RequestProduct {
         this.notes = notes;
     }
 
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public String getFileLink() {
+        return fileLink;
+    }
+
+    public void setFileLink(String fileLink) {
+        this.fileLink = fileLink;
+    }
+
     public static RequestProduct from(RequestProductJSON source) {
         RequestProduct target = new RequestProduct();
         copyProperties(source, target);
         target.setRequestProductID(RequestProductID.from(source));
         return target;
+    }
+
+    @PrePersist
+    private void prePersist() {
+        calculatedProductionCost = requestProductID.getProduct().calculateProductionCost();
     }
 }

@@ -26,10 +26,6 @@ public class ProductJSON {
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     private LocalDateTime createdAt;
 
-    @JsonProperty("updated_at")
-    @JsonFormat(shape = JsonFormat.Shape.STRING)
-    private LocalDateTime updatedAt;
-
     @JsonProperty("deleted_at")
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     private LocalDateTime deletedAt;
@@ -47,6 +43,9 @@ public class ProductJSON {
     @Positive(groups = {SavingProduct.class})
     private BigDecimal price;
 
+    @JsonProperty("photo_address")
+    private String photoAddress;
+
     public UUID getId() {
         return id;
     }
@@ -61,14 +60,6 @@ public class ProductJSON {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
     }
 
     public String getName() {
@@ -101,6 +92,14 @@ public class ProductJSON {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public String getPhotoAddress() {
+        return photoAddress;
+    }
+
+    public void setPhotoAddress(String photoAddress) {
+        this.photoAddress = photoAddress;
     }
 
     public static ProductJSON from(Product source) {

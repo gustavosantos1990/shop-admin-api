@@ -4,11 +4,11 @@ import jakarta.persistence.*;
 import org.gdas.bigreportsapi.model.enummeration.Measure;
 import org.gdas.bigreportsapi.model.json.ComponentJSON;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
+import static org.apache.commons.lang3.RandomStringUtils.randomAlphanumeric;
 import static org.springframework.beans.BeanUtils.copyProperties;
 
 @Entity
@@ -16,17 +16,13 @@ import static org.springframework.beans.BeanUtils.copyProperties;
 public class Component {
 
     @Id
-    @Column(name = "cmp_id")
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @Column(name = "cmp_id", length = 10)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String id;
 
     @Column(name = "cmp_created_at", nullable = false)
     @CreationTimestamp
     private LocalDateTime createdAt;
-
-    @Column(name = "cmp_updated_at")
-    @UpdateTimestamp
-    private LocalDateTime updatedAt;
 
     @Column(name = "cmp_deleted_at")
     private LocalDateTime deletedAt;
@@ -41,6 +37,18 @@ public class Component {
     @Column(name = "photo_address")
     private String photoAddress;
 
+    @Column(name = "base_buy_height", nullable = false)
+    private BigDecimal baseBuyHeight;
+
+    @Column(name = "base_buy_width", nullable = false)
+    private BigDecimal baseBuyWidth;
+
+    @Column(name = "base_buy_amount", nullable = false)
+    private BigDecimal baseBuyAmount;
+
+    @Column(name = "base_buy_paid_value", nullable = false)
+    private BigDecimal baseBuyPaidValue;
+
     public Component() {
     }
 
@@ -49,18 +57,11 @@ public class Component {
         this.measure = measure;
     }
 
-    public Component(UUID id, LocalDateTime createdAt, String name, Measure measure) {
-        this.id = id;
-        this.createdAt = createdAt;
-        this.name = name;
-        this.measure = measure;
-    }
-
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -70,14 +71,6 @@ public class Component {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
     }
 
     public LocalDateTime getDeletedAt() {
@@ -112,10 +105,48 @@ public class Component {
         this.photoAddress = photoAddress;
     }
 
+    public BigDecimal getBaseBuyHeight() {
+        return baseBuyHeight;
+    }
+
+    public void setBaseBuyHeight(BigDecimal baseBuyHeight) {
+        this.baseBuyHeight = baseBuyHeight;
+    }
+
+    public BigDecimal getBaseBuyWidth() {
+        return baseBuyWidth;
+    }
+
+    public void setBaseBuyWidth(BigDecimal baseBuyWidth) {
+        this.baseBuyWidth = baseBuyWidth;
+    }
+
+    public BigDecimal getBaseBuyAmount() {
+        return baseBuyAmount;
+    }
+
+    public void setBaseBuyAmount(BigDecimal baseBuyAmount) {
+        this.baseBuyAmount = baseBuyAmount;
+    }
+
+    public BigDecimal getBaseBuyPaidValue() {
+        return baseBuyPaidValue;
+    }
+
+    public void setBaseBuyPaidValue(BigDecimal baseBuyPaidValue) {
+        this.baseBuyPaidValue = baseBuyPaidValue;
+    }
+
     public static Component from(ComponentJSON source) {
         Component target = new Component();
         copyProperties(source, target);
-        target.setMeasure(Measure.valueOf(source.getMeasure().getValue()));
+        if (source.getMeasure() != null) target.setMeasure(Measure.valueOf(source.getMeasure().getValue()));
         return target;
     }
+
+//    @PrePersist
+//    public void prePersist() {
+//        id = randomAlphanumeric(10);
+//    }
+
 }

@@ -2,18 +2,18 @@ package org.gdas.bigreportsapi.model.enummeration;
 
 public enum Measure {
 
-    UNITY("Unidade", "unit."),
-    MT("Metro", "mt"),
-    CM("Centímetro", "cm"),
-    MT2("Metro Quadrado", "mt²"),
-    CM2("Centímetro Quadrado", "cm²");
+    UNITY("Unidade", "unit.", false),
+    CM("Centímetro", "cm", false),
+    CM2("Centímetro Quadrado", "cm²", true);
 
-    private String label;
-    private String symbol;
+    private final String label;
+    private final String symbol;
+    private final boolean multiDimension;
 
-    Measure(String label, String symbol) {
+    Measure(String label, String symbol, boolean multiDimension) {
         this.label = label;
         this.symbol = symbol;
+        this.multiDimension = multiDimension;
     }
 
     public String getLabel() {
@@ -22,5 +22,9 @@ public enum Measure {
 
     public String getSymbol() {
         return symbol;
+    }
+
+    public boolean isMultiDimension() {
+        return multiDimension;
     }
 }
