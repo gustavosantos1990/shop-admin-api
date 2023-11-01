@@ -6,20 +6,22 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
-import org.gdas.bigreportsapi.model.actions.SavingNewRequest;
+import org.gdas.bigreportsapi.model.actions.IncludingNewRequestProduct;
 import org.gdas.bigreportsapi.model.actions.SavingProduct;
 import org.gdas.bigreportsapi.model.entity.Product;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import static org.springframework.beans.BeanUtils.copyProperties;
 
 public class ProductJSON {
 
     @JsonProperty
-    @NotNull(groups = {SavingNewRequest.class})
+    @NotNull(groups = {IncludingNewRequestProduct.class})
     private UUID id;
 
     @JsonProperty("created_at")
@@ -45,6 +47,9 @@ public class ProductJSON {
 
     @JsonProperty("photo_address")
     private String photoAddress;
+
+    @JsonProperty
+    private List<ProductComponentJSON> components;
 
     public UUID getId() {
         return id;
@@ -102,9 +107,22 @@ public class ProductJSON {
         this.photoAddress = photoAddress;
     }
 
+    public List<ProductComponentJSON> getComponents() {
+        return components;
+    }
+
+    public void setComponents(List<ProductComponentJSON> components) {
+        this.components = components;
+    }
+
     public static ProductJSON from(Product source) {
         ProductJSON target = new ProductJSON();
         copyProperties(source, target);
+        if(source.getComponents() != null)
+            target.setComponents(source.getComponents()
+                    .stream()
+                    .map(ProductComponentJSON::from)
+                    .collect(Collectors.toList()));
         return target;
     }
 

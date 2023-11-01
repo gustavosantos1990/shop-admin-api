@@ -13,6 +13,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
@@ -47,7 +48,17 @@ public class ProductService {
     }
 
     public Product save(Product entity) {
-        return productRepository.save(entity);
+        Optional<Product> optionalProduct = cloneProduct(entity);
+        return optionalProduct.orElseGet(() -> productRepository.save(entity));
+    }
+
+    private Optional<Product> cloneProduct(Product entity) {
+        Product current;
+        if (entity.getId() != null && (current = findByID(entity.getId())) != null) {
+            Product clone = current.cloneProduct();
+            return Optional.of(productRepository.save(clone));
+        }
+        return Optional.empty();
     }
 
     public Product delete(UUID id) {
@@ -58,6 +69,7 @@ public class ProductService {
 
     public Product update(UUID id, Product entity) {
         Product product = findByID(id);
+        product.setName(entity.getName());
         product.setPrice(entity.getPrice());
         product.setDescription(entity.getDescription());
         return productRepository.save(product);

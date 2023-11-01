@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import org.gdas.bigreportsapi.model.actions.IncludingNewRequestProduct;
 import org.gdas.bigreportsapi.model.entity.RequestProduct;
 
 import java.math.BigDecimal;
@@ -21,7 +22,7 @@ public class RequestProductJSON {
 
     @JsonProperty
     @Valid
-    @NotNull
+    @NotNull(groups = {IncludingNewRequestProduct.class})
     private ProductJSON product;
 
     @JsonProperty("created_at")
@@ -141,7 +142,8 @@ public class RequestProductJSON {
     public static RequestProductJSON from(RequestProduct source) {
         RequestProductJSON target = new RequestProductJSON();
         copyProperties(source, target);
-        target.setProduct(ProductJSON.from(source.getRequestProductID().getProduct()));
+        if (source.getRequestProductID() != null && source.getRequestProductID().getProduct() != null)
+            target.setProduct(ProductJSON.from(source.getRequestProductID().getProduct()));
         return target;
     }
 

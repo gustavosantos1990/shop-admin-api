@@ -91,4 +91,15 @@ public class ProductComponent {
         return target;
     }
 
+    public ProductComponent cloneProductComponent() {
+        ProductComponent target = new ProductComponent();
+        copyProperties(this, target);
+        return target;
+    }
+
+    public ProductComponent cloneForProduct(Product product) {
+        ProductComponent target = this.cloneProductComponent();
+        target.getProductComponentID().setProduct(product);
+        return target;
+    }
 }

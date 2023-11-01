@@ -1,7 +1,9 @@
 package org.gdas.bigreportsapi.controller;
 
+import org.gdas.bigreportsapi.model.actions.IncludingNewRequestProduct;
 import org.gdas.bigreportsapi.model.actions.SavingNewRequest;
 import org.gdas.bigreportsapi.model.actions.UpdatingRequest;
+import org.gdas.bigreportsapi.model.actions.UpdatingRequestProduct;
 import org.gdas.bigreportsapi.model.entity.Request;
 import org.gdas.bigreportsapi.model.entity.RequestProduct;
 import org.gdas.bigreportsapi.model.json.RequestJSON;
@@ -81,7 +83,7 @@ public class RequestController {
     @Validated
     public ResponseEntity<RequestProductJSON> postRequestProducts(
             @PathVariable Long requestID,
-            @Validated @RequestBody RequestProductJSON payload) {
+            @Validated(IncludingNewRequestProduct.class) @RequestBody RequestProductJSON payload) {
         RequestProduct entity = RequestProduct.from(payload);
         RequestProduct saved = requestService.save(requestID, entity);
         return ResponseEntity.status(CREATED).body(RequestProductJSON.from(saved));
@@ -92,7 +94,7 @@ public class RequestController {
     public ResponseEntity<RequestProductJSON> patchRequestProduct(
             @PathVariable Long requestID,
             @PathVariable UUID productID,
-            @Validated @RequestBody RequestProductJSON payload) {
+            @Validated(UpdatingRequestProduct.class) @RequestBody RequestProductJSON payload) {
         RequestProduct entity = RequestProduct.from(payload);
         RequestProduct updated = requestService.update(requestID, productID, entity);
         return ResponseEntity.status(CREATED).body(RequestProductJSON.from(updated));

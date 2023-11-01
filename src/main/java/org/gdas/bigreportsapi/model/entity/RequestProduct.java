@@ -134,7 +134,7 @@ public class RequestProduct {
     public static RequestProduct from(RequestProductJSON source) {
         RequestProduct target = new RequestProduct();
         copyProperties(source, target);
-        target.setRequestProductID(RequestProductID.from(source));
+        if (source.getProduct() != null) target.setRequestProductID(RequestProductID.from(source));
         return target;
     }
 
