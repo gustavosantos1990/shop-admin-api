@@ -8,6 +8,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
@@ -25,6 +26,11 @@ public class CustomerService {
         return customerRepository.findAll();
     }
 
+    public Customer findByID(UUID customerID) {
+        return customerRepository.findById(customerID)
+                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Invalid customer ID"));
+    }
+
     public Customer findByPhone(String phone) {
         return customerRepository.findByPhone(phone)
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Invalid phone"));
@@ -32,6 +38,14 @@ public class CustomerService {
 
     public Customer save(Customer entity) {
         return customerRepository.save(entity);
+    }
+
+    public Customer update(UUID customerID, Customer entity) {
+        Customer customer = findByID(customerID);
+        customer.setName(entity.getName());
+        customer.setPhone(entity.getPhone());
+        customer.setFacebookChatNumber(entity.getFacebookChatNumber());
+        return customerRepository.save(customer);
     }
 
     @Transactional

@@ -5,12 +5,10 @@ import org.gdas.bigreportsapi.model.json.CustomerJSON;
 import org.gdas.bigreportsapi.service.CustomerService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
@@ -37,6 +35,17 @@ public class CustomerController {
     public ResponseEntity<CustomerJSON> get(@PathVariable String phone) {
         Customer entity = customerService.findByPhone(phone);
         return ResponseEntity.ok(CustomerJSON.from(entity));
+    }
+
+    @PutMapping("/{customerID}")
+    @Validated
+    public ResponseEntity<CustomerJSON> put(
+            @PathVariable UUID customerID,
+            @RequestBody CustomerJSON payload
+            ) {
+        Customer entity = Customer.from(payload);
+        Customer updated = customerService.update(customerID, entity);
+        return ResponseEntity.ok(CustomerJSON.from(updated));
     }
 
 }
