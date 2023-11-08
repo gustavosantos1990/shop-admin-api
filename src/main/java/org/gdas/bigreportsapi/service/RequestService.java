@@ -17,8 +17,7 @@ import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
-import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
-import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.http.HttpStatus.*;
 
 @Service
 @Transactional
@@ -68,6 +67,10 @@ public class RequestService {
 
     @Transactional
     public RequestProduct save(Long requestID, RequestProduct entity) {
+        requestProductRepository.findByRequestProductIDRequestIdAndRequestProductIDProductId(requestID, entity.getRequestProductID().getProduct().getId())
+                .ifPresent(rp -> {
+                    throw new ResponseStatusException(PRECONDITION_FAILED, "Produto já existente para esse pedido!");
+                });
         Request request = findByID(requestID);
         prepareRequestProduct(entity, request);
         return requestProductRepository.save(entity);
@@ -79,9 +82,9 @@ public class RequestService {
 //        rp.setCalculatedProductionCost(product.calculateProductionCost());
     }
 
+    @Transactional
     public RequestProduct update(Long requestID, UUID productID, RequestProduct entity) {
-        RequestProductID requestProductID = mountRequestProductID(requestID, productID);
-        RequestProduct requestProduct = findById(requestProductID);
+        RequestProduct requestProduct = findByRequestAndProductID(requestID, productID);
         copyForUpdate(requestProduct, entity);
         return requestProductRepository.save(requestProduct);
     }
@@ -90,11 +93,20 @@ public class RequestService {
         target.setUnitaryValue(source.getUnitaryValue());
         target.setAmount(source.getAmount());
         target.setNotes(source.getNotes());
+        target.setNotes(source.getNotes());
+        target.setFileLink(source.getFileLink());
+        target.setFilePath(source.getFilePath());
     }
 
     private RequestProduct findById(RequestProductID requestProductID) {
         return requestProductRepository.findById(requestProductID)
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Invalid ID"));
+    }
+
+    private RequestProductID mountRawRequestProductID(Long requestID, UUID productID) {
+        Request request = new Request(requestID);
+        Product product = new Product(productID);
+        return new RequestProductID(request, product);
     }
 
     private RequestProductID mountRequestProductID(Long requestID, UUID productID) {
@@ -116,5 +128,11 @@ public class RequestService {
     public void deleteProduct(Long requestID, UUID productID) {
         RequestProduct requestProduct = findByRequestAndProductID(requestID, productID);
         requestProductRepository.delete(requestProduct);
+    }
+
+    public Request updateStatus(Long requestID, RequestStatus newStatus) {
+        Request request = findByID(requestID);
+        request.setStatus(newStatus);
+        return requestRepository.save(request);
     }
 }

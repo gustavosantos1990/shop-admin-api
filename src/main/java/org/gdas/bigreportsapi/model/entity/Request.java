@@ -53,6 +53,10 @@ public class Request {
     public Request() {
     }
 
+    public Request(Long id) {
+        this.id = id;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

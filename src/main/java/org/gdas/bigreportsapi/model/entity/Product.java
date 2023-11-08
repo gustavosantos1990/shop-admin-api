@@ -31,7 +31,7 @@ public class Product {
     @Column(name = "pdt_deleted_at")
     private LocalDateTime deletedAt;
 
-    @Column(name = "pdt_name", nullable = false, unique = true, updatable = false)
+    @Column(name = "pdt_name", nullable = false, unique = true)
     private String name;
 
     @Column(name = "description")
@@ -43,7 +43,7 @@ public class Product {
     @Column(name = "photo_address")
     private String photoAddress;
 
-    @OneToMany(mappedBy = "productComponentID.product", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "productComponentID.product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<ProductComponent> components;
 
     public Product() {
@@ -53,6 +53,10 @@ public class Product {
         this.name = name;
         this.description = description;
         this.price = price;
+    }
+
+    public Product(UUID id) {
+        this.id = id;
     }
 
     public UUID getId() {

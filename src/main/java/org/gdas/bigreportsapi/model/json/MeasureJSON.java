@@ -9,11 +9,11 @@ import static org.springframework.beans.BeanUtils.copyProperties;
 public class MeasureJSON {
 
     @JsonProperty
-    private String label;
+    private String name;
 
     @JsonProperty
     @NotBlank
-    private String value;
+    private String code;
 
     @JsonProperty
     private String symbol;
@@ -21,20 +21,20 @@ public class MeasureJSON {
     @JsonProperty("multi_dimension")
     private boolean multiDimension;
 
-    public String getLabel() {
-        return label;
+    public String getName() {
+        return name;
     }
 
-    public void setLabel(String label) {
-        this.label = label;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getValue() {
-        return value;
+    public String getCode() {
+        return code;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getSymbol() {
@@ -54,13 +54,14 @@ public class MeasureJSON {
     }
 
     public Measure toEnum() {
-        return Measure.valueOf(this.value);
+        return Measure.valueOf(this.code);
     }
 
     public static MeasureJSON from(Measure source) {
         MeasureJSON target = new MeasureJSON();
         copyProperties(source, target);
-        target.setValue(source.name());
+        target.setCode(source.name());
+        target.setName(source.getLabel());
         return target;
     }
 

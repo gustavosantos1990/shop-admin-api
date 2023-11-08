@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
@@ -63,6 +64,12 @@ public class ProductService {
 
     public Product delete(UUID id) {
         Product product = findByID(id);
+        try {
+            productRepository.delete(product);
+            return product;
+        } catch (Throwable t) {
+            t.printStackTrace();
+        }
         product.setDeletedAt(LocalDateTime.now(ZoneId.of("America/Sao_Paulo")));
         return productRepository.save(product);
     }
@@ -88,13 +95,17 @@ public class ProductService {
         }
 
         newEntity.setProductComponentID(new ProductComponentID(product, component));
-        if (newEntity.getProductComponentID().getComponent().getMeasure().isMultiDimension()) {
-            newEntity.setAmount(newEntity.getHeight().multiply(newEntity.getWidth()));
-        } else {
-            newEntity.setHeight(BigDecimal.ZERO);
-            newEntity.setWidth(BigDecimal.ZERO);
-        }
+        prepareForSaving(newEntity);
         return productComponentRepository.save(newEntity);
+    }
+
+    private void prepareForSaving(ProductComponent entity) {
+        if (entity.getProductComponentID().getComponent().getMeasure().isMultiDimension()) {
+            entity.setAmount(entity.getHeight().multiply(entity.getWidth()).setScale(2, RoundingMode.HALF_UP));
+        } else {
+            entity.setHeight(BigDecimal.ZERO.setScale(2));
+            entity.setWidth(BigDecimal.ZERO.setScale(2));
+        }
     }
 
     public ProductComponent findByProductAndComponentIDs(UUID productID, String componentID) {
@@ -105,5 +116,14 @@ public class ProductService {
     public void deleteProductComponent(UUID productID, String componentID) {
         ProductComponent productComponent = findByProductAndComponentIDs(productID, componentID);
         productComponentRepository.delete(productComponent);
+    }
+
+    public ProductComponent updateComponent(UUID productID, String componentID, ProductComponent updating) {
+        ProductComponent productComponent = findByProductAndComponentIDs(productID, componentID);
+        productComponent.setHeight(updating.getHeight());
+        productComponent.setWidth(updating.getWidth());
+        productComponent.setAmount(updating.getAmount());
+        prepareForSaving(productComponent);
+        return productComponentRepository.save(productComponent);
     }
 }

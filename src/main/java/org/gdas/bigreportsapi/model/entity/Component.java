@@ -140,7 +140,7 @@ public class Component {
     public static Component from(ComponentJSON source) {
         Component target = new Component();
         copyProperties(source, target);
-        if (source.getMeasure() != null) target.setMeasure(Measure.valueOf(source.getMeasure().getValue()));
+        if (source.getMeasure() != null) target.setMeasure(Measure.valueOf(source.getMeasure().getCode()));
         return target;
     }
 

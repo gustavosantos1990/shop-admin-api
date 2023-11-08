@@ -33,18 +33,18 @@ public class RequestProductJSON {
     private BigDecimal calculatedProductionCost;
 
     @JsonProperty("declared_production_cost")
-    @NotNull
-    @Positive
+    @NotNull(groups = {IncludingNewRequestProduct.class})
+    @Positive(groups = {IncludingNewRequestProduct.class})
     private BigDecimal declaredProductionCost;
 
     @JsonProperty("unitary_value")
-    @NotNull
-    @Positive
+    @NotNull(groups = {IncludingNewRequestProduct.class})
+    @Positive(groups = {IncludingNewRequestProduct.class})
     private BigDecimal unitaryValue;
 
     @JsonProperty
-    @NotNull
-    @Positive
+    @NotNull(groups = {IncludingNewRequestProduct.class})
+    @Positive(groups = {IncludingNewRequestProduct.class})
     private BigDecimal amount;
 
     @JsonProperty

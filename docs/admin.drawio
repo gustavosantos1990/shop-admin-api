@@ -1,6 +1,6 @@
-<mxfile host="Electron" modified="2023-10-26T22:11:21.618Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.0.3 Chrome/114.0.5735.289 Electron/25.8.4 Safari/537.36" etag="rGuWeGRjjjc4ypC6M_m8" version="22.0.3" type="device" pages="2">
+<mxfile host="Electron" modified="2023-11-08T23:11:55.938Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.0.3 Chrome/114.0.5735.289 Electron/25.8.4 Safari/537.36" etag="7byShUKJG5O6lckpLTXg" version="22.0.3" type="device" pages="2">
   <diagram name="version B" id="tw7bOugptfXPdBWQpAGX">
-    <mxGraphModel dx="2433" dy="1651" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="none" math="0" shadow="0">
+    <mxGraphModel dx="3072" dy="1989" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="none" math="0" shadow="0">
       <root>
         <mxCell id="C0qg8u0_gGs9_s_iUCHX-0" />
         <mxCell id="C0qg8u0_gGs9_s_iUCHX-1" parent="C0qg8u0_gGs9_s_iUCHX-0" />
@@ -69,8 +69,8 @@
         <mxCell id="BzaDTK5jLBmIMNmThcL--1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" parent="C0qg8u0_gGs9_s_iUCHX-1" source="BzaDTK5jLBmIMNmThcL--0" target="Ygff0WiNiJIvmF6vx_iR-14" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="BzaDTK5jLBmIMNmThcL--0" value="STATUS ENUM&lt;br&gt;&lt;ul&gt;&lt;li style=&quot;text-align: left;&quot;&gt;READY(&quot;Cadastrado&quot;)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;DOING(&quot;Em produção&quot;)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;DELIVERED(&quot;Entregue&quot;)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;PROCESSED(&quot;Processado&quot;)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;DONE(&quot;Concluído&quot;)&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=default;strokeColor=#007FFF;fontColor=default;align=left;verticalAlign=top;spacingLeft=10;spacingTop=10;dashed=1;dashPattern=1 1;strokeWidth=10;" parent="C0qg8u0_gGs9_s_iUCHX-1" vertex="1">
-          <mxGeometry x="-440" y="390" width="250" height="140" as="geometry" />
+        <mxCell id="BzaDTK5jLBmIMNmThcL--0" value="STATUS ENUM&lt;br&gt;&lt;ul&gt;&lt;li style=&quot;text-align: left;&quot;&gt;READY(&quot;Cadastrado&quot;)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;DOING(&quot;Em produção&quot;)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;DELIVERED(&quot;Entregue&quot;)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;PROCESSED(&quot;Processado&quot;)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;DONE(&quot;Concluído&quot;)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;CANCELED(&quot;Cancelado&quot;)&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=default;strokeColor=#007FFF;fontColor=default;align=left;verticalAlign=top;spacingLeft=10;spacingTop=10;dashed=1;dashPattern=1 1;strokeWidth=10;" parent="C0qg8u0_gGs9_s_iUCHX-1" vertex="1">
+          <mxGeometry x="-440" y="410" width="250" height="140" as="geometry" />
         </mxCell>
         <mxCell id="BzaDTK5jLBmIMNmThcL--2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.574;entryDx=0;entryDy=0;entryPerimeter=0;" parent="C0qg8u0_gGs9_s_iUCHX-1" source="DuafAJx64HUzNj7nYha8-1" target="qT1Zz3O92g6PQhBymwFu-0" edge="1">
           <mxGeometry relative="1" as="geometry" />
@@ -116,6 +116,15 @@
         </mxCell>
         <mxCell id="XCBlp-uY9w4KbEWQlovN-5" value="BILLING_RESULT_TYPE&lt;br&gt;ENUM&lt;br&gt;&lt;ul&gt;&lt;li style=&quot;text-align: left;&quot;&gt;OPERATIONS&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;COMISSION&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;PROFIT&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;spacingLeft=-20;fillColor=#6d8764;fontColor=#ffffff;strokeColor=#3A5431;" parent="C0qg8u0_gGs9_s_iUCHX-1" vertex="1">
           <mxGeometry x="-1630" y="-1070" width="230" height="164" as="geometry" />
+        </mxCell>
+        <mxCell id="-zfwxT4iXppDbRjdOsRo-0" value="CRIADO" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;size=0.25;" parent="C0qg8u0_gGs9_s_iUCHX-1" vertex="1">
+          <mxGeometry x="-690" y="520" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="-zfwxT4iXppDbRjdOsRo-1" value="DOING&lt;br&gt;&lt;br&gt;&lt;ol&gt;&lt;li style=&quot;text-align: left;&quot;&gt;Deve existir ao menos um produto associado ao pedido&lt;/li&gt;&lt;/ol&gt;" style="shape=tape;whiteSpace=wrap;html=1;size=0.1111111111111111;verticalAlign=top;spacing=1;spacingTop=30;spacingBottom=1;spacingLeft=-15;" parent="C0qg8u0_gGs9_s_iUCHX-1" vertex="1">
+          <mxGeometry x="-690" y="650" width="120" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="-zfwxT4iXppDbRjdOsRo-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0.044;entryDx=0;entryDy=0;entryPerimeter=0;" parent="C0qg8u0_gGs9_s_iUCHX-1" source="-zfwxT4iXppDbRjdOsRo-0" target="-zfwxT4iXppDbRjdOsRo-1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

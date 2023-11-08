@@ -35,7 +35,7 @@ CREATE TABLE product_component (
 );
 
 CREATE TABLE customer (
-	ctm_id uuid PRIMARY KEY,
+	ctm_id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
     ctm_created_at timestamp with time zone NOT NULL,
     phone varchar NOT NULL,
 	ctm_name varchar NOT NULL,
@@ -51,4 +51,18 @@ CREATE TABLE request (
     due_date date NOT NULL,
     status varchar NOT NULL,
 	notes varchar
+);
+
+CREATE TABLE request_product (
+	rpd_rqt_id int REFERENCES request(rqt_id),
+	rpd_pdt_id uuid REFERENCES product(pdt_id),
+	rpd_created_at timestamp with time zone NOT NULL,
+	calculated_production_cost decimal NOT NULL,
+	declared_production_cost decimal NOT NULL,
+	unitary_value decimal NOT NULL,
+	amount decimal NOT NULL,
+	notes varchar,
+	file_path varchar,
+	file_link varchar,
+	PRIMARY KEY(rpd_rqt_id, rpd_pdt_id)
 );
