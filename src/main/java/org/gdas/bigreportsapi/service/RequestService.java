@@ -135,7 +135,7 @@ public class RequestService {
     public Request updateStatus(Long requestID, RequestStatus desiredStatus) {
         Request request = findByID(requestID);
 
-        if (request.getStatus().getOrder() > desiredStatus.getOrder()) {
+        if (request.getStatus().getOrder() >= desiredStatus.getOrder()) {
             throw new ResponseStatusException(PRECONDITION_FAILED, format("Atualização inválida, status atual: %s", request.getStatus().getLabel()));
         }
 
