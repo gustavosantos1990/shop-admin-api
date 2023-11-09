@@ -12,11 +12,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
+import static java.lang.String.format;
+import static org.gdas.bigreportsapi.model.enummeration.RequestStatus.CANCELED;
 import static org.springframework.http.HttpStatus.*;
 
 @Service
@@ -35,10 +39,8 @@ public class RequestService {
         this.productService = productService;
     }
 
-    public List<Request> findAll(LocalDate startDate, LocalDate endDate, boolean includeCanceled) {
-        return includeCanceled
-                ? requestRepository.findAllBetweenOrderByCreatedAtDesc(startDate, endDate)
-                : requestRepository.findAllBetweenAndCanceledAtIsNullOrderByCreatedAtDesc(startDate, endDate);
+    public List<Request> findAll(LocalDate startDate, LocalDate endDate) {
+        return requestRepository.findAllBetweenOrderByCreatedAtDesc(startDate, endDate);
     }
 
     public Request findByID(Long id) {
@@ -130,9 +132,31 @@ public class RequestService {
         requestProductRepository.delete(requestProduct);
     }
 
-    public Request updateStatus(Long requestID, RequestStatus newStatus) {
+    public Request updateStatus(Long requestID, RequestStatus desiredStatus) {
         Request request = findByID(requestID);
-        request.setStatus(newStatus);
+
+        if (request.getStatus().getOrder() > desiredStatus.getOrder()) {
+            throw new ResponseStatusException(PRECONDITION_FAILED, format("Atualização inválida, status atual: %s", request.getStatus().getLabel()));
+        }
+
+        switch (desiredStatus) {
+            case DOING -> {
+                if (request.getRequestProducts() == null || request.getRequestProducts().isEmpty()) {
+                    throw new ResponseStatusException(PRECONDITION_FAILED, "Pedido sem produtos associados");
+                }
+            }
+            case CANCELED -> {
+                if(request.getStatus().getOrder() > RequestStatus.DELIVERED.getOrder()) {
+                    throw new ResponseStatusException(PRECONDITION_FAILED, format("Atualização inválida, status atual: %s", request.getStatus().getLabel()));
+                }
+            }
+            default -> throw new ResponseStatusException(NOT_IMPLEMENTED, "Atualização ainda não implementada");
+        }
+
+        if (CANCELED.equals(desiredStatus)) {
+            request.setCanceledAt(LocalDateTime.now(ZoneId.of("America/Sao_Paulo")));
+        }
+        request.setStatus(desiredStatus);
         return requestRepository.save(request);
     }
 }

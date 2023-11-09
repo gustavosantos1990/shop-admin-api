@@ -30,15 +30,14 @@ public class RequestController {
     @GetMapping
     public ResponseEntity<List<RequestJSON>> get(
             @RequestParam(value = "start_date", required = false) LocalDate startDate,
-            @RequestParam(value = "end_date", required = false) LocalDate endDate,
-            @RequestParam(value = "include_deleted", defaultValue = "false") boolean includeDeleted) {
+            @RequestParam(value = "end_date", required = false) LocalDate endDate) {
 
         if (startDate == null || endDate == null) {
             startDate = LocalDate.now().withDayOfMonth(1);
             endDate = LocalDate.now().plusMonths(1).minusDays(1);
         }
 
-        List<Request> entities = requestService.findAll(startDate, endDate, includeDeleted);
+        List<Request> entities = requestService.findAll(startDate, endDate);
         List<RequestJSON> result = entities.stream().map(RequestJSON::from).collect(Collectors.toList());
         return ResponseEntity.ok(result);
     }

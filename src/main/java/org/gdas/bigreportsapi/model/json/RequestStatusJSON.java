@@ -10,6 +10,12 @@ import static org.springframework.beans.BeanUtils.copyProperties;
 public class RequestStatusJSON {
 
     @JsonProperty
+    private int order;
+
+    @JsonProperty
+    private String severity;
+
+    @JsonProperty
     private String label;
 
     @JsonProperty
@@ -34,6 +40,22 @@ public class RequestStatusJSON {
 
     public Measure toEnum() {
         return Measure.valueOf(this.value);
+    }
+
+    public int getOrder() {
+        return order;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
+    }
+
+    public String getSeverity() {
+        return severity;
+    }
+
+    public void setSeverity(String severity) {
+        this.severity = severity;
     }
 
     public static RequestStatusJSON from(RequestStatus source) {
