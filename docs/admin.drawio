@@ -1,4 +1,4 @@
-<mxfile host="Electron" modified="2023-11-08T23:11:55.938Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.0.3 Chrome/114.0.5735.289 Electron/25.8.4 Safari/537.36" etag="7byShUKJG5O6lckpLTXg" version="22.0.3" type="device" pages="2">
+<mxfile host="Electron" modified="2023-11-27T01:39:27.708Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.1.2 Chrome/114.0.5735.289 Electron/25.9.4 Safari/537.36" etag="QV8jRZUfyHLx500Kf42Z" version="22.1.2" type="device" pages="3">
   <diagram name="version B" id="tw7bOugptfXPdBWQpAGX">
     <mxGraphModel dx="3072" dy="1989" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="none" math="0" shadow="0">
       <root>
@@ -126,6 +126,24 @@
         <mxCell id="-zfwxT4iXppDbRjdOsRo-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0.044;entryDx=0;entryDy=0;entryPerimeter=0;" parent="C0qg8u0_gGs9_s_iUCHX-1" source="-zfwxT4iXppDbRjdOsRo-0" target="-zfwxT4iXppDbRjdOsRo-1" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
+        <mxCell id="tygv8zQSKwT_2YGZif-c-0" value="BILLING_ITEM (BIT)&lt;br&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;ul&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;BIT_RQT_ID INT PK FK UK&lt;/span&gt;&lt;/li&gt;&lt;li&gt;ITEM_TYPE VARCHAR|ENUM PK UK&lt;/li&gt;&lt;li&gt;BIT_CREATED_AT DATETIME NN&lt;/li&gt;&lt;li&gt;AUTO_GENERATED BOOL NN&lt;/li&gt;&lt;li&gt;PERCENTAGE INT&lt;/li&gt;&lt;li&gt;BIT_MVT_ID INT FK&lt;/li&gt;&lt;li&gt;BIT_VALUE DECIMAL NN&lt;/li&gt;&lt;li&gt;BIT DESCRIPTION&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;spacingLeft=10;verticalAlign=top;spacingTop=10;" parent="C0qg8u0_gGs9_s_iUCHX-1" vertex="1">
+          <mxGeometry x="1150" y="840" width="360" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="tygv8zQSKwT_2YGZif-c-2" value="BILLING_ITEM_TYPE&lt;br&gt;ENUM&lt;br&gt;&lt;ul&gt;&lt;li style=&quot;text-align: left;&quot;&gt;EXPENSE(&quot;Despesa&quot;, DEBT, false)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;REVENUE(&quot;Receita&quot;, INCOME, false)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;PRODUCTION_COST(&quot;Custo de Produção&quot;&lt;/span&gt;,&amp;nbsp;DEBT,&amp;nbsp;false)&lt;br&gt;&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;OPERATIONS_COST(&quot;Custos de Operação&quot;&lt;/span&gt;,&amp;nbsp;DEBT,&amp;nbsp;true)&lt;br&gt;&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;COMISSION(&quot;Comissão&quot;,&amp;nbsp;DEBT,&amp;nbsp;true)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;PROFIT(&quot;Lucro&quot;,&amp;nbsp;DEBT,&amp;nbsp;true)&lt;/li&gt;&lt;/ul&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;&quot;&gt;&lt;span style=&quot;&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/span&gt;&lt;/span&gt;String label&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&amp;nbsp; &amp;nbsp; MovementType type&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;&quot;&gt;&lt;span style=&quot;&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/span&gt;&lt;/span&gt;boolean result&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;spacingLeft=-20;" parent="C0qg8u0_gGs9_s_iUCHX-1" vertex="1">
+          <mxGeometry x="1520" y="840" width="440" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="tygv8zQSKwT_2YGZif-c-3" value="BILLING_ITEM_TYPE&lt;br&gt;ENUM&lt;br&gt;&lt;ul&gt;&lt;li style=&quot;text-align: left;&quot;&gt;EXPENSE(-)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;REVENUE(+)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;RESULT(-)&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;spacingLeft=-20;" parent="C0qg8u0_gGs9_s_iUCHX-1" vertex="1">
+          <mxGeometry x="2000" y="845" width="250" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="tygv8zQSKwT_2YGZif-c-4" value="MOVIMENTATION_TYPE&lt;br&gt;ENUM&lt;br&gt;&lt;ul&gt;&lt;li style=&quot;text-align: left;&quot;&gt;INCOME(+)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;DEBT(-)&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;spacingLeft=-20;" parent="C0qg8u0_gGs9_s_iUCHX-1" vertex="1">
+          <mxGeometry x="1720" y="570" width="200" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="afjaLYu5vWHjv6IBhFP--0" value="MOVIMENTATION (MVT)&lt;br&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;ul&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;MVT_ID INT PK&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;MVT_RQT_ID FK&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;MVT_MAQ_ID FK&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;MVT_CREATED_AT DATETIME NN&lt;/span&gt;&lt;br&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;MVT_UPDATED_AT DATETIME&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;MVT_DELETED_AT DATETIME&lt;/span&gt;&lt;/li&gt;&lt;li&gt;MVT_DATE DATE NN&lt;/li&gt;&lt;li&gt;MVT_VALUE DECIMAL NN&lt;/li&gt;&lt;li&gt;DESCRIPTION VARCHAR NN&lt;/li&gt;&lt;li&gt;NOTES VARCHAR&lt;/li&gt;&lt;li&gt;REASON VARCHAR/ENUM NN&lt;/li&gt;&lt;li&gt;MVT_TYPE VARCHAR/ENUM NN&lt;/li&gt;&lt;li&gt;LINK: REQUEST|ACQUISITION|NONE&lt;/li&gt;&lt;li&gt;VOUCHER_PATH VARCHAR&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;spacingLeft=10;verticalAlign=top;spacingTop=10;fillColor=#6d8764;fontColor=#ffffff;strokeColor=#3A5431;" parent="C0qg8u0_gGs9_s_iUCHX-1" vertex="1">
+          <mxGeometry x="1150" y="480" width="360" height="284" as="geometry" />
+        </mxCell>
+        <mxCell id="afjaLYu5vWHjv6IBhFP--1" value="MOVEMENTATION_REASON&lt;br&gt;ENUM&lt;br&gt;&lt;ul&gt;&lt;li style=&quot;text-align: left;&quot;&gt;REQUEST_PAYMENT(INCOME)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;ACQUISITION(DEBT)&lt;/span&gt;&lt;br&gt;&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;ADDITIONAL_PRODUCTION_COST(DEBT)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;PROFIT_WHITHDRAWAL(DEBT)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;COMISSION_PAYMENT(DEBT)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;DELIVERY(DEBT)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;UNKNOWN(null)&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;spacingLeft=-20;fillColor=#6d8764;fontColor=#ffffff;strokeColor=#3A5431;" parent="C0qg8u0_gGs9_s_iUCHX-1" vertex="1">
+          <mxGeometry x="1150" y="260" width="310" height="200" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
@@ -216,6 +234,23 @@
         </mxCell>
         <mxCell id="QgHTz88DONTaZ_egxvaE-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.447;entryY=1.021;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="_gxMeObQO4zB7mxPQDEl-2" target="7A054APB6TZybVWNMQpJ-20" edge="1">
           <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="cZ2GkafK1pQ8gxyHk1Fj" name="trash">
+    <mxGraphModel dx="4097" dy="3558" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="UM5LlhvSLOQkjYG4CSLp-1" value="RESULT (RST)&lt;br&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;ul&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;RST_RQT_ID INT PK FK UK&lt;/span&gt;&lt;/li&gt;&lt;li&gt;RESULT_TYPE VARCHAR|ENUM PK UK&lt;/li&gt;&lt;li&gt;RST_CREATED_AT DATETIME NN&lt;/li&gt;&lt;li&gt;PERCENTAGE DECIMAL&lt;/li&gt;&lt;li&gt;RESULT_VALUE DECIMAL NN&lt;/li&gt;&lt;li&gt;DESCRIPTION VARCHAR NN&lt;/li&gt;&lt;li&gt;RST_MVT_ID INT&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;spacingLeft=10;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="80" y="-640" width="360" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="UM5LlhvSLOQkjYG4CSLp-2" value="RESULT_TYPE&lt;br&gt;ENUM&lt;br&gt;&lt;ul&gt;&lt;li style=&quot;text-align: left;&quot;&gt;INCOME(+)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;DEBT(-)&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;spacingLeft=-20;" vertex="1" parent="1">
+          <mxGeometry x="470" y="-860" width="200" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="UM5LlhvSLOQkjYG4CSLp-3" value="RESULT_SUBTYPE&lt;br&gt;ENUM&lt;br&gt;&lt;ul&gt;&lt;li style=&quot;text-align: left;&quot;&gt;EXPENSE(&quot;Despesa&quot;, DEBT)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;UNPLANNED_EXPENSE(&quot;Despesa Não Planejada&quot;, DEBT)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;PRODUCTION_COST(&quot;Custo de Produção&quot;, DEBT)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;UNPLANNED_PRODUCTION_COST(&quot;Custo de Produção Não Planejado&quot;, DEBT)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;OPERATIONS_COST(&quot;Custos de Operação&quot;, ????)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;COMISSION(&quot;Comissão&quot;, ????)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;PROFIT(&quot;Lucro&quot;, ????)&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;spacingLeft=-20;" vertex="1" parent="1">
+          <mxGeometry x="123" y="-360" width="580" height="200" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
