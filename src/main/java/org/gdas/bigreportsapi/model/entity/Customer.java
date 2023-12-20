@@ -31,6 +31,9 @@ public class Customer {
     @Column(name = "facebook_chat_number")
     private String facebookChatNumber;
 
+    @Column(name = "rating")
+    private Integer rating;
+
     public Customer() {
     }
 
@@ -72,6 +75,14 @@ public class Customer {
 
     public void setFacebookChatNumber(String facebookChatNumber) {
         this.facebookChatNumber = facebookChatNumber;
+    }
+
+    public Integer getRating() {
+        return rating;
+    }
+
+    public void setRating(Integer rating) {
+        this.rating = rating;
     }
 
     public static Customer from(CustomerJSON source) {

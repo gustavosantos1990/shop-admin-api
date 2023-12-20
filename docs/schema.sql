@@ -1,4 +1,4 @@
---DROP TABLE IF EXISTS financial_event, component, product_component, request_product, request, product, customer;
+DROP TABLE IF EXISTS financial_movement, component, product_component, request_product, request, product, customer;
 
 CREATE TABLE component (
     cmp_id varchar(10) DEFAULT substring(MD5(random()::text), 0, 11) PRIMARY KEY,
@@ -22,6 +22,7 @@ CREATE TABLE product (
     description varchar,
     price decimal NOT NULL,
     photo_address varchar,
+    production_duration_in_minutes int NOT NULL,
     CONSTRAINT product_name_uk UNIQUE(pdt_name)
 );
 
@@ -40,6 +41,7 @@ CREATE TABLE customer (
     phone varchar NOT NULL,
 	ctm_name varchar NOT NULL,
     facebook_chat_number varchar,
+    rating int,
     CONSTRAINT customer_phone_uk UNIQUE(phone)
 );
 
@@ -50,7 +52,8 @@ CREATE TABLE request (
     rqt_canceled_at timestamp with time zone,
     due_date date NOT NULL,
     status varchar NOT NULL,
-	notes varchar
+	notes varchar,
+	rating int
 );
 
 CREATE TABLE request_product (
@@ -65,4 +68,50 @@ CREATE TABLE request_product (
 	file_path varchar,
 	file_link varchar,
 	PRIMARY KEY(rpd_rqt_id, rpd_pdt_id)
+);
+
+CREATE TABLE financial_movement (
+	fim_id serial PRIMARY KEY,
+	fim_date date NOT NULL,
+    fim_created_at timestamp with time zone NOT NULL,
+	wallet varchar NOT NULL,
+	operation varchar NOT NULL,
+	description varchar NOT NULL,
+	fim_rqt_id int REFERENCES request(rqt_id),
+	--mvt_acq_id int REFERENCES acquisition(acq_id),
+	fim_value decimal NOT NULL,
+	banking_operation bool NOT NULL,
+	voucher_path varchar
+);
+
+SELECT * FROM customer;
+SELECT * FROM request;
+SELECT * FROM request_product;
+
+INSERT INTO PRODUCT(pdt_name, price, production_duration_in_minutes, pdt_created_at) VALUES
+('Agenda 1 dia por página', 10, 90, now()),
+('Agenda 2 dias por página', 20, 90, now()),
+('Planner', 30, 60, now());
+
+INSERT INTO CUSTOMER (phone, ctm_name, ctm_created_at) VALUES
+('41985365856', 'Gustavo', now());
+
+INSERT INTO request(rqt_created_at, rqt_ctm_id, due_date, status) VALUES
+(NOW(), (SELECT ctm_id FROM customer WHERE ctm_name = 'Gustavo'), now()::date, 'CREATED');
+
+INSERT INTO request_product(
+	rpd_rqt_id, rpd_pdt_id,
+	rpd_created_at,
+	unitary_value,
+	amount,
+	calculated_production_cost,
+	declared_production_cost) VALUES
+(
+	(SELECT rqt_id FROM request WHERE rqt_ctm_id = (SELECT ctm_id FROM customer WHERE ctm_name = 'Gustavo')),
+	(SELECT pdt_id FROM product WHERE pdt_name = 'Planner'),
+	now(),
+	10.00,
+	3,
+	2.00,
+	2.00
 );

@@ -11,6 +11,7 @@ import org.gdas.bigreportsapi.model.actions.SavingProduct;
 import org.gdas.bigreportsapi.model.entity.Product;
 
 import java.math.BigDecimal;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -50,6 +51,10 @@ public class ProductJSON {
 
     @JsonProperty
     private List<ProductComponentJSON> components;
+
+    @JsonProperty("production_duration_in_minutes")
+    @Positive(groups = {SavingProduct.class})
+    private int productionDurationInMinutes;
 
     public UUID getId() {
         return id;

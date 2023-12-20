@@ -42,6 +42,9 @@ public class Request {
     @Column(name = "notes")
     private String notes;
 
+    @Column(name = "rating")
+    private Integer rating;
+
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
     @NotNull
@@ -132,6 +135,14 @@ public class Request {
 
     public void setRequestProducts(List<RequestProduct> requestProducts) {
         this.requestProducts = requestProducts;
+    }
+
+    public Integer getRating() {
+        return rating;
+    }
+
+    public void setRating(Integer rating) {
+        this.rating = rating;
     }
 
     public static Request from(RequestJSON source) {

@@ -6,6 +6,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -45,6 +46,9 @@ public class Product {
 
     @OneToMany(mappedBy = "productComponentID.product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<ProductComponent> components;
+
+    @Column(name = "production_duration_in_minutes", nullable = false)
+    private int productionDurationInMinutes;
 
     public Product() {
     }

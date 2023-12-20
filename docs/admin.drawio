@@ -1,6 +1,6 @@
-<mxfile host="Electron" modified="2023-11-27T01:39:27.708Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.1.2 Chrome/114.0.5735.289 Electron/25.9.4 Safari/537.36" etag="QV8jRZUfyHLx500Kf42Z" version="22.1.2" type="device" pages="3">
+<mxfile host="Electron" modified="2023-12-20T17:51:40.930Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.1.2 Chrome/114.0.5735.289 Electron/25.9.4 Safari/537.36" etag="HWf3DFrKzTJLomMEXpaK" version="22.1.2" type="device" pages="4">
   <diagram name="version B" id="tw7bOugptfXPdBWQpAGX">
-    <mxGraphModel dx="3072" dy="1989" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="none" math="0" shadow="0">
+    <mxGraphModel dx="1425" dy="2186" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="none" math="0" shadow="0">
       <root>
         <mxCell id="C0qg8u0_gGs9_s_iUCHX-0" />
         <mxCell id="C0qg8u0_gGs9_s_iUCHX-1" parent="C0qg8u0_gGs9_s_iUCHX-0" />
@@ -35,33 +35,17 @@
         <mxCell id="Ygff0WiNiJIvmF6vx_iR-17" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="C0qg8u0_gGs9_s_iUCHX-1" source="Ygff0WiNiJIvmF6vx_iR-14" target="Ygff0WiNiJIvmF6vx_iR-16" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="qT1Zz3O92g6PQhBymwFu-1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="C0qg8u0_gGs9_s_iUCHX-1" source="Ygff0WiNiJIvmF6vx_iR-14" target="qT1Zz3O92g6PQhBymwFu-0" edge="1">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
         <mxCell id="Ygff0WiNiJIvmF6vx_iR-14" value="REQUEST (RQT)&lt;br&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;ul&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;RQT_ID INT PK&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;RQT_CTM_ID FK NN&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;RQT_CREATED_AT DATETIME NN&lt;/span&gt;&lt;/li&gt;&lt;li&gt;RQT_CANCELED_AT DATETIME&lt;/li&gt;&lt;li&gt;DUE_DATE DATE NN&lt;/li&gt;&lt;li&gt;NOTES VARCHAR&lt;/li&gt;&lt;li&gt;STATUS VARCHAR NN&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;spacingLeft=10;verticalAlign=top;spacingTop=10;strokeColor=#007FFF;dashed=1;dashPattern=1 1;strokeWidth=10;" parent="C0qg8u0_gGs9_s_iUCHX-1" vertex="1">
           <mxGeometry x="-150" y="120" width="360" height="210" as="geometry" />
         </mxCell>
         <mxCell id="Ygff0WiNiJIvmF6vx_iR-16" value="CUSTOMER (CTM)&lt;br&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;ul&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;CTM_ID PK&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;CTM_CREATED_AT DATETIME NN&lt;/span&gt;&lt;/li&gt;&lt;li&gt;PHONE VARCHAR NN UK&lt;/li&gt;&lt;li&gt;CTM_NAME VARCHAR NN&lt;/li&gt;&lt;li&gt;FACEBOOK_CHAT_NUMBER VARCHAR&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;spacingLeft=10;verticalAlign=top;spacingTop=10;strokeColor=#007FFF;dashed=1;dashPattern=1 1;strokeWidth=10;" parent="C0qg8u0_gGs9_s_iUCHX-1" vertex="1">
           <mxGeometry x="-810" y="150" width="360" height="150" as="geometry" />
         </mxCell>
-        <mxCell id="qT1Zz3O92g6PQhBymwFu-0" value="MOVIMENTATION (MVT)&lt;br&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;ul&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;MVT_ID INT PK&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;MVT_RQT_ID FK&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;MVT_MAQ_ID FK&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;MVT_CREATED_AT DATETIME NN&lt;/span&gt;&lt;br&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;MVT_UPDATED_AT DATETIME&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;MVT_DELETED_AT DATETIME&lt;/span&gt;&lt;/li&gt;&lt;li&gt;MVT_DATE DATE NN&lt;/li&gt;&lt;li&gt;MVT_VALUE DECIMAL NN&lt;/li&gt;&lt;li&gt;DESCRIPTION VARCHAR NN&lt;/li&gt;&lt;li&gt;NOTES VARCHAR&lt;/li&gt;&lt;li&gt;REASON VARCHAR/ENUM NN&lt;/li&gt;&lt;li&gt;MVT_TYPE VARCHAR/ENUM NN&lt;/li&gt;&lt;li&gt;LINK: REQUEST|ACQUISITION|NONE&lt;/li&gt;&lt;li&gt;VOUCHER_PATH VARCHAR&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;spacingLeft=10;verticalAlign=top;spacingTop=10;fillColor=#6d8764;fontColor=#ffffff;strokeColor=#3A5431;" parent="C0qg8u0_gGs9_s_iUCHX-1" vertex="1">
-          <mxGeometry x="-150" y="-564" width="360" height="284" as="geometry" />
-        </mxCell>
         <mxCell id="aixIUmm3CiERQ2K2kEwL-0" value="MATERIAL_ACQUISITION&amp;nbsp;(MAQ)&lt;br&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;ul&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;MAQ_ID&amp;nbsp;UUID PK FK&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;MAQ_CREATED_AT DATETIME NN&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;MAQ_UPDATED_AT DATETIME&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;MAQ_DELETED_AT DATETIME&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;MAQ_DATE DATE NN&lt;/span&gt;&lt;/li&gt;&lt;li&gt;MAQ_STR_ID UUID FK NN&lt;/li&gt;&lt;li&gt;NOTES VARCHAR&lt;/li&gt;&lt;li&gt;MAQ_DELIVERY_TAX DECIMAL NN&lt;/li&gt;&lt;li&gt;&lt;br&gt;&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;spacingLeft=10;verticalAlign=top;spacingTop=10;fillColor=#6d8764;fontColor=#ffffff;strokeColor=#3A5431;" parent="C0qg8u0_gGs9_s_iUCHX-1" vertex="1">
           <mxGeometry x="790" y="-564" width="360" height="210" as="geometry" />
         </mxCell>
-        <mxCell id="DuafAJx64HUzNj7nYha8-1" value="MOVIMENTATION_TYPE&lt;br&gt;ENUM&lt;br&gt;&lt;ul&gt;&lt;li style=&quot;text-align: left;&quot;&gt;INCOME(+)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;DEBT(-)&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;spacingLeft=-20;fillColor=#6d8764;fontColor=#ffffff;strokeColor=#3A5431;" parent="C0qg8u0_gGs9_s_iUCHX-1" vertex="1">
-          <mxGeometry x="200" y="-800" width="200" height="200" as="geometry" />
-        </mxCell>
         <mxCell id="DuafAJx64HUzNj7nYha8-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="C0qg8u0_gGs9_s_iUCHX-1" source="DuafAJx64HUzNj7nYha8-2" target="aixIUmm3CiERQ2K2kEwL-0" edge="1">
           <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="DuafAJx64HUzNj7nYha8-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="C0qg8u0_gGs9_s_iUCHX-1" source="DuafAJx64HUzNj7nYha8-2" target="C0qg8u0_gGs9_s_iUCHX-8" edge="1">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="970" y="735" />
-            </Array>
-          </mxGeometry>
         </mxCell>
         <mxCell id="DuafAJx64HUzNj7nYha8-2" value="MATERIAL_ACQUISITION_COMPONENT (MAC)&lt;br&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;ul&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;MAC_MAQ_ID&amp;nbsp;UUID PK FK&lt;/span&gt;&lt;/li&gt;&lt;li&gt;MAC_CMP_ID&amp;nbsp;UUID PK FK&lt;/li&gt;&lt;li&gt;AMOUNT DECIMAL NN&lt;/li&gt;&lt;li&gt;WIDTH DECIMAL NN&lt;/li&gt;&lt;li&gt;HEIGHT DECIMAL NN&lt;/li&gt;&lt;li&gt;VALUE DECIMAL NN&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;spacingLeft=10;verticalAlign=top;spacingTop=10;fillColor=#6d8764;fontColor=#ffffff;strokeColor=#3A5431;" parent="C0qg8u0_gGs9_s_iUCHX-1" vertex="1">
           <mxGeometry x="790" y="-310" width="360" height="160" as="geometry" />
@@ -71,9 +55,6 @@
         </mxCell>
         <mxCell id="BzaDTK5jLBmIMNmThcL--0" value="STATUS ENUM&lt;br&gt;&lt;ul&gt;&lt;li style=&quot;text-align: left;&quot;&gt;READY(&quot;Cadastrado&quot;)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;DOING(&quot;Em produção&quot;)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;DELIVERED(&quot;Entregue&quot;)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;PROCESSED(&quot;Processado&quot;)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;DONE(&quot;Concluído&quot;)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;CANCELED(&quot;Cancelado&quot;)&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=default;strokeColor=#007FFF;fontColor=default;align=left;verticalAlign=top;spacingLeft=10;spacingTop=10;dashed=1;dashPattern=1 1;strokeWidth=10;" parent="C0qg8u0_gGs9_s_iUCHX-1" vertex="1">
           <mxGeometry x="-440" y="410" width="250" height="140" as="geometry" />
-        </mxCell>
-        <mxCell id="BzaDTK5jLBmIMNmThcL--2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.574;entryDx=0;entryDy=0;entryPerimeter=0;" parent="C0qg8u0_gGs9_s_iUCHX-1" source="DuafAJx64HUzNj7nYha8-1" target="qT1Zz3O92g6PQhBymwFu-0" edge="1">
-          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="BzaDTK5jLBmIMNmThcL--5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="C0qg8u0_gGs9_s_iUCHX-1" source="BzaDTK5jLBmIMNmThcL--3" target="BzaDTK5jLBmIMNmThcL--4" edge="1">
           <mxGeometry relative="1" as="geometry" />
@@ -99,24 +80,6 @@
         <mxCell id="aDe03LS6ucZ2tFbCAUwk-0" value="QR Code?" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fontSize=40;" parent="C0qg8u0_gGs9_s_iUCHX-1" vertex="1">
           <mxGeometry x="700" y="-1070" width="310" height="180" as="geometry" />
         </mxCell>
-        <mxCell id="XCBlp-uY9w4KbEWQlovN-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" parent="C0qg8u0_gGs9_s_iUCHX-1" source="XCBlp-uY9w4KbEWQlovN-0" target="qT1Zz3O92g6PQhBymwFu-0" edge="1">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="XCBlp-uY9w4KbEWQlovN-0" value="MOVEMENTATION_REASON&lt;br&gt;ENUM&lt;br&gt;&lt;ul&gt;&lt;li style=&quot;text-align: left;&quot;&gt;REQUEST_PAYMENT(INCOME)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;ACQUISITION(DEBT)&lt;/span&gt;&lt;br&gt;&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;ADDITIONAL_PRODUCTION_COST(DEBT)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;PROFIT_WHITHDRAWAL(DEBT)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;COMISSION_PAYMENT(DEBT)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;DELIVERY(DEBT)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;UNKNOWN(null)&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;spacingLeft=-20;fillColor=#6d8764;fontColor=#ffffff;strokeColor=#3A5431;" parent="C0qg8u0_gGs9_s_iUCHX-1" vertex="1">
-          <mxGeometry x="-215" y="-800" width="310" height="200" as="geometry" />
-        </mxCell>
-        <mxCell id="XCBlp-uY9w4KbEWQlovN-1" value="BILLING_ITEM_TYPE&lt;br&gt;ENUM&lt;br&gt;&lt;ul&gt;&lt;li style=&quot;text-align: left;&quot;&gt;REVENUE(+)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;EXPENSE(-)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;PRODUCTION_COST(-)&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;spacingLeft=-20;fillColor=#6d8764;fontColor=#ffffff;strokeColor=#3A5431;" parent="C0qg8u0_gGs9_s_iUCHX-1" vertex="1">
-          <mxGeometry x="-610" y="-800" width="230" height="164" as="geometry" />
-        </mxCell>
-        <mxCell id="XCBlp-uY9w4KbEWQlovN-3" value="REQUEST_BILLING_ITEM (RBI)&lt;br&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;ul&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;RBI_RQT_ID PK FK&lt;/span&gt;&lt;br&gt;&lt;/li&gt;&lt;li&gt;RBI_MVT_ID FK&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;RBI_MAQ_ID FK&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;MVT_CREATED_AT DATETIME NN&lt;/span&gt;&lt;br&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;MVT_UPDATED_AT DATETIME&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;MVT_DELETED_AT DATETIME&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;br&gt;&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;spacingLeft=10;verticalAlign=top;spacingTop=10;fillColor=#6d8764;fontColor=#ffffff;strokeColor=#3A5431;" parent="C0qg8u0_gGs9_s_iUCHX-1" vertex="1">
-          <mxGeometry x="-1270" y="-868" width="360" height="284" as="geometry" />
-        </mxCell>
-        <mxCell id="XCBlp-uY9w4KbEWQlovN-4" value="REQUEST_BILLING_RESULT (RBR)&lt;br&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;ul&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;RBR_RQT_ID PK FK&lt;/span&gt;&lt;br&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;RBR_CREATED_AT DATETIME NN&lt;/span&gt;&lt;br&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;RBR_UPDATED_AT DATETIME&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;RBR_DELETED_AT DATETIME&lt;/span&gt;&lt;/li&gt;&lt;li&gt;RESULT_TYPE VARCHAR|ENUM NN&lt;/li&gt;&lt;li&gt;PERCENTAGE NN&lt;/li&gt;&lt;li&gt;RESULT_VALUE DECIMAL NN&lt;/li&gt;&lt;li&gt;RBR_MVT_ID FK&lt;/li&gt;&lt;li&gt;RBR_DESCRIPTION VARCHAR NN&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;spacingLeft=10;verticalAlign=top;spacingTop=10;fillColor=#6d8764;fontColor=#ffffff;strokeColor=#3A5431;" parent="C0qg8u0_gGs9_s_iUCHX-1" vertex="1">
-          <mxGeometry x="-1640" y="-868" width="360" height="284" as="geometry" />
-        </mxCell>
-        <mxCell id="XCBlp-uY9w4KbEWQlovN-5" value="BILLING_RESULT_TYPE&lt;br&gt;ENUM&lt;br&gt;&lt;ul&gt;&lt;li style=&quot;text-align: left;&quot;&gt;OPERATIONS&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;COMISSION&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;PROFIT&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;spacingLeft=-20;fillColor=#6d8764;fontColor=#ffffff;strokeColor=#3A5431;" parent="C0qg8u0_gGs9_s_iUCHX-1" vertex="1">
-          <mxGeometry x="-1630" y="-1070" width="230" height="164" as="geometry" />
-        </mxCell>
         <mxCell id="-zfwxT4iXppDbRjdOsRo-0" value="CRIADO" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;size=0.25;" parent="C0qg8u0_gGs9_s_iUCHX-1" vertex="1">
           <mxGeometry x="-690" y="520" width="120" height="80" as="geometry" />
         </mxCell>
@@ -126,23 +89,23 @@
         <mxCell id="-zfwxT4iXppDbRjdOsRo-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0.044;entryDx=0;entryDy=0;entryPerimeter=0;" parent="C0qg8u0_gGs9_s_iUCHX-1" source="-zfwxT4iXppDbRjdOsRo-0" target="-zfwxT4iXppDbRjdOsRo-1" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="tygv8zQSKwT_2YGZif-c-0" value="BILLING_ITEM (BIT)&lt;br&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;ul&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;BIT_RQT_ID INT PK FK UK&lt;/span&gt;&lt;/li&gt;&lt;li&gt;ITEM_TYPE VARCHAR|ENUM PK UK&lt;/li&gt;&lt;li&gt;BIT_CREATED_AT DATETIME NN&lt;/li&gt;&lt;li&gt;AUTO_GENERATED BOOL NN&lt;/li&gt;&lt;li&gt;PERCENTAGE INT&lt;/li&gt;&lt;li&gt;BIT_MVT_ID INT FK&lt;/li&gt;&lt;li&gt;BIT_VALUE DECIMAL NN&lt;/li&gt;&lt;li&gt;BIT DESCRIPTION&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;spacingLeft=10;verticalAlign=top;spacingTop=10;" parent="C0qg8u0_gGs9_s_iUCHX-1" vertex="1">
-          <mxGeometry x="1150" y="840" width="360" height="210" as="geometry" />
+        <mxCell id="uFXS_iiYwnPdjBADlZsD-2" value="&lt;div&gt;FINANCIAL_MOVEMENT (FIM)&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;ul&gt;&lt;li&gt;FIM_ID INT PK&lt;/li&gt;&lt;li&gt;FIM_DATE DATE NN&amp;nbsp;&lt;/li&gt;&lt;li&gt;WALLET VARCHAR/ENUM NN&lt;/li&gt;&lt;li&gt;OPERATION VARCHAR/ENUM NN&lt;/li&gt;&lt;li&gt;DESCRIPTION VARCHAR&lt;/li&gt;&lt;li&gt;FIM_RQT_ID INT FK&lt;/li&gt;&lt;li&gt;FIM_ACQ_ID INT FK&lt;/li&gt;&lt;li&gt;FIM_VALUE DECIMAL NN&lt;/li&gt;&lt;li&gt;BANKING OPERATION BOOL NN&lt;/li&gt;&lt;li&gt;VOUCHER_PATH VARCHAR&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;spacingLeft=-20;fillColor=#6d8764;fontColor=#ffffff;strokeColor=#3A5431;" vertex="1" parent="C0qg8u0_gGs9_s_iUCHX-1">
+          <mxGeometry x="760" y="790" width="280" height="310" as="geometry" />
         </mxCell>
-        <mxCell id="tygv8zQSKwT_2YGZif-c-2" value="BILLING_ITEM_TYPE&lt;br&gt;ENUM&lt;br&gt;&lt;ul&gt;&lt;li style=&quot;text-align: left;&quot;&gt;EXPENSE(&quot;Despesa&quot;, DEBT, false)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;REVENUE(&quot;Receita&quot;, INCOME, false)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;PRODUCTION_COST(&quot;Custo de Produção&quot;&lt;/span&gt;,&amp;nbsp;DEBT,&amp;nbsp;false)&lt;br&gt;&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;OPERATIONS_COST(&quot;Custos de Operação&quot;&lt;/span&gt;,&amp;nbsp;DEBT,&amp;nbsp;true)&lt;br&gt;&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;COMISSION(&quot;Comissão&quot;,&amp;nbsp;DEBT,&amp;nbsp;true)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;PROFIT(&quot;Lucro&quot;,&amp;nbsp;DEBT,&amp;nbsp;true)&lt;/li&gt;&lt;/ul&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;&quot;&gt;&lt;span style=&quot;&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/span&gt;&lt;/span&gt;String label&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&amp;nbsp; &amp;nbsp; MovementType type&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;&quot;&gt;&lt;span style=&quot;&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/span&gt;&lt;/span&gt;boolean result&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;spacingLeft=-20;" parent="C0qg8u0_gGs9_s_iUCHX-1" vertex="1">
-          <mxGeometry x="1520" y="840" width="440" height="210" as="geometry" />
+        <mxCell id="uFXS_iiYwnPdjBADlZsD-4" value="FINANCIAL_MOVEMENT_OPERATION&lt;br&gt;ENUM&lt;br&gt;&lt;ul&gt;&lt;li style=&quot;text-align: left;&quot;&gt;ADVANCE_OR_PAYMENT(&quot;Adiantamento/Pagamento de pedido&quot;)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;WITHDRAWAL_OR_DELIVERY(&quot;Retirada/Entrega de pedido&quot;)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;EXPENSE_REIMBURSEMENT(&quot;Reembolso de despesas de pedido&quot;)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;COST_REIMBURSEMENT(&quot;Reembolso de custos de produção&quot;)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;OPERATION_COST(&quot;Custos de operação&quot;)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;COMMISSION_OF_REQUEST(&quot;Comissão de resultado de venda&quot;)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;PROFIT(&quot;Lucro&quot;)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;REQUEST_PROCESSING(&quot;Faturamento de pedido&quot;)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;COMMISSION_PAYMENT(&quot;Pagamento de comissão&quot;)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;ACQUISITION(&quot;Compra de material&quot;)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;PROFIT_WITHDRAW(&quot;Retirada de lucro&quot;)&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;spacingLeft=-20;fillColor=#6d8764;fontColor=#ffffff;strokeColor=#3A5431;" vertex="1" parent="C0qg8u0_gGs9_s_iUCHX-1">
+          <mxGeometry x="1070" y="570" width="470" height="440" as="geometry" />
         </mxCell>
-        <mxCell id="tygv8zQSKwT_2YGZif-c-3" value="BILLING_ITEM_TYPE&lt;br&gt;ENUM&lt;br&gt;&lt;ul&gt;&lt;li style=&quot;text-align: left;&quot;&gt;EXPENSE(-)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;REVENUE(+)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;RESULT(-)&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;spacingLeft=-20;" parent="C0qg8u0_gGs9_s_iUCHX-1" vertex="1">
-          <mxGeometry x="2000" y="845" width="250" height="200" as="geometry" />
+        <mxCell id="uFXS_iiYwnPdjBADlZsD-6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="C0qg8u0_gGs9_s_iUCHX-1" source="DuafAJx64HUzNj7nYha8-2" target="afjaLYu5vWHjv6IBhFP--1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="970" y="735" />
+            </Array>
+            <mxPoint x="970" y="-150" as="sourcePoint" />
+            <mxPoint x="620" y="745" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
-        <mxCell id="tygv8zQSKwT_2YGZif-c-4" value="MOVIMENTATION_TYPE&lt;br&gt;ENUM&lt;br&gt;&lt;ul&gt;&lt;li style=&quot;text-align: left;&quot;&gt;INCOME(+)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;DEBT(-)&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;spacingLeft=-20;" parent="C0qg8u0_gGs9_s_iUCHX-1" vertex="1">
-          <mxGeometry x="1720" y="570" width="200" height="200" as="geometry" />
-        </mxCell>
-        <mxCell id="afjaLYu5vWHjv6IBhFP--0" value="MOVIMENTATION (MVT)&lt;br&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;ul&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;MVT_ID INT PK&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;MVT_RQT_ID FK&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;MVT_MAQ_ID FK&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;MVT_CREATED_AT DATETIME NN&lt;/span&gt;&lt;br&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;MVT_UPDATED_AT DATETIME&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;MVT_DELETED_AT DATETIME&lt;/span&gt;&lt;/li&gt;&lt;li&gt;MVT_DATE DATE NN&lt;/li&gt;&lt;li&gt;MVT_VALUE DECIMAL NN&lt;/li&gt;&lt;li&gt;DESCRIPTION VARCHAR NN&lt;/li&gt;&lt;li&gt;NOTES VARCHAR&lt;/li&gt;&lt;li&gt;REASON VARCHAR/ENUM NN&lt;/li&gt;&lt;li&gt;MVT_TYPE VARCHAR/ENUM NN&lt;/li&gt;&lt;li&gt;LINK: REQUEST|ACQUISITION|NONE&lt;/li&gt;&lt;li&gt;VOUCHER_PATH VARCHAR&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;spacingLeft=10;verticalAlign=top;spacingTop=10;fillColor=#6d8764;fontColor=#ffffff;strokeColor=#3A5431;" parent="C0qg8u0_gGs9_s_iUCHX-1" vertex="1">
-          <mxGeometry x="1150" y="480" width="360" height="284" as="geometry" />
-        </mxCell>
-        <mxCell id="afjaLYu5vWHjv6IBhFP--1" value="MOVEMENTATION_REASON&lt;br&gt;ENUM&lt;br&gt;&lt;ul&gt;&lt;li style=&quot;text-align: left;&quot;&gt;REQUEST_PAYMENT(INCOME)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;ACQUISITION(DEBT)&lt;/span&gt;&lt;br&gt;&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;ADDITIONAL_PRODUCTION_COST(DEBT)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;PROFIT_WHITHDRAWAL(DEBT)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;COMISSION_PAYMENT(DEBT)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;DELIVERY(DEBT)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;UNKNOWN(null)&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;spacingLeft=-20;fillColor=#6d8764;fontColor=#ffffff;strokeColor=#3A5431;" parent="C0qg8u0_gGs9_s_iUCHX-1" vertex="1">
-          <mxGeometry x="1150" y="260" width="310" height="200" as="geometry" />
+        <mxCell id="afjaLYu5vWHjv6IBhFP--1" value="FINANCIAL_MOVEMENT_TYPE&lt;br&gt;ENUM&lt;br&gt;&lt;ul&gt;&lt;li style=&quot;text-align: left;&quot;&gt;INCOME(+)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;DEBT(-)&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;spacingLeft=-20;fillColor=#6d8764;fontColor=#ffffff;strokeColor=#3A5431;" parent="C0qg8u0_gGs9_s_iUCHX-1" vertex="1">
+          <mxGeometry x="760" y="570" width="280" height="200" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
@@ -251,6 +214,67 @@
         </mxCell>
         <mxCell id="UM5LlhvSLOQkjYG4CSLp-3" value="RESULT_SUBTYPE&lt;br&gt;ENUM&lt;br&gt;&lt;ul&gt;&lt;li style=&quot;text-align: left;&quot;&gt;EXPENSE(&quot;Despesa&quot;, DEBT)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;UNPLANNED_EXPENSE(&quot;Despesa Não Planejada&quot;, DEBT)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;PRODUCTION_COST(&quot;Custo de Produção&quot;, DEBT)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;UNPLANNED_PRODUCTION_COST(&quot;Custo de Produção Não Planejado&quot;, DEBT)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;OPERATIONS_COST(&quot;Custos de Operação&quot;, ????)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;COMISSION(&quot;Comissão&quot;, ????)&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;PROFIT(&quot;Lucro&quot;, ????)&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;spacingLeft=-20;" vertex="1" parent="1">
           <mxGeometry x="123" y="-360" width="580" height="200" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="lcfG0GevQZIrnZ-YKZKe" name="Página-4">
+    <mxGraphModel dx="1434" dy="836" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="16_vxCI3fH46M6Zl0UsW-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="16_vxCI3fH46M6Zl0UsW-1" target="16_vxCI3fH46M6Zl0UsW-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="16_vxCI3fH46M6Zl0UsW-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="16_vxCI3fH46M6Zl0UsW-1" target="16_vxCI3fH46M6Zl0UsW-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="16_vxCI3fH46M6Zl0UsW-9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="16_vxCI3fH46M6Zl0UsW-1" target="16_vxCI3fH46M6Zl0UsW-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="16_vxCI3fH46M6Zl0UsW-1" value="REQUEST" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="400" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="16_vxCI3fH46M6Zl0UsW-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="16_vxCI3fH46M6Zl0UsW-2" target="16_vxCI3fH46M6Zl0UsW-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="16_vxCI3fH46M6Zl0UsW-2" value="REQUEST_ITEM" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="550" y="400" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="16_vxCI3fH46M6Zl0UsW-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="16_vxCI3fH46M6Zl0UsW-4" target="16_vxCI3fH46M6Zl0UsW-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="16_vxCI3fH46M6Zl0UsW-4" value="BILLING" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="540" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="16_vxCI3fH46M6Zl0UsW-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="16_vxCI3fH46M6Zl0UsW-6" target="16_vxCI3fH46M6Zl0UsW-8">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="610" y="720" />
+              <mxPoint x="200" y="720" />
+              <mxPoint x="200" y="290" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="16_vxCI3fH46M6Zl0UsW-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="16_vxCI3fH46M6Zl0UsW-6" target="16_vxCI3fH46M6Zl0UsW-12">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="770" y="570" />
+              <mxPoint x="770" y="290" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="16_vxCI3fH46M6Zl0UsW-6" value="BILLING_ITEM" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="550" y="540" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="16_vxCI3fH46M6Zl0UsW-13" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="16_vxCI3fH46M6Zl0UsW-8" target="16_vxCI3fH46M6Zl0UsW-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="16_vxCI3fH46M6Zl0UsW-8" value="MOVEMENT" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="260" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="16_vxCI3fH46M6Zl0UsW-12" value="WALLET" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="550" y="260" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

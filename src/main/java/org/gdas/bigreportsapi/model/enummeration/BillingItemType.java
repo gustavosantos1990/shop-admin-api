@@ -2,9 +2,11 @@ package org.gdas.bigreportsapi.model.enummeration;
 
 public enum BillingItemType {
 
-    EXPENSE("Despesa"),
     REVENUE("Receita"),
-    PRODUCTION_COST("Custo de Produção");
+    EXPENSE("Despesa"),
+    OPERATIONS("Operações"),
+    COMMISSION("Comissão"),
+    PROFIT("Lucro");
 
     private final String text;
 
