@@ -1,22 +1,24 @@
 package com.gdas.shopadminapi.product.domain;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.gdas.shopadminapi.product.application.ports.in.CreateProductUseCase;
 import com.gdas.shopadminapi.product.domain.enumeration.ProductStatus;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import org.hibernate.annotations.CreationTimestamp;
 
-import java.util.List;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
 @Table(name = "product")
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
 public class Product {
 
     @Id
@@ -25,10 +27,36 @@ public class Product {
     private UUID id;
 
     @Column(name = "pdt_name", nullable = false, unique = true)
+    @NotNull(groups = {CreateProductUseCase.class})
+    @NotBlank(groups = {CreateProductUseCase.class})
     private String name;
 
-    @Transient
+    @Enumerated(EnumType.STRING)
     private ProductStatus status;
+
+    @Column(name = "production_duration_in_minutes", nullable = false)
+    @JsonProperty("production_duration_in_minutes")
+    @NotNull(groups = {CreateProductUseCase.class})
+    @Positive(groups = {CreateProductUseCase.class})
+    private Integer productionDurationInMinutes;
+
+    @Column(name = "pdt_created_at", nullable = false)
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @Column(name = "pdt_deleted_at")
+    private LocalDateTime deletedAt;
+
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "price", nullable = false)
+    @NotNull(groups = {CreateProductUseCase.class})
+    @Positive(groups = {CreateProductUseCase.class})
+    private BigDecimal price;
+
+    @Column(name = "photo_address")
+    private String photoAddress;
 
     public Product() {
     }
@@ -57,23 +85,51 @@ public class Product {
         this.status = status;
     }
 
-    //    @Column(name = "production_duration_in_minutes", nullable = false)
-//    private int productionDurationInMinutes;
-//
-//    @Column(name = "pdt_created_at", nullable = false)
-//    @CreationTimestamp
-//    private LocalDateTime createdAt;
-//
-//    @Column(name = "pdt_deleted_at")
-//    private LocalDateTime deletedAt;
-//
-//    @Column(name = "description")
-//    private String description;
-//
-//    @Column(name = "price", nullable = false)
-//    private BigDecimal price;
-//
-//    @Column(name = "photo_address")
-//    private String photoAddress;
+    public int getProductionDurationInMinutes() {
+        return productionDurationInMinutes;
+    }
 
+    public void setProductionDurationInMinutes(int productionDurationInMinutes) {
+        this.productionDurationInMinutes = productionDurationInMinutes;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public String getPhotoAddress() {
+        return photoAddress;
+    }
+
+    public void setPhotoAddress(String photoAddress) {
+        this.photoAddress = photoAddress;
+    }
 }

@@ -1,5 +1,6 @@
 package com.gdas.shopadminapi.product.adapter.out.persistence;
 
+import com.gdas.shopadminapi.product.application.ports.out.CreateProductPort;
 import com.gdas.shopadminapi.product.application.ports.out.FindAllProductsPort;
 import com.gdas.shopadminapi.product.domain.Product;
 import org.springframework.stereotype.Service;
@@ -7,7 +8,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-class ProductPersistenceAdapter implements FindAllProductsPort {
+class ProductPersistenceAdapter implements
+        FindAllProductsPort,
+        CreateProductPort {
 
     private final ProductRepository productRepository;
 
@@ -20,4 +23,8 @@ class ProductPersistenceAdapter implements FindAllProductsPort {
         return productRepository.findAll();
     }
 
+    @Override
+    public Product create(Product product) {
+        return productRepository.save(product);
+    }
 }

@@ -3,7 +3,6 @@ package com.gdas.shopadminapi.product.application.ports;
 import com.gdas.shopadminapi.product.application.ports.in.CreateComponentUseCase;
 import com.gdas.shopadminapi.product.application.ports.out.CreateComponentPort;
 import com.gdas.shopadminapi.product.domain.Component;
-import jakarta.persistence.Transient;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -19,7 +18,6 @@ class CreateComponentService implements CreateComponentUseCase {
     }
 
     @Override
-    @Transient
     public Component apply(Component component) {
         prepare(component);
         return createComponentPort.create(component);

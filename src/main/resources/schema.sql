@@ -55,15 +55,16 @@ CREATE TABLE component ( --cmp
 
 CREATE TABLE product ( --pdt
     pdt_id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
-    pdt_name varchar NOT NULL UNIQUE,
-    --default_version varchar(10) REFERENCES product_version_info(pvr_version),
-    --CONSTRAINT product_name_uk UNIQUE(pdt_name),
     pdt_created_at timestamp with time zone NOT NULL, --*new
     pdt_deleted_at timestamp with time zone, --*new
+    pdt_name varchar NOT NULL UNIQUE,
+    status varchar NOT NULL,
     description varchar, --*new
     price decimal NOT NULL, --*new
     photo_address varchar, --*new
     production_duration_in_minutes int NOT NULL --*new
+    --default_version varchar(10) REFERENCES product_version_info(pvr_version),
+    --CONSTRAINT product_name_uk UNIQUE(pdt_name),
 );
 
 --*new
