@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gdas.shopadminapi.product.application.ports.in.CreateProductUseCase;
+import com.gdas.shopadminapi.product.application.ports.in.UpdateProductUseCase;
 import com.gdas.shopadminapi.product.domain.enumeration.ProductStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -26,9 +27,9 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
 
-    @Column(name = "pdt_name", nullable = false, unique = true)
-    @NotNull(groups = {CreateProductUseCase.class})
-    @NotBlank(groups = {CreateProductUseCase.class})
+    @Column(name = "pdt_name", nullable = false, unique = true, updatable = false)
+    @NotNull(groups = {CreateProductUseCase.class, UpdateProductUseCase.class})
+    @NotBlank(groups = {CreateProductUseCase.class, UpdateProductUseCase.class})
     private String name;
 
     @Enumerated(EnumType.STRING)
@@ -36,8 +37,8 @@ public class Product {
 
     @Column(name = "production_duration_in_minutes", nullable = false)
     @JsonProperty("production_duration_in_minutes")
-    @NotNull(groups = {CreateProductUseCase.class})
-    @Positive(groups = {CreateProductUseCase.class})
+    @NotNull(groups = {CreateProductUseCase.class, UpdateProductUseCase.class})
+    @Positive(groups = {CreateProductUseCase.class, UpdateProductUseCase.class})
     private Integer productionDurationInMinutes;
 
     @Column(name = "pdt_created_at", nullable = false)
@@ -51,8 +52,8 @@ public class Product {
     private String description;
 
     @Column(name = "price", nullable = false)
-    @NotNull(groups = {CreateProductUseCase.class})
-    @Positive(groups = {CreateProductUseCase.class})
+    @NotNull(groups = {CreateProductUseCase.class, UpdateProductUseCase.class})
+    @Positive(groups = {CreateProductUseCase.class, UpdateProductUseCase.class})
     private BigDecimal price;
 
     @Column(name = "photo_address")

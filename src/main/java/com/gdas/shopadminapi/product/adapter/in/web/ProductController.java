@@ -2,6 +2,7 @@ package com.gdas.shopadminapi.product.adapter.in.web;
 
 import com.gdas.shopadminapi.product.application.ports.in.CreateProductUseCase;
 import com.gdas.shopadminapi.product.application.ports.in.FindAllProductsUseCase;
+import com.gdas.shopadminapi.product.application.ports.in.UpdateProductUseCase;
 import com.gdas.shopadminapi.product.domain.Product;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -10,6 +11,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.UUID;
 
 import static java.lang.String.format;
 
@@ -19,10 +21,12 @@ public class ProductController {
 
     private final FindAllProductsUseCase findAllProductsUseCase;
     private final CreateProductUseCase createProductUseCase;
+    private final UpdateProductUseCase updateProductUseCase;
 
-    public ProductController(FindAllProductsUseCase findAllProductsUseCase, CreateProductUseCase createProductUseCase) {
+    public ProductController(FindAllProductsUseCase findAllProductsUseCase, CreateProductUseCase createProductUseCase, UpdateProductUseCase updateProductUseCase) {
         this.findAllProductsUseCase = findAllProductsUseCase;
         this.createProductUseCase = createProductUseCase;
+        this.updateProductUseCase = updateProductUseCase;
     }
 
     @GetMapping
@@ -40,6 +44,14 @@ public class ProductController {
                 .buildAndExpand(newProduct)
                 .toUri();
         return ResponseEntity.created(uri).body(newProduct);
+    }
+
+    @PutMapping("/{id}")
+    private ResponseEntity<Product> put(
+            @PathVariable UUID id,
+            @Validated(UpdateProductUseCase.class) @RequestBody Product product) {
+        Product newProduct = updateProductUseCase.apply(id, product);
+        return ResponseEntity.ok(newProduct);
     }
 
 }
