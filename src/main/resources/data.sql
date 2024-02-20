@@ -5,7 +5,8 @@ INSERT INTO component(cmp_created_at, cmp_name, measure, base_buy_height, base_b
 	(now()::timestamp, 'Saco Celofane 20x29cm', 'UNITY', 0.00, 0.00, 50.00, 11.50),
 	(now()::timestamp, 'Papel Offset A4 90g', 'UNITY', 0.00, 0.00, 500.00, 50.00),
 	(now()::timestamp, 'Nylon 600', 'CM2', 500.00, 150.00, 0.00, 74.50),
-	(now()::timestamp, 'Bagun Fosco', 'CM2', 200.00, 100.00, 0.00, 27.80);
+	(now()::timestamp, 'Bagun Fosco', 'CM2', 200.00, 140.00, 0.00, 27.80),
+	(now()::timestamp, 'Sacola Boca de Palhaço 30x40cm', 'UNITY', 0.00, 0.00, 100.00, 33.92);
 
 INSERT INTO product(pdt_name, pdt_created_at, status, price, production_duration_in_minutes) VALUES
 ('Necessaire P', now()::timestamp, 'CREATED', 15.00, 90);
@@ -17,7 +18,8 @@ INSERT INTO product_component(pco_pdt_id, pco_cmp_id, height, width, amount) VAL
 ((SELECT pdt_id FROM product WHERE pdt_name LIKE 'Necessaire P'), (SELECT cmp_id FROM component WHERE cmp_name LIKE 'Saco Celofane 20x29cm'), 0.00, 0.00, 1.00),
 ((SELECT pdt_id FROM product WHERE pdt_name LIKE 'Necessaire P'), (SELECT cmp_id FROM component WHERE cmp_name LIKE 'Papel Offset A4 90g'), 0.00, 0.00, 1.00),
 ((SELECT pdt_id FROM product WHERE pdt_name LIKE 'Necessaire P'), (SELECT cmp_id FROM component WHERE cmp_name LIKE 'Nylon 600'), 30.00, 21.00, 0.00),
-((SELECT pdt_id FROM product WHERE pdt_name LIKE 'Necessaire P'), (SELECT cmp_id FROM component WHERE cmp_name LIKE 'Bagun Fosco'), 30.00, 21.00, 0.00);
+((SELECT pdt_id FROM product WHERE pdt_name LIKE 'Necessaire P'), (SELECT cmp_id FROM component WHERE cmp_name LIKE 'Bagun Fosco'), 30.00, 21.00, 0.00),
+((SELECT pdt_id FROM product WHERE pdt_name LIKE 'Necessaire P'), (SELECT cmp_id FROM component WHERE cmp_name LIKE 'Sacola Boca de Palhaço 30x40cm'), 0.00, 0.00, 1.00);
 
 INSERT INTO CUSTOMER (phone, ctm_name, ctm_created_at) VALUES
 ('31985971976', 'Gustavo', now()),

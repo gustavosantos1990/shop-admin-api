@@ -43,6 +43,7 @@ public class RequestProduct {
     private Product product;
 
     @Column(name = "rpd_created_at", nullable = false)
+    @JsonProperty("created_at")
     @CreationTimestamp
     private LocalDateTime createdAt;
 

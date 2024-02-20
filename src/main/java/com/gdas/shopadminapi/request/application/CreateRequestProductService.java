@@ -12,18 +12,21 @@ import com.gdas.shopadminapi.request.domain.RequestProductDocument;
 import com.gdas.shopadminapi.request.domain.RequestProductId;
 import com.gdas.shopadminapi.request.domain.enummeration.RequestStatus;
 import jakarta.transaction.Transactional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 
 import static java.lang.String.format;
 import static org.springframework.http.HttpStatus.*;
 
 @Service
 class CreateRequestProductService implements CreateRequestProductUseCase {
+
+    Logger logger = LoggerFactory.getLogger(CreateRequestProductService.class);
 
     private final FindRequestProductByIdPort findRequestProductByIdPort;
     private final CreateRequestProductPort createRequestProductPort;
@@ -71,9 +74,8 @@ class CreateRequestProductService implements CreateRequestProductUseCase {
             requestProduct.setProductDocument(RequestProductDocument.fromProduct(product));
 
             return createRequestProductPort.create(requestProduct);
-        } catch(InterruptedException | ExecutionException e) {
-            throw new IllegalStateException(e);
         } catch(Throwable t) {
+            logger.error(t.getMessage(), t);
             throw new IllegalStateException(t);
         }
     }
