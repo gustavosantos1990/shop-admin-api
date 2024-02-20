@@ -33,7 +33,7 @@ class ProductPersistenceAdapter implements
     }
 
     @Override
-    public Optional<Product> find(UUID id) {
+    public Optional<Product> findById(UUID id) {
         return productRepository.findById(id);
     }
 }

@@ -5,13 +5,16 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gdas.shopadminapi.product.application.ports.in.CreateComponentUseCase;
+import com.gdas.shopadminapi.product.application.ports.in.CreateProductComponentUseCase;
 import com.gdas.shopadminapi.product.application.ports.in.UpdateComponentUseCase;
+import com.gdas.shopadminapi.product.application.ports.in.UpdateProductUseCase;
 import com.gdas.shopadminapi.product.domain.enumeration.Measure;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDateTime;
 
 @Entity
@@ -20,9 +23,13 @@ import java.time.LocalDateTime;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Component {
 
+    //TODO: create update history
+
     @Id
     @Column(name = "cmp_id", length = 10)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull(groups = {CreateProductComponentUseCase.class, UpdateProductUseCase.class})
+    @NotBlank(groups = {CreateProductComponentUseCase.class, UpdateProductUseCase.class})
     private String id;
 
     @Column(name = "cmp_created_at", nullable = false)
@@ -71,6 +78,10 @@ public class Component {
     private String photoAddress;
 
     public Component() {
+    }
+
+    public Component(String id) {
+        this.id = id;
     }
 
     @AssertTrue(
@@ -167,4 +178,25 @@ public class Component {
     public void setBaseBuyPaidValue(BigDecimal baseBuyPaidValue) {
         this.baseBuyPaidValue = baseBuyPaidValue;
     }
+
+    @PrePersist
+    @PreUpdate
+    private void prePersist() {
+        if (measure.isMultiDimension()) {
+            baseBuyAmount = BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP);
+            return;
+        }
+        baseBuyHeight = BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP);
+        baseBuyWidth = BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP);
+    }
+
+    @PostLoad
+    @PostPersist
+    @PostUpdate
+    private void post() {
+        if (measure.isMultiDimension()) {
+            baseBuyAmount = baseBuyHeight.multiply(baseBuyWidth).setScale(2, RoundingMode.HALF_UP);
+        }
+    }
+
 }

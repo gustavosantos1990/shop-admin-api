@@ -29,7 +29,7 @@ class UpdateProductService implements UpdateProductUseCase {
 
     @Override
     public Product apply(UUID id, Product product) {
-        Product existingProduct = findProductByIdPort.find(id).orElseThrow(() -> new ResponseStatusException(NOT_FOUND, format("invalid product id (%s)", id)));
+        Product existingProduct = findProductByIdPort.findById(id).orElseThrow(() -> new ResponseStatusException(NOT_FOUND, format("invalid product id (%s)", id)));
         copyProperties(product, existingProduct, PROPERTIES_TO_IGNORE_ON_UPDATE);
         return createProductPort.create(existingProduct);
     }

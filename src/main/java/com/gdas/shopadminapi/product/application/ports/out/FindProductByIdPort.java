@@ -6,5 +6,5 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface FindProductByIdPort {
-    Optional<Product> find(UUID id);
+    Optional<Product> findById(UUID id);
 }

@@ -22,6 +22,8 @@ import java.util.UUID;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Product {
 
+    //TODO: create update history
+
     @Id
     @Column(name = "pdt_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,6 +62,10 @@ public class Product {
     private String photoAddress;
 
     public Product() {
+    }
+
+    public Product(UUID id) {
+        this.id = id;
     }
 
     public UUID getId() {
