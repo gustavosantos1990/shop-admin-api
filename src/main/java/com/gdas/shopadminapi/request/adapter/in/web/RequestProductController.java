@@ -2,6 +2,7 @@ package com.gdas.shopadminapi.request.adapter.in.web;
 
 
 import com.gdas.shopadminapi.request.application.ports.in.CreateRequestProductUseCase;
+import com.gdas.shopadminapi.request.application.ports.in.DeleteRequestProductUseCase;
 import com.gdas.shopadminapi.request.application.ports.in.UpdateRequestProductUseCase;
 import com.gdas.shopadminapi.request.domain.RequestProduct;
 import com.gdas.shopadminapi.request.domain.RequestProductId;
@@ -21,10 +22,12 @@ public class RequestProductController {
 
     private final CreateRequestProductUseCase createRequestProductUseCase;
     private final UpdateRequestProductUseCase updateRequestProductUseCase;
+    private final DeleteRequestProductUseCase deleteRequestProductUseCase;
 
-    public RequestProductController(CreateRequestProductUseCase createRequestProductUseCase, UpdateRequestProductUseCase updateRequestProductUseCase) {
+    public RequestProductController(CreateRequestProductUseCase createRequestProductUseCase, UpdateRequestProductUseCase updateRequestProductUseCase, DeleteRequestProductUseCase deleteRequestProductUseCase) {
         this.createRequestProductUseCase = createRequestProductUseCase;
         this.updateRequestProductUseCase = updateRequestProductUseCase;
+        this.deleteRequestProductUseCase = deleteRequestProductUseCase;
     }
 
     @PostMapping
@@ -41,13 +44,21 @@ public class RequestProductController {
     }
 
     @PutMapping("/{productId}")
-    private ResponseEntity<RequestProduct> create(
+    private ResponseEntity<RequestProduct> update(
             @PathVariable Long requestId,
             @PathVariable UUID productId,
             @Validated(UpdateRequestProductUseCase.class) @RequestBody RequestProduct requestProduct) {
         requestProduct.setRequestProductId(new RequestProductId(requestId, productId));
         RequestProduct updated = updateRequestProductUseCase.apply(requestProduct);
         return ResponseEntity.ok(updated);
+    }
+
+    @DeleteMapping("/{productId}")
+    private ResponseEntity<RequestProduct> delete(
+            @PathVariable Long requestId,
+            @PathVariable UUID productId) {
+        deleteRequestProductUseCase.accept(new RequestProductId(requestId, productId));
+        return ResponseEntity.noContent().build();
     }
 
 }

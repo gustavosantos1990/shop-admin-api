@@ -43,6 +43,7 @@ class UpdateRequestProductService implements UpdateRequestProductUseCase {
             );
 
             validateRequestStatus(existingRequestProduct);
+
             copyProperties(existingRequestProduct, requestProduct);
 
             return saveRequestProductPort.save(existingRequestProduct);
