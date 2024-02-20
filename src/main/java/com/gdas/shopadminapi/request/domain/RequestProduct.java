@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gdas.shopadminapi.product.domain.Product;
 import com.gdas.shopadminapi.request.application.ports.in.CreateRequestProductUseCase;
+import com.gdas.shopadminapi.request.application.ports.in.UpdateRequestProductUseCase;
 import com.gdas.shopadminapi.request.domain.converter.RequestProductDocumentConverter;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
@@ -60,19 +61,19 @@ public class RequestProduct {
 
     @Column(name = "declared_production_cost", nullable = false)
     @JsonProperty("declared_production_cost")
-    @NotNull(groups = {CreateRequestProductUseCase.class})
-    @Positive(groups = {CreateRequestProductUseCase.class})
+    @NotNull(groups = {CreateRequestProductUseCase.class, UpdateRequestProductUseCase.class})
+    @Positive(groups = {CreateRequestProductUseCase.class, UpdateRequestProductUseCase.class})
     private BigDecimal declaredProductionCost;
 
     @Column(name = "unitary_value", nullable = false)
     @JsonProperty("unitary_value")
-    @NotNull(groups = {CreateRequestProductUseCase.class})
-    @Positive(groups = {CreateRequestProductUseCase.class})
+    @NotNull(groups = {CreateRequestProductUseCase.class, UpdateRequestProductUseCase.class})
+    @Positive(groups = {CreateRequestProductUseCase.class, UpdateRequestProductUseCase.class})
     private BigDecimal unitaryValue;
 
     @Column(name = "amount", nullable = false)
-    @NotNull(groups = {CreateRequestProductUseCase.class})
-    @Positive(groups = {CreateRequestProductUseCase.class})
+    @NotNull(groups = {CreateRequestProductUseCase.class, UpdateRequestProductUseCase.class})
+    @Positive(groups = {CreateRequestProductUseCase.class, UpdateRequestProductUseCase.class})
     private BigDecimal amount;
 
     @Column(name = "notes")

@@ -1,6 +1,6 @@
 package com.gdas.shopadminapi.request.adapter.out.persistence;
 
-import com.gdas.shopadminapi.request.application.ports.out.CreateRequestProductPort;
+import com.gdas.shopadminapi.request.application.ports.out.SaveRequestProductPort;
 import com.gdas.shopadminapi.request.application.ports.out.FindRequestProductByIdPort;
 import com.gdas.shopadminapi.request.domain.RequestProduct;
 import com.gdas.shopadminapi.request.domain.RequestProductId;
@@ -11,7 +11,7 @@ import java.util.Optional;
 @Service
 class RequestProductPersistenceAdapter implements
         FindRequestProductByIdPort,
-        CreateRequestProductPort {
+        SaveRequestProductPort {
 
     private final RequestProductRepository requestProductRepository;
 
@@ -20,7 +20,7 @@ class RequestProductPersistenceAdapter implements
     }
 
     @Override
-    public RequestProduct create(RequestProduct requestProduct) {
+    public RequestProduct save(RequestProduct requestProduct) {
         return requestProductRepository.save(requestProduct);
     }
 

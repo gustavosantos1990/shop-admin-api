@@ -3,7 +3,7 @@ package com.gdas.shopadminapi.request.application;
 import com.gdas.shopadminapi.product.application.ports.out.FindProductByIdPort;
 import com.gdas.shopadminapi.product.domain.Product;
 import com.gdas.shopadminapi.request.application.ports.in.CreateRequestProductUseCase;
-import com.gdas.shopadminapi.request.application.ports.out.CreateRequestProductPort;
+import com.gdas.shopadminapi.request.application.ports.out.SaveRequestProductPort;
 import com.gdas.shopadminapi.request.application.ports.out.FindRequestByIdPort;
 import com.gdas.shopadminapi.request.application.ports.out.FindRequestProductByIdPort;
 import com.gdas.shopadminapi.request.domain.Request;
@@ -29,13 +29,13 @@ class CreateRequestProductService implements CreateRequestProductUseCase {
     Logger logger = LoggerFactory.getLogger(CreateRequestProductService.class);
 
     private final FindRequestProductByIdPort findRequestProductByIdPort;
-    private final CreateRequestProductPort createRequestProductPort;
+    private final SaveRequestProductPort saveRequestProductPort;
     private final FindRequestByIdPort findRequestByIdPort;
     private final FindProductByIdPort findProductByIdPort;
 
-    CreateRequestProductService(FindRequestProductByIdPort findRequestProductByIdPort, CreateRequestProductPort createRequestProductPort, FindRequestByIdPort findRequestByIdPort, FindProductByIdPort findProductByIdPort) {
+    CreateRequestProductService(FindRequestProductByIdPort findRequestProductByIdPort, SaveRequestProductPort saveRequestProductPort, FindRequestByIdPort findRequestByIdPort, FindProductByIdPort findProductByIdPort) {
         this.findRequestProductByIdPort = findRequestProductByIdPort;
-        this.createRequestProductPort = createRequestProductPort;
+        this.saveRequestProductPort = saveRequestProductPort;
         this.findRequestByIdPort = findRequestByIdPort;
         this.findProductByIdPort = findProductByIdPort;
     }
@@ -62,10 +62,7 @@ class CreateRequestProductService implements CreateRequestProductUseCase {
             Product product = futureProduct.get().orElseThrow(() -> new ResponseStatusException(NOT_FOUND, format("Invalid product ID (%s)",
                     requestProduct.getRequestProductId().getProductId())));
 
-            if (!request.getStatus().equals(RequestStatus.CREATED)) {
-                throw new ResponseStatusException(PRECONDITION_FAILED,
-                        format("request status must be CREATED, current status is %s", request.getStatus()));
-            }
+            validateRequestStatus(request);
 
             requestProduct.setRequestProductId(new RequestProductId(request.getId(), product.getId()));
             requestProduct.setRequest(request);
@@ -73,10 +70,17 @@ class CreateRequestProductService implements CreateRequestProductUseCase {
             requestProduct.setCalculatedProductionCost(product.productionCost());
             requestProduct.setProductDocument(RequestProductDocument.fromProduct(product));
 
-            return createRequestProductPort.create(requestProduct);
+            return saveRequestProductPort.save(requestProduct);
         } catch(Throwable t) {
             logger.error(t.getMessage(), t);
             throw new IllegalStateException(t);
+        }
+    }
+
+    private void validateRequestStatus(Request request) {
+        if (!request.getStatus().equals(RequestStatus.CREATED)) {
+            throw new ResponseStatusException(PRECONDITION_FAILED,
+                    format("request status must be CREATED, current status is %s", request.getStatus()));
         }
     }
 }

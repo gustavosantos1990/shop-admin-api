@@ -2,7 +2,7 @@ package com.gdas.shopadminapi.request.adapter.in.web;
 
 
 import com.gdas.shopadminapi.request.application.ports.in.CreateRequestProductUseCase;
-import com.gdas.shopadminapi.request.domain.Request;
+import com.gdas.shopadminapi.request.application.ports.in.UpdateRequestProductUseCase;
 import com.gdas.shopadminapi.request.domain.RequestProduct;
 import com.gdas.shopadminapi.request.domain.RequestProductId;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.UUID;
 
 import static java.lang.String.format;
 
@@ -19,9 +20,11 @@ import static java.lang.String.format;
 public class RequestProductController {
 
     private final CreateRequestProductUseCase createRequestProductUseCase;
+    private final UpdateRequestProductUseCase updateRequestProductUseCase;
 
-    public RequestProductController(CreateRequestProductUseCase createRequestProductUseCase) {
+    public RequestProductController(CreateRequestProductUseCase createRequestProductUseCase, UpdateRequestProductUseCase updateRequestProductUseCase) {
         this.createRequestProductUseCase = createRequestProductUseCase;
+        this.updateRequestProductUseCase = updateRequestProductUseCase;
     }
 
     @PostMapping
@@ -35,6 +38,16 @@ public class RequestProductController {
                 .buildAndExpand(newRequest)
                 .toUri();
         return ResponseEntity.created(uri).body(newRequest);
+    }
+
+    @PutMapping("/{productId}")
+    private ResponseEntity<RequestProduct> create(
+            @PathVariable Long requestId,
+            @PathVariable UUID productId,
+            @Validated(UpdateRequestProductUseCase.class) @RequestBody RequestProduct requestProduct) {
+        requestProduct.setRequestProductId(new RequestProductId(requestId, productId));
+        RequestProduct updated = updateRequestProductUseCase.apply(requestProduct);
+        return ResponseEntity.ok(updated);
     }
 
 }
