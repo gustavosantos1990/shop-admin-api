@@ -1,27 +1,38 @@
 package com.gdas.shopadminapi.request.domain.converter;
 
+import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.gdas.shopadminapi.product.domain.enumeration.Measure;
 import com.gdas.shopadminapi.request.domain.RequestProductDocument;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
+
+import java.io.IOException;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 @Converter
 public class RequestProductDocumentConverter implements AttributeConverter<RequestProductDocument, String> {
 
-    private final ObjectMapper mapper;
-
-    public RequestProductDocumentConverter(ObjectMapper mapper) {
-        this.mapper = mapper;
-    }
-
     @Override
     public String convertToDatabaseColumn(RequestProductDocument requestProductDocument) {
         if (requestProductDocument == null) return null;
         try {
-            return mapper.writeValueAsString(requestProductDocument);
+            ObjectMapper mapper = new ObjectMapper();
+            SimpleModule module = new SimpleModule();
+            module.addSerializer(Measure.class, new JsonSerializer<Measure>() {
+                @Override
+                public void serialize(Measure measure, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
+                    jsonGenerator.writeString(measure.name());
+                }
+            });
+            mapper.registerModule(module);
+            String result = mapper.writeValueAsString(requestProductDocument);
+            return result;
         } catch (JsonProcessingException e) {
             throw new IllegalStateException("current value can't be converted to JSON", e);
         }
@@ -31,6 +42,7 @@ public class RequestProductDocumentConverter implements AttributeConverter<Reque
     public RequestProductDocument convertToEntityAttribute(String string) {
         if (isEmpty(string)) return null;
         try {
+            ObjectMapper mapper = new ObjectMapper();
             return mapper.readValue(string, RequestProductDocument.class);
         } catch (JsonProcessingException e) {
             throw new IllegalStateException("current value can't be converted to POJO", e);

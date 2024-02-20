@@ -56,12 +56,8 @@ public class Request {
     @Enumerated(EnumType.STRING)
     private RequestStatus status;
 
-    @OneToMany(mappedBy = "requestProductID.request")
-    @JsonProperty("products")
+    @OneToMany(mappedBy = "request")
     private List<RequestProduct> products;
-
-//    @OneToMany(mappedBy = "request")
-//    private List<FinancialMovement> financialMovements;
 
     public Request() {
     }
@@ -73,14 +69,13 @@ public class Request {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Request request = (Request) o;
-        return Objects.equals(id, request.id) && Objects.equals(customer, request.customer) && Objects.equals(createdAt, request.createdAt) && Objects.equals(dueDate, request.dueDate);
+        if (!(o instanceof Request request)) return false;
+        return Objects.equals(id, request.id) && Objects.equals(customer, request.customer) && Objects.equals(createdAt, request.createdAt) && Objects.equals(canceledAt, request.canceledAt) && Objects.equals(dueDate, request.dueDate) && Objects.equals(notes, request.notes) && Objects.equals(rating, request.rating) && status == request.status && Objects.equals(products, request.products);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, customer, createdAt, dueDate);
+        return Objects.hash(id, customer, createdAt, canceledAt, dueDate, notes, rating, status, products);
     }
 
     public Long getId() {

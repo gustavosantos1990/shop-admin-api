@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gdas.shopadminapi.product.application.ports.in.CreateProductUseCase;
 import com.gdas.shopadminapi.product.application.ports.in.UpdateProductUseCase;
 import com.gdas.shopadminapi.product.domain.enumeration.ProductStatus;
+import com.gdas.shopadminapi.request.application.ports.in.CreateRequestProductUseCase;
+import com.gdas.shopadminapi.request.domain.RequestProduct;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -13,7 +15,10 @@ import jakarta.validation.constraints.Positive;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -27,6 +32,7 @@ public class Product {
     @Id
     @Column(name = "pdt_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull(groups = {CreateRequestProductUseCase.class})
     private UUID id;
 
     @Column(name = "pdt_name", nullable = false, unique = true, updatable = false)
@@ -61,7 +67,22 @@ public class Product {
     @Column(name = "photo_address")
     private String photoAddress;
 
+    @OneToMany(mappedBy = "productComponentId.product", fetch = FetchType.EAGER)
+    private List<ProductComponent> components;
+
     public Product() {
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Product product)) return false;
+        return Objects.equals(id, product.id) && Objects.equals(name, product.name) && status == product.status && Objects.equals(productionDurationInMinutes, product.productionDurationInMinutes) && Objects.equals(createdAt, product.createdAt) && Objects.equals(deletedAt, product.deletedAt) && Objects.equals(description, product.description) && Objects.equals(price, product.price) && Objects.equals(photoAddress, product.photoAddress) && Objects.equals(components, product.components);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, status, productionDurationInMinutes, createdAt, deletedAt, description, price, photoAddress, components);
     }
 
     public Product(UUID id) {
@@ -138,5 +159,27 @@ public class Product {
 
     public void setPhotoAddress(String photoAddress) {
         this.photoAddress = photoAddress;
+    }
+
+    public void setProductionDurationInMinutes(Integer productionDurationInMinutes) {
+        this.productionDurationInMinutes = productionDurationInMinutes;
+    }
+
+    public List<ProductComponent> getComponents() {
+        return components;
+    }
+
+    public void setComponents(List<ProductComponent> components) {
+        this.components = components;
+    }
+
+    public BigDecimal productionCost() {
+        if (components == null) return null;
+
+        return components
+                .stream()
+                .map(ProductComponent::getCost)
+                .reduce(BigDecimal.ZERO, BigDecimal::add)
+                .setScale(2, RoundingMode.HALF_UP);
     }
 }

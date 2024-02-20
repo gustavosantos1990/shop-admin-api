@@ -28,8 +28,8 @@ public class RequestController {
 
     @GetMapping
     private ResponseEntity<List<Request>> findAllRequests() {
-        List<Request> components = findAllRequestsUseCase.get();
-        return ResponseEntity.ok(components);
+        List<Request> requests = findAllRequestsUseCase.get();
+        return ResponseEntity.ok(requests);
     }
 
     @PostMapping

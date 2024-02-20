@@ -67,7 +67,7 @@ CREATE TABLE request_product ( --rpd
 	rpd_rqt_id int REFERENCES request(rqt_id),
 	rpd_pdt_id uuid REFERENCES product(pdt_id),
 	rpd_created_at timestamp with time zone NOT NULL,
-	document jsonb NOT NULL, --properties[component,measure,width,height,amount,paid_value]
+	product_document jsonb NOT NULL, --properties[component,measure,width,height,amount,paid_value]
 	calculated_production_cost decimal NOT NULL,
 	declared_production_cost decimal NOT NULL,
 	unitary_value decimal NOT NULL,

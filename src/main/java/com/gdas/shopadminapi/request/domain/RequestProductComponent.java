@@ -3,6 +3,7 @@ package com.gdas.shopadminapi.request.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.gdas.shopadminapi.product.domain.ProductComponent;
 import com.gdas.shopadminapi.product.domain.enumeration.Measure;
 
 import java.io.Serializable;
@@ -104,5 +105,21 @@ public class RequestProductComponent implements Serializable {
 
     public void setPaidValue(BigDecimal paidValue) {
         this.paidValue = paidValue;
+    }
+
+    public static RequestProductComponent fromProductComponent(ProductComponent productComponent) {
+        RequestProductComponent requestProductComponent = new RequestProductComponent();
+
+        requestProductComponent.setComponent(productComponent.getProductComponentId().getComponent().getName());
+        requestProductComponent.setMeasure(productComponent.getProductComponentId().getComponent().getMeasure());
+        requestProductComponent.setBoughtHeight(productComponent.getProductComponentId().getComponent().getBaseBuyHeight());
+        requestProductComponent.setBoughtWidth(productComponent.getProductComponentId().getComponent().getBaseBuyWidth());
+        requestProductComponent.setBoughtAmount(productComponent.getProductComponentId().getComponent().getBaseBuyAmount());
+        requestProductComponent.setPaidValue(productComponent.getProductComponentId().getComponent().getBaseBuyPaidValue());
+        requestProductComponent.setHeight(productComponent.getHeight());
+        requestProductComponent.setWidth(productComponent.getWidth());
+        requestProductComponent.setAmount(productComponent.getAmount());
+
+        return requestProductComponent;
     }
 }
