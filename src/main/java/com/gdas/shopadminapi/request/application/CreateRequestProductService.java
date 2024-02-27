@@ -78,7 +78,7 @@ class CreateRequestProductService implements CreateRequestProductUseCase {
     }
 
     private void validateRequestStatus(Request request) {
-        if (!request.getStatus().equals(RequestStatus.CREATED)) {
+        if (!request.getStatus().equals(RequestStatus.ACTIVE)) {
             throw new ResponseStatusException(PRECONDITION_FAILED,
                     format("request status must be CREATED, current status is %s", request.getStatus()));
         }

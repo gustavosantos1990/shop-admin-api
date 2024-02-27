@@ -47,28 +47,28 @@ class CreateProductComponentService implements CreateProductComponentUseCase {
         Optional<ProductComponent> optProductComponent = findProductComponentByIdPort.findById(productComponent.getProductComponentId());
         optProductComponent.ifPresent(pc -> {throw new ResponseStatusException(PRECONDITION_FAILED,
                 format("component %s is already included to product %s",
-                        pc.getProductComponentId().getComponent().getName(), pc.getProductComponentId().getProduct().getName()));});
+                        pc.getComponent().getName(), pc.getProduct().getName()));});
 
         try {
             CompletableFuture<Optional<Product>> futureProduct =
-                    CompletableFuture.supplyAsync(() -> findProductByIdPort.findById(productComponent.getProductComponentId().getProduct().getId()));
+                    CompletableFuture.supplyAsync(() -> findProductByIdPort.findById(productComponent.getProduct().getId()));
             CompletableFuture<Optional<Component>> futureComponent =
-                    CompletableFuture.supplyAsync(() -> findComponentByIdPort.findById(productComponent.getProductComponentId().getComponent().getId()));
+                    CompletableFuture.supplyAsync(() -> findComponentByIdPort.findById(productComponent.getComponent().getId()));
             CompletableFuture.allOf(futureProduct, futureComponent);
 
             Product product = futureProduct.get().orElseThrow(() -> new ResponseStatusException(NOT_FOUND,
-                    format("Invalid product ID (%s)", productComponent.getProductComponentId().getProduct().getId())));
+                    format("Invalid product ID (%s)", productComponent.getProduct().getId())));
             Component component = futureComponent.get().orElseThrow(() -> new ResponseStatusException(NOT_FOUND,
-                    format("Invalid component ID (%s)", productComponent.getProductComponentId().getComponent().getId())));
+                    format("Invalid component ID (%s)", productComponent.getComponent().getId())));
 
-            productComponent.setProductComponentId(new ProductComponentId(product, component));
+            productComponent.setProductComponentId(new ProductComponentId(product.getId(), component.getId()));
         } catch (InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);
         }
     }
 
     private void validateInput(ProductComponent productComponent) {
-        if(productComponent.getProductComponentId().getComponent().getMeasure().isMultiDimension()) {
+        if(productComponent.getComponent().getMeasure().isMultiDimension()) {
             if ((productComponent.getWidth() == null || productComponent.getWidth().compareTo(BigDecimal.ZERO) <= 0)
                     || (productComponent.getHeight() == null || productComponent.getHeight().compareTo(BigDecimal.ZERO) <= 0)) {
                 throw new ResponseStatusException(PRECONDITION_FAILED, "must inform both height and width");

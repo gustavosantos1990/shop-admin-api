@@ -3,6 +3,7 @@ package com.gdas.shopadminapi.request.adapter.in.web;
 
 import com.gdas.shopadminapi.request.application.ports.in.CreateRequestProductUseCase;
 import com.gdas.shopadminapi.request.application.ports.in.DeleteRequestProductUseCase;
+import com.gdas.shopadminapi.request.application.ports.in.FindRequestProductsByRequestIdUseCase;
 import com.gdas.shopadminapi.request.application.ports.in.UpdateRequestProductUseCase;
 import com.gdas.shopadminapi.request.domain.RequestProduct;
 import com.gdas.shopadminapi.request.domain.RequestProductId;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 import java.util.UUID;
 
 import static java.lang.String.format;
@@ -20,14 +22,22 @@ import static java.lang.String.format;
 @RequestMapping("/v1/requests/{requestId}/products")
 public class RequestProductController {
 
+    private final FindRequestProductsByRequestIdUseCase findRequestProductsByRequestIdUseCase;
     private final CreateRequestProductUseCase createRequestProductUseCase;
     private final UpdateRequestProductUseCase updateRequestProductUseCase;
     private final DeleteRequestProductUseCase deleteRequestProductUseCase;
 
-    public RequestProductController(CreateRequestProductUseCase createRequestProductUseCase, UpdateRequestProductUseCase updateRequestProductUseCase, DeleteRequestProductUseCase deleteRequestProductUseCase) {
+    public RequestProductController(FindRequestProductsByRequestIdUseCase findRequestProductsByRequestIdUseCase, CreateRequestProductUseCase createRequestProductUseCase, UpdateRequestProductUseCase updateRequestProductUseCase, DeleteRequestProductUseCase deleteRequestProductUseCase) {
+        this.findRequestProductsByRequestIdUseCase = findRequestProductsByRequestIdUseCase;
         this.createRequestProductUseCase = createRequestProductUseCase;
         this.updateRequestProductUseCase = updateRequestProductUseCase;
         this.deleteRequestProductUseCase = deleteRequestProductUseCase;
+    }
+
+    @GetMapping
+    private ResponseEntity<List<RequestProduct>> create(@PathVariable Long requestId) {
+        List<RequestProduct> requestProducts = findRequestProductsByRequestIdUseCase.apply(requestId);
+        return ResponseEntity.ok(requestProducts);
     }
 
     @PostMapping

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gdas.shopadminapi.request.application.ports.in.CreateRequestUseCase;
+import com.gdas.shopadminapi.request.application.ports.in.UpdateRequestStatusUseCase;
 import com.gdas.shopadminapi.request.domain.enummeration.RequestStatus;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
@@ -54,6 +55,7 @@ public class Request {
 
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
+    @NotNull(groups = UpdateRequestStatusUseCase.class)
     private RequestStatus status;
 
     @OneToMany(mappedBy = "request")

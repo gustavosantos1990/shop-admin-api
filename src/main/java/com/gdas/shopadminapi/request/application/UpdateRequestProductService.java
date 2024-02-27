@@ -63,7 +63,7 @@ class UpdateRequestProductService implements UpdateRequestProductUseCase {
     }
 
     private void validateRequestStatus(RequestProduct existingRequestProduct) {
-        if (!existingRequestProduct.getRequest().getStatus().equals(RequestStatus.CREATED)) {
+        if (!existingRequestProduct.getRequest().getStatus().equals(RequestStatus.ACTIVE)) {
             throw new ResponseStatusException(PRECONDITION_FAILED, format("request status must be CREATED, current status is %s",
                     existingRequestProduct.getRequest().getStatus()));
         }

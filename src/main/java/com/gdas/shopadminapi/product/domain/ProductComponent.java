@@ -1,11 +1,14 @@
 package com.gdas.shopadminapi.product.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonUnwrapped;
+import com.gdas.shopadminapi.product.application.ports.in.CreateProductComponentUseCase;
+import com.gdas.shopadminapi.product.application.ports.in.UpdateProductUseCase;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -17,9 +20,21 @@ import java.math.RoundingMode;
 public class ProductComponent {
 
     @EmbeddedId
-    @JsonUnwrapped
-    @Valid
+    @JsonIgnore
     private ProductComponentId productComponentId;
+
+    @MapsId("productId")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "pco_pdt_id")
+    @JsonIgnore
+    private Product product;
+
+    @MapsId("componentId")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "pco_cmp_id")
+    @NotNull(groups = {CreateProductComponentUseCase.class, UpdateProductUseCase.class})
+    @Valid
+    private Component component;
 
     @Column(nullable = false)
     @Min(0)
@@ -86,7 +101,7 @@ public class ProductComponent {
     @PrePersist
     @PreUpdate
     private void prePersist() {
-        if (productComponentId.getComponent().getMeasure().isMultiDimension()) {
+        if (component.getMeasure().isMultiDimension()) {
             amount = BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP);
             return;
         }
@@ -99,32 +114,48 @@ public class ProductComponent {
     @PostUpdate
     private void post() {
         cost = calculateCost();
-        if (productComponentId.getComponent().getMeasure().isMultiDimension()) {
+        if (component.getMeasure().isMultiDimension()) {
             amount = height.multiply(width).setScale(2, RoundingMode.HALF_UP);
         }
     }
 
     public BigDecimal calculateCost() {
-        return productComponentId.getComponent().getMeasure().isMultiDimension()
+        return component.getMeasure().isMultiDimension()
                 ? calculateCostFormMultiDimensionalComponent()
                 : calculateCostFormSingleDimensionalComponent();
     }
 
     public BigDecimal calculateCostFormSingleDimensionalComponent() {
-        BigDecimal paidValue = productComponentId.getComponent().getBaseBuyPaidValue();
-        BigDecimal boughtAmount = productComponentId.getComponent().getBaseBuyAmount();
+        BigDecimal paidValue = component.getBaseBuyPaidValue();
+        BigDecimal boughtAmount = component.getBaseBuyAmount();
         return amount.multiply(paidValue).divide(boughtAmount, 2, RoundingMode.HALF_UP);
     }
 
     public BigDecimal calculateCostFormMultiDimensionalComponent() {
-        BigDecimal paidValue = productComponentId.getComponent().getBaseBuyPaidValue();
-        BigDecimal boughtAmount = productComponentId.getComponent().getBaseBuyHeight()
-                .multiply(productComponentId.getComponent().getBaseBuyWidth());
+        BigDecimal paidValue = component.getBaseBuyPaidValue();
+        BigDecimal boughtAmount = component.getBaseBuyHeight()
+                .multiply(component.getBaseBuyWidth());
         BigDecimal componentAmount = height.multiply(width);
         return componentAmount.multiply(paidValue).divide(boughtAmount, 2, RoundingMode.HALF_UP);
     }
 
-//    public VersionComponent cloneProductComponent() {
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public Component getComponent() {
+        return component;
+    }
+
+    public void setComponent(Component component) {
+        this.component = component;
+    }
+
+    //    public VersionComponent cloneProductComponent() {
 //        VersionComponent target = new VersionComponent();
 //        copyProperties(this, target);
 //        return target;

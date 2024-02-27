@@ -7,7 +7,6 @@ import com.gdas.shopadminapi.product.application.ports.in.CreateProductUseCase;
 import com.gdas.shopadminapi.product.application.ports.in.UpdateProductUseCase;
 import com.gdas.shopadminapi.product.domain.enumeration.ProductStatus;
 import com.gdas.shopadminapi.request.application.ports.in.CreateRequestProductUseCase;
-import com.gdas.shopadminapi.request.domain.RequestProduct;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -67,7 +66,8 @@ public class Product {
     @Column(name = "photo_address")
     private String photoAddress;
 
-    @OneToMany(mappedBy = "productComponentId.product", fetch = FetchType.EAGER)
+    @Transient
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     private List<ProductComponent> components;
 
     public Product() {

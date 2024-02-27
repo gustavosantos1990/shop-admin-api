@@ -31,7 +31,7 @@ class ProductComponentPersistenceAdapter implements
 
     @Override
     public Page<ProductComponent> findByProductId(UUID productId, Pageable pageable) {
-        return productComponentRepository.findByProductComponentIdProductId(productId, pageable);
+        return productComponentRepository.selectByProductIdFetchComponents(productId, pageable);
     }
 
     @Override
@@ -52,8 +52,8 @@ class ProductComponentPersistenceAdapter implements
     @Override
     public Optional<ProductComponent> findById(ProductComponentId productComponentId) {
         return productComponentRepository.findByProductComponentIdProductIdAndProductComponentIdComponentId(
-                productComponentId.getProduct().getId(),
-                productComponentId.getComponent().getId());
+                productComponentId.getProductId(),
+                productComponentId.getComponentId());
     }
 
     @Override

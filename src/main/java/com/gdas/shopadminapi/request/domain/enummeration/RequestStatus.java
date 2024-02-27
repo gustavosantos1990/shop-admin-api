@@ -5,9 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum RequestStatus {
 
-    CREATED(0, "warning", "Criado"),
-    READY(1, "info", "Cadastrado"),
-    DOING(2, "info", "Em Produção"),
+    ACTIVE(0, "warning", "Ativo"),
     DELIVERED(3, "info", "Entregue"),
     READY_TO_BILLING(4, "info", "Pronto para faturamento"),
     UNDER_BILLING(4, "info", "Sob faturamento"),

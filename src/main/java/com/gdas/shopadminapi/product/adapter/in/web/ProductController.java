@@ -2,6 +2,7 @@ package com.gdas.shopadminapi.product.adapter.in.web;
 
 import com.gdas.shopadminapi.product.application.ports.in.CreateProductUseCase;
 import com.gdas.shopadminapi.product.application.ports.in.FindAllProductsUseCase;
+import com.gdas.shopadminapi.product.application.ports.in.FindProductByIdUseCase;
 import com.gdas.shopadminapi.product.application.ports.in.UpdateProductUseCase;
 import com.gdas.shopadminapi.product.domain.Product;
 import org.springframework.http.ResponseEntity;
@@ -20,11 +21,13 @@ import static java.lang.String.format;
 public class ProductController {
 
     private final FindAllProductsUseCase findAllProductsUseCase;
+    private final FindProductByIdUseCase findProductByIdUseCase;
     private final CreateProductUseCase createProductUseCase;
     private final UpdateProductUseCase updateProductUseCase;
 
-    public ProductController(FindAllProductsUseCase findAllProductsUseCase, CreateProductUseCase createProductUseCase, UpdateProductUseCase updateProductUseCase) {
+    public ProductController(FindAllProductsUseCase findAllProductsUseCase, FindProductByIdUseCase findProductByIdUseCase, CreateProductUseCase createProductUseCase, UpdateProductUseCase updateProductUseCase) {
         this.findAllProductsUseCase = findAllProductsUseCase;
+        this.findProductByIdUseCase = findProductByIdUseCase;
         this.createProductUseCase = createProductUseCase;
         this.updateProductUseCase = updateProductUseCase;
     }
@@ -33,6 +36,12 @@ public class ProductController {
     private ResponseEntity<List<Product>> findAllProducts() {
         List<Product> products = findAllProductsUseCase.get();
         return ResponseEntity.ok(products);
+    }
+
+    @GetMapping("/{productId}")
+    private ResponseEntity<Product> findById(@PathVariable UUID productId) {
+        Product product = findProductByIdUseCase.apply(productId);
+        return ResponseEntity.ok(product);
     }
 
     @PostMapping

@@ -28,14 +28,14 @@ class UpdateProductComponentService implements UpdateProductComponentUseCase {
     public ProductComponent apply(ProductComponent productComponent) {
         ProductComponent existingProductComponent = findProductComponentByIdPort.findById(productComponent.getProductComponentId())
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, format("Invalid product/component ids (%s/%s)",
-                        productComponent.getProductComponentId().getProduct().getId(), productComponent.getProductComponentId().getComponent().getId())));
+                        productComponent.getProduct().getId(), productComponent.getComponent().getId())));
         validateInput(existingProductComponent, productComponent);
         copyProperties(existingProductComponent, productComponent);
         return updateProductComponentPort.update(productComponent);
     }
 
     private void validateInput(ProductComponent existingProductComponent, ProductComponent productComponent) {
-        if(existingProductComponent.getProductComponentId().getComponent().getMeasure().isMultiDimension()) {
+        if(existingProductComponent.getComponent().getMeasure().isMultiDimension()) {
             if ((productComponent.getWidth() == null || productComponent.getWidth().compareTo(BigDecimal.ZERO) <= 0)
                     || (productComponent.getHeight() == null || productComponent.getHeight().compareTo(BigDecimal.ZERO) <= 0)) {
                 throw new ResponseStatusException(PRECONDITION_FAILED, "must inform both height and width");
@@ -49,7 +49,7 @@ class UpdateProductComponentService implements UpdateProductComponentUseCase {
     }
 
     private void copyProperties(ProductComponent existingProductComponent, ProductComponent productComponent) {
-        if(existingProductComponent.getProductComponentId().getComponent().getMeasure().isMultiDimension()) {
+        if(existingProductComponent.getComponent().getMeasure().isMultiDimension()) {
             existingProductComponent.setHeight(productComponent.getHeight());
             existingProductComponent.setWidth(productComponent.getWidth());
             return;

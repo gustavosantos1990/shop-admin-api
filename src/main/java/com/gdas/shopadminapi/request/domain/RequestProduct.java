@@ -28,6 +28,7 @@ import java.util.Objects;
 public class RequestProduct {
 
     @EmbeddedId
+    @JsonIgnore
     private RequestProductId requestProductId;
 
     @MapsId("requestId")
@@ -53,6 +54,7 @@ public class RequestProduct {
     @Convert(converter = RequestProductDocumentConverter.class)
     @ColumnTransformer(read = "product_document::jsonb", write = "?::jsonb")
     //@JdbcTypeCode(SqlTypes.JSON) > stores as bytea
+    @JsonProperty("document")
     private RequestProductDocument productDocument;
 
     @Column(name = "calculated_production_cost", nullable = false)

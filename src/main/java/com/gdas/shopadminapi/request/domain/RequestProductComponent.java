@@ -110,12 +110,12 @@ public class RequestProductComponent implements Serializable {
     public static RequestProductComponent fromProductComponent(ProductComponent productComponent) {
         RequestProductComponent requestProductComponent = new RequestProductComponent();
 
-        requestProductComponent.setComponent(productComponent.getProductComponentId().getComponent().getName());
-        requestProductComponent.setMeasure(productComponent.getProductComponentId().getComponent().getMeasure());
-        requestProductComponent.setBoughtHeight(productComponent.getProductComponentId().getComponent().getBaseBuyHeight());
-        requestProductComponent.setBoughtWidth(productComponent.getProductComponentId().getComponent().getBaseBuyWidth());
-        requestProductComponent.setBoughtAmount(productComponent.getProductComponentId().getComponent().getBaseBuyAmount());
-        requestProductComponent.setPaidValue(productComponent.getProductComponentId().getComponent().getBaseBuyPaidValue());
+        requestProductComponent.setComponent(productComponent.getComponent().getName());
+        requestProductComponent.setMeasure(productComponent.getComponent().getMeasure());
+        requestProductComponent.setBoughtHeight(productComponent.getComponent().getBaseBuyHeight());
+        requestProductComponent.setBoughtWidth(productComponent.getComponent().getBaseBuyWidth());
+        requestProductComponent.setBoughtAmount(productComponent.getComponent().getBaseBuyAmount());
+        requestProductComponent.setPaidValue(productComponent.getComponent().getBaseBuyPaidValue());
         requestProductComponent.setHeight(productComponent.getHeight());
         requestProductComponent.setWidth(productComponent.getWidth());
         requestProductComponent.setAmount(productComponent.getAmount());

@@ -24,7 +24,7 @@ class ProductPersistenceAdapter implements
 
     @Override
     public List<Product> findAll() {
-        return productRepository.findAll();
+        return productRepository.findProductsOnly();
     }
 
     @Override

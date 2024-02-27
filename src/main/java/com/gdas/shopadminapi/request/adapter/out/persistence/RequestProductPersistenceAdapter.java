@@ -2,18 +2,21 @@ package com.gdas.shopadminapi.request.adapter.out.persistence;
 
 import com.gdas.shopadminapi.request.application.ports.out.DeleteRequestProductPort;
 import com.gdas.shopadminapi.request.application.ports.out.FindRequestProductByIdPort;
+import com.gdas.shopadminapi.request.application.ports.out.FindRequestProductsByRequestIdPort;
 import com.gdas.shopadminapi.request.application.ports.out.SaveRequestProductPort;
 import com.gdas.shopadminapi.request.domain.RequestProduct;
 import com.gdas.shopadminapi.request.domain.RequestProductId;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 class RequestProductPersistenceAdapter implements
         FindRequestProductByIdPort,
         SaveRequestProductPort,
-        DeleteRequestProductPort {
+        DeleteRequestProductPort,
+        FindRequestProductsByRequestIdPort {
 
     private final RequestProductRepository requestProductRepository;
 
@@ -34,5 +37,10 @@ class RequestProductPersistenceAdapter implements
     @Override
     public void delete(RequestProduct requestProduct) {
         requestProductRepository.delete(requestProduct);
+    }
+
+    @Override
+    public List<RequestProduct> findByRequestId(Long requestId) {
+        return requestProductRepository.findByRequestId(requestId);
     }
 }

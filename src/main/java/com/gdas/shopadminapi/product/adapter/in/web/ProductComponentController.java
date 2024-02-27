@@ -47,12 +47,12 @@ public class ProductComponentController {
     private ResponseEntity<ProductComponent> post(
             @PathVariable UUID productId,
             @Validated(CreateProductComponentUseCase.class) @RequestBody ProductComponent productComponent) {
-        productComponent.getProductComponentId().setProduct(new Product(productId));
+        productComponent.   setProduct(new Product(productId));
 
         ProductComponent newProductComponent = createProductComponentUseCase.apply(productComponent);
 
         URI uri = ServletUriComponentsBuilder
-                .fromCurrentRequest().path(format("/%s", newProductComponent.getProductComponentId().getComponent().getId()))
+                .fromCurrentRequest().path(format("/%s", newProductComponent.getComponent().getId()))
                 .buildAndExpand(newProductComponent)
                 .toUri();
 
@@ -64,7 +64,7 @@ public class ProductComponentController {
             @PathVariable UUID productId,
             @PathVariable String componentId,
             @Validated(UpdateProductComponentUseCase.class) @RequestBody ProductComponent productComponent) {
-        productComponent.setProductComponentId(new ProductComponentId(new Product(productId), new Component(componentId)));
+        productComponent.setProductComponentId(new ProductComponentId(productId, componentId));
         ProductComponent updatedProductComponent = updateProductComponentUseCase.apply(productComponent);
         return ResponseEntity.ok(updatedProductComponent);
     }

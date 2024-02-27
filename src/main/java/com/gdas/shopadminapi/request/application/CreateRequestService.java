@@ -2,7 +2,7 @@ package com.gdas.shopadminapi.request.application;
 
 import com.gdas.shopadminapi.request.application.ports.in.CreateRequestUseCase;
 import com.gdas.shopadminapi.request.application.ports.out.SaveCustomerPort;
-import com.gdas.shopadminapi.request.application.ports.out.CreateRequestPort;
+import com.gdas.shopadminapi.request.application.ports.out.SaveRequestPort;
 import com.gdas.shopadminapi.request.application.ports.out.FindCustomerByIdPort;
 import com.gdas.shopadminapi.request.application.ports.out.FindCustomerByPhonePort;
 import com.gdas.shopadminapi.request.domain.Customer;
@@ -18,13 +18,13 @@ import static org.springframework.beans.BeanUtils.copyProperties;
 @Service
 class CreateRequestService implements CreateRequestUseCase {
 
-    private final CreateRequestPort createRequestPort;
+    private final SaveRequestPort saveRequestPort;
     private final SaveCustomerPort saveCustomerPort;
     private final FindCustomerByIdPort findCustomerByIdPort;
     private final FindCustomerByPhonePort findCustomerByPhonePort;
 
-    CreateRequestService(CreateRequestPort createRequestPort, SaveCustomerPort saveCustomerPort, FindCustomerByIdPort findCustomerByIdPort, FindCustomerByPhonePort findCustomerByPhonePort) {
-        this.createRequestPort = createRequestPort;
+    CreateRequestService(SaveRequestPort saveRequestPort, SaveCustomerPort saveCustomerPort, FindCustomerByIdPort findCustomerByIdPort, FindCustomerByPhonePort findCustomerByPhonePort) {
+        this.saveRequestPort = saveRequestPort;
         this.saveCustomerPort = saveCustomerPort;
         this.findCustomerByIdPort = findCustomerByIdPort;
         this.findCustomerByPhonePort = findCustomerByPhonePort;
@@ -35,8 +35,8 @@ class CreateRequestService implements CreateRequestUseCase {
     public Request apply(Request request) {
         Customer customer = loadSaveCustomer(request.getCustomer());
         request.setCustomer(customer);
-        request.setStatus(RequestStatus.CREATED);
-        return createRequestPort.create(request);
+        request.setStatus(RequestStatus.ACTIVE);
+        return saveRequestPort.save(request);
     }
 
     @Transactional
