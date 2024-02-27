@@ -155,15 +155,4 @@ public class ProductComponent {
         this.component = component;
     }
 
-    //    public VersionComponent cloneProductComponent() {
-//        VersionComponent target = new VersionComponent();
-//        copyProperties(this, target);
-//        return target;
-//    }
-//
-//    public VersionComponent cloneForProduct(Product product) {
-//        VersionComponent target = this.cloneProductComponent();
-//        target.getProductComponentID().setProduct(product);
-//        return target;
-//    }
 }
