@@ -35,7 +35,7 @@ class CreateRequestService implements CreateRequestUseCase {
     public Request apply(Request request) {
         Customer customer = loadSaveCustomer(request.getCustomer());
         request.setCustomer(customer);
-        request.setStatus(RequestStatus.ACTIVE);
+        request.setStatus(RequestStatus.ESTIMATE);
         return saveRequestPort.save(request);
     }
 

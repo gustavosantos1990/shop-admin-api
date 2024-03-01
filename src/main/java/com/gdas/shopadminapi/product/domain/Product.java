@@ -66,8 +66,7 @@ public class Product {
     @Column(name = "photo_address")
     private String photoAddress;
 
-    @Transient
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
     private List<ProductComponent> components;
 
     public Product() {

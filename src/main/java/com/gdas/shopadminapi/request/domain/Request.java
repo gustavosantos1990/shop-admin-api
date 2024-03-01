@@ -59,7 +59,8 @@ public class Request {
     private RequestStatus status;
 
     @OneToMany(mappedBy = "request")
-    private List<RequestProduct> products;
+    @JsonProperty("request_products")
+    private List<RequestProduct> requestProducts;
 
     public Request() {
     }
@@ -72,12 +73,12 @@ public class Request {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Request request)) return false;
-        return Objects.equals(id, request.id) && Objects.equals(customer, request.customer) && Objects.equals(createdAt, request.createdAt) && Objects.equals(canceledAt, request.canceledAt) && Objects.equals(dueDate, request.dueDate) && Objects.equals(notes, request.notes) && Objects.equals(rating, request.rating) && status == request.status && Objects.equals(products, request.products);
+        return Objects.equals(id, request.id) && Objects.equals(customer, request.customer) && Objects.equals(createdAt, request.createdAt) && Objects.equals(canceledAt, request.canceledAt) && Objects.equals(dueDate, request.dueDate) && Objects.equals(notes, request.notes) && Objects.equals(rating, request.rating) && status == request.status && Objects.equals(requestProducts, request.requestProducts);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, customer, createdAt, canceledAt, dueDate, notes, rating, status, products);
+        return Objects.hash(id, customer, createdAt, canceledAt, dueDate, notes, rating, status, requestProducts);
     }
 
     public Long getId() {
@@ -136,12 +137,12 @@ public class Request {
         this.status = status;
     }
 
-    public List<RequestProduct> getProducts() {
-        return products;
+    public List<RequestProduct> getRequestProducts() {
+        return requestProducts;
     }
 
-    public void setProducts(List<RequestProduct> products) {
-        this.products = products;
+    public void setRequestProducts(List<RequestProduct> requestProducts) {
+        this.requestProducts = requestProducts;
     }
 
     public Integer getRating() {

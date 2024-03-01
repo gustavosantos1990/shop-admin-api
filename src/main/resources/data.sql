@@ -27,7 +27,7 @@ INSERT INTO CUSTOMER (phone, ctm_name, ctm_created_at) VALUES
 ('33333333333', 'José', now());
 
 INSERT INTO request(rqt_created_at, rqt_ctm_id, due_date, status) VALUES
-(now()::timestamp, (SELECT ctm_id FROM customer WHERE ctm_name = 'Gustavo'), now()::date, 'ACTIVE');
+(now()::timestamp, (SELECT ctm_id FROM customer WHERE ctm_name = 'Gustavo'), now()::date, 'ESTIMATE');
 
 INSERT INTO request_product(
 	rpd_rqt_id,
@@ -43,8 +43,8 @@ INSERT INTO request_product(
 	(SELECT pdt_id FROM product WHERE pdt_name = 'Necessaire P'),
 	now(),
 	10.00,
-	3,
-	2.00,
-	2.00,
-	'{"name": "Necessaire P","components": [ { "component": "Oxford", "measure": "CM2", "boughtWidth": 150.00, "boughtHeight": 100.00, "boughtAmount": 15000.00, "width": 21.00, "height": 30.00, "amount": 630.00, "paid_value": 8.90 }, { "component": "Zipper", "measure": "CM", "boughtWidth": 0.00, "boughtHeight": 0.00, "boughtAmount": 500.00, "width": 0.00, "height": 0.00, "amount": 30.00, "paid_value": 6.90 }, { "component": "Cursor", "measure": "UNITY", "boughtWidth": 0.00, "boughtHeight": 0.00, "boughtAmount": 50.00, "width": 0.00, "height": 0.00, "amount": 1.00, "paid_value": 13.50 }, { "component": "Saco Celofane 20x29cm", "measure": "UNITY", "boughtWidth": 0.00, "boughtHeight": 0.00, "boughtAmount": 50.00, "width": 0.00, "height": 0.00, "amount": 1.00, "paid_value": 11.50 }, { "component": "Papel Offset A4 90g", "measure": "UNITY", "boughtWidth": 0.00, "boughtHeight": 0.00, "boughtAmount": 500.00, "width": 0.00, "height": 0.00, "amount": 1.00, "paid_value": 50.00 }, { "component": "Nylon 600", "measure": "CM2", "boughtWidth": 150.00, "boughtHeight": 500.00, "boughtAmount": 75000.00, "width": 21.00, "height": 30.00, "amount": 630.00, "paid_value": 74.50 }, { "component": "Bagun Fosco", "measure": "CM2", "boughtWidth": 100.00, "boughtHeight": 200.00, "boughtAmount": 20000.00, "width": 21.00, "height": 30.00, "amount": 630.00, "paid_value": 27.80 } ]}'::jsonb
+	3.00,
+	2.98,
+	2.98,
+	'{"name": "Necessaire P", "price": 15.00, "components": [{"cost": 0.37, "width": 21.00, "amount": 630.00, "height": 30.00, "measure": "CM2", "component": "Oxford", "paid_value": 8.90, "boughtWidth": 150.00, "boughtAmount": 15000.00, "boughtHeight": 100.00}, {"cost": 0.41, "width": 0.00, "amount": 30.00, "height": 0.00, "measure": "CM", "component": "Zipper", "paid_value": 6.90, "boughtWidth": 0.00, "boughtAmount": 500.00, "boughtHeight": 0.00}, {"cost": 0.27, "width": 0.00, "amount": 1.00, "height": 0.00, "measure": "UNITY", "component": "Cursor", "paid_value": 13.50, "boughtWidth": 0.00, "boughtAmount": 50.00, "boughtHeight": 0.00}, {"cost": 0.23, "width": 0.00, "amount": 1.00, "height": 0.00, "measure": "UNITY", "component": "Saco Celofane 20x29cm", "paid_value": 11.50, "boughtWidth": 0.00, "boughtAmount": 50.00, "boughtHeight": 0.00}, {"cost": 0.10, "width": 0.00, "amount": 1.00, "height": 0.00, "measure": "UNITY", "component": "Papel Offset A4 90g", "paid_value": 50.00, "boughtWidth": 0.00, "boughtAmount": 500.00, "boughtHeight": 0.00}, {"cost": 0.63, "width": 21.00, "amount": 630.00, "height": 30.00, "measure": "CM2", "component": "Nylon 600", "paid_value": 74.50, "boughtWidth": 150.00, "boughtAmount": 75000.00, "boughtHeight": 500.00}, {"cost": 0.63, "width": 21.00, "amount": 630.00, "height": 30.00, "measure": "CM2", "component": "Bagun Fosco", "paid_value": 27.80, "boughtWidth": 140.00, "boughtAmount": 28000.00, "boughtHeight": 200.00}, {"cost": 0.34, "width": 0.00, "amount": 1.00, "height": 0.00, "measure": "UNITY", "component": "Sacola Boca de Palhaço 30x40cm", "paid_value": 33.92, "boughtWidth": 0.00, "boughtAmount": 100.00, "boughtHeight": 0.00}]}'::jsonb
 );

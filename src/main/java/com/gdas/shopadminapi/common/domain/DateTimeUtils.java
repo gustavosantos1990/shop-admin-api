@@ -1,6 +1,7 @@
 package com.gdas.shopadminapi.common.domain;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 
 public class DateTimeUtils {
@@ -12,6 +13,11 @@ public class DateTimeUtils {
     public static LocalDate currentLocalDate() {
         return LocalDate.now(AMERICA_SAO_PAULO_ZONE);
     }
+
+    public static LocalDateTime currentLocalDateTime() {
+        return LocalDateTime.now(AMERICA_SAO_PAULO_ZONE);
+    }
+
     public static LocalDate firstDayOfCurrentMonth() {
         return currentLocalDate()
                 .withDayOfMonth(1);

@@ -4,7 +4,6 @@ import com.gdas.shopadminapi.request.application.ports.in.UpdateRequestProductUs
 import com.gdas.shopadminapi.request.application.ports.out.FindRequestProductByIdPort;
 import com.gdas.shopadminapi.request.application.ports.out.SaveRequestProductPort;
 import com.gdas.shopadminapi.request.domain.RequestProduct;
-import com.gdas.shopadminapi.request.domain.enummeration.RequestStatus;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
 
+import static com.gdas.shopadminapi.request.domain.enummeration.RequestStatus.READY_TO_BILLING;
 import static java.lang.String.format;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.PRECONDITION_FAILED;
@@ -63,8 +63,8 @@ class UpdateRequestProductService implements UpdateRequestProductUseCase {
     }
 
     private void validateRequestStatus(RequestProduct existingRequestProduct) {
-        if (!existingRequestProduct.getRequest().getStatus().equals(RequestStatus.ACTIVE)) {
-            throw new ResponseStatusException(PRECONDITION_FAILED, format("request status must be CREATED, current status is %s",
+        if (existingRequestProduct.getRequest().getStatus().getSequence() >= READY_TO_BILLING.getSequence()) {
+            throw new ResponseStatusException(PRECONDITION_FAILED, format("can't add products to request on %s status",
                     existingRequestProduct.getRequest().getStatus()));
         }
     }

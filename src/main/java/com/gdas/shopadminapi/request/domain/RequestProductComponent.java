@@ -32,6 +32,8 @@ public class RequestProductComponent implements Serializable {
 
     private BigDecimal amount;
 
+    private BigDecimal cost;
+
     public RequestProductComponent() {
     }
 
@@ -107,6 +109,14 @@ public class RequestProductComponent implements Serializable {
         this.paidValue = paidValue;
     }
 
+    public BigDecimal getCost() {
+        return cost;
+    }
+
+    public void setCost(BigDecimal cost) {
+        this.cost = cost;
+    }
+
     public static RequestProductComponent fromProductComponent(ProductComponent productComponent) {
         RequestProductComponent requestProductComponent = new RequestProductComponent();
 
@@ -119,6 +129,7 @@ public class RequestProductComponent implements Serializable {
         requestProductComponent.setHeight(productComponent.getHeight());
         requestProductComponent.setWidth(productComponent.getWidth());
         requestProductComponent.setAmount(productComponent.getAmount());
+        requestProductComponent.setCost(productComponent.getCost());
 
         return requestProductComponent;
     }

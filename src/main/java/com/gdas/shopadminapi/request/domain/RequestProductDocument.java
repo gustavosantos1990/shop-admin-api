@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 public class RequestProductDocument implements Serializable {
 
     private String name;
+    private BigDecimal price;
     private List<RequestProductComponent> components;
 
     public RequestProductDocument() {
@@ -29,6 +30,14 @@ public class RequestProductDocument implements Serializable {
         this.name = name;
     }
 
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
     public List<RequestProductComponent> getComponents() {
         return components;
     }
@@ -40,6 +49,7 @@ public class RequestProductDocument implements Serializable {
     public static RequestProductDocument fromProduct(Product product) {
         RequestProductDocument requestProductDocument = new RequestProductDocument();
         requestProductDocument.setName(product.getName());
+        requestProductDocument.setPrice(product.getPrice());
         requestProductDocument.setComponents(product.getComponents()
                 .stream()
                 .map(RequestProductComponent::fromProductComponent)

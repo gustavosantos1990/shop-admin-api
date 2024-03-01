@@ -24,13 +24,13 @@ public class ProductComponent {
     private ProductComponentId productComponentId;
 
     @MapsId("productId")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "pco_pdt_id")
     @JsonIgnore
     private Product product;
 
     @MapsId("componentId")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "pco_cmp_id")
     @NotNull(groups = {CreateProductComponentUseCase.class, UpdateProductUseCase.class})
     @Valid

@@ -32,7 +32,7 @@ public class RequestProduct {
     private RequestProductId requestProductId;
 
     @MapsId("requestId")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "rpd_rqt_id")
     @JsonIgnore
     private Request request;

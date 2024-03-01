@@ -3,14 +3,13 @@ package com.gdas.shopadminapi.request.application;
 import com.gdas.shopadminapi.product.application.ports.out.FindProductByIdPort;
 import com.gdas.shopadminapi.product.domain.Product;
 import com.gdas.shopadminapi.request.application.ports.in.CreateRequestProductUseCase;
-import com.gdas.shopadminapi.request.application.ports.out.SaveRequestProductPort;
 import com.gdas.shopadminapi.request.application.ports.out.FindRequestByIdPort;
 import com.gdas.shopadminapi.request.application.ports.out.FindRequestProductByIdPort;
+import com.gdas.shopadminapi.request.application.ports.out.SaveRequestProductPort;
 import com.gdas.shopadminapi.request.domain.Request;
 import com.gdas.shopadminapi.request.domain.RequestProduct;
 import com.gdas.shopadminapi.request.domain.RequestProductDocument;
 import com.gdas.shopadminapi.request.domain.RequestProductId;
-import com.gdas.shopadminapi.request.domain.enummeration.RequestStatus;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +19,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
+import static com.gdas.shopadminapi.request.domain.enummeration.RequestStatus.READY_TO_BILLING;
 import static java.lang.String.format;
 import static org.springframework.http.HttpStatus.*;
 
@@ -78,9 +78,9 @@ class CreateRequestProductService implements CreateRequestProductUseCase {
     }
 
     private void validateRequestStatus(Request request) {
-        if (!request.getStatus().equals(RequestStatus.ACTIVE)) {
+        if (request.getStatus().getSequence() >= READY_TO_BILLING.getSequence()) {
             throw new ResponseStatusException(PRECONDITION_FAILED,
-                    format("request status must be CREATED, current status is %s", request.getStatus()));
+                    format("can't add products to request on %s status", request.getStatus()));
         }
     }
 }
